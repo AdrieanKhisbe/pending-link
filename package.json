@@ -1,0 +1,14 @@
+{
+  "name": "pending-link",
+  "version": "0.1.0",
+  "description": "Small server to store and quickly share links",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "link"
+  ],
+  "author": "Adriean Khisbe",
+  "license": "ISC"
+}
