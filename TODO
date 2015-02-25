@@ -1,0 +1,5 @@
+- SEE structure of api: folder, bin, etc.
+- Opt for one of logging utility.
+- Choose express or hapi? (add view on top of hapi?)
+- deploy on heroku
+- choose backend for data. (stupid file for now, look for library)
