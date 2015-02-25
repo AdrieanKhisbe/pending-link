@@ -4,7 +4,8 @@
   "description": "Small server to store and quickly share links",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+      "start": "node app.js",
+    "test": "mocha"
   },
   "keywords": [
     "link"

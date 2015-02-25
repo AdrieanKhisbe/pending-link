@@ -3,7 +3,7 @@
 title: Pending Link Api
 baseUri: SOMEAPI/{version}
 version: v1
-traits:
+# traits:
 #  - paged:
 #      queryParameters:
 #        pages:
