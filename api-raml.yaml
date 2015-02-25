@@ -1,0 +1,64 @@
+#%RAML 0.8
+
+title: Pending Link Api
+baseUri: SOMEAPI/{version}
+version: v1
+traits:
+#  - paged:
+#      queryParameters:
+#        pages:
+#          description: The number of pages to return
+#          type: number
+#  - secured: !include http://raml-example.com/secured.yml
+
+## Main ressource
+/links:
+  # resource: link:string, timestamp:timestamp, tag:list<string>, archive:boolean, comment:string
+  # is: [ paged, secured ]
+  get:
+    # §todo: see optional option
+  post:
+  /{linkId}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                { "link": "http://blog.octo.com/designer-une-api-rest/",
+                  "archive": true,
+                  "timestamp": "2015-02-16T09:25:43.511Z",
+                  "tags": ["rest", "api"],
+                  "comment": "Api Rocks"
+                }
+              schema: |
+                { "$schema": "http://json-schema.org/schema",
+                  "type": "object",
+                  "id": "APILINK",
+                  "properties": {
+                    "link": {
+                      "id": "APILINK/link",
+                      "type": "string" },
+                    "archive": {
+                      "id": "APILINK/archive",
+                      "type": "boolean" },
+                    "timestamp": {
+                      "id": "APILINK/timestamp",
+                      "type": "string"},
+                    "tags": {
+                      "id": "APILINK/tags",
+                      "type": "array",
+                      "items": [{
+                          "id": "APILINK/tags/0",
+                          "type": "string"},
+                        {"id": "APILINK/tags/1",
+                          "type": "string"}]},
+                    "comment": {
+                      "id": "APILINK/comment",
+                      "type": "string"}},
+                  "required": ["link","timestamp"]
+                }
+            application/xml:
+    delete:
+      description: |
+        This method will *delete* an **individual link**

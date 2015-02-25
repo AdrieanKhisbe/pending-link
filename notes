@@ -1,1 +1,3 @@
 Plutot utiliser un file to store. simple, pas d'user. plutot qu'une db
+
+? distinguer client du server? (dans un autre dépot la lib et le cli?)
