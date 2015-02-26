@@ -14,7 +14,7 @@ You can consult the api on [Heroku](https://pending-link.herokuapp.com/)
 ### Development Notes
 
 #### Organisation
-As you may expect, tests are in test, and code in lib folder.
+As you may expect, tests are in `test`, and code in `src` folder.
 Modules are dispatched in the model, controller, views folder.
 
 #### Configuration
