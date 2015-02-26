@@ -23,4 +23,4 @@ describe 'Link Object', ->
 
     link.removeTag "toto"
     link.tags.should.contains "titi"
-    link.tags.should.nott.contains "toto"
+    link.tags.should.not.contains "toto"
