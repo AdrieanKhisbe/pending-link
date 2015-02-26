@@ -3,10 +3,11 @@
  */
 // V1 in memory
 
-var allLinks = []
+var allLinks = [];
 
 function save(link){
-    allLinks.add(link);
+    //TODO: check link
+    allLinks.push(link);
     //TODO: loging?? global?
 }
 
@@ -15,4 +16,14 @@ function remove(link){
     //TODO:
 }
 
+var all = function(){
+    return [].concat(allLinks);
+}
+
 //TODO: finder
+
+module.exports = {
+    all:all,
+    save:save,
+    remove:remove
+}

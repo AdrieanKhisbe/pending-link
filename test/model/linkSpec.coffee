@@ -5,19 +5,19 @@ should = require('chai').should()
 describe 'Link Object', ->
   it 'has a working constructor', ->
 
-    link = new Link 'abc'
+    link = Link.create 'abc'
     link.url.should.equal 'abc'
     link.archived.should.not.be.true
     should.not.exist link.comment
     link.tags.length.should.be.equal 0
 
   it 'can contains added tag', ->
-    link = new Link 'dce'
+    link = Link.create 'dce'
     link.addTag "toto"
     link.tags.should.contains "toto"
 
   it 'can be deleted tag', ->
-    link = new Link 'fgh'
+    link = Link.create 'fgh'
     link.addTag "toto"
     link.addTag "titi"
 
