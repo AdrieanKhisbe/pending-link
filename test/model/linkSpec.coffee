@@ -1,5 +1,5 @@
-Link = require '../../src/model/link'
-require('chai').should()
+Link = require '../../src/model/link.js'
+should = require('chai').should()
 
 
 describe 'Link Object', ->
@@ -7,9 +7,9 @@ describe 'Link Object', ->
 
     link = new Link 'abc'
     link.url.should.equal 'abc'
-    link.archived.should.not.be true
-    link.comment.should.be null
-    link.tags.size.should.be 0
+    link.archived.should.not.be.true
+    should.not.exist link.comment
+    link.tags.length.should.be.equal 0
 
   it 'can contains added tag', ->
     link = new Link 'dce'
