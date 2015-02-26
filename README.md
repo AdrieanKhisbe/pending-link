@@ -11,6 +11,21 @@ See Raml api specification [here :) ](api-raml.yaml)
 
 You can consult the api on [Heroku](https://pending-link.herokuapp.com/)
 
+### Development Notes
+
+#### Organisation
+As you may expect, tests are in test, and code in lib folder.
+Modules are dispatched in the model, controller, views folder.
+
+#### Configuration
+
+Configuration WILL BE DONE using nconf.
+Here are the main configurtion points:
+
+- TOBEDONE
+- ONEDAY
+
+Login is being done using [Bu](https://github.com/trentm/node-bunyan)
 
 ### Client Generation
 

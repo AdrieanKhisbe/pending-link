@@ -4,12 +4,15 @@
   "description": "Small server to store and quickly share links",
   "main": "app.js",
   "scripts": {
-      "start": "node app.js",
+    "start": "node app.js",
     "test": "mocha"
   },
   "keywords": [
     "link"
   ],
   "author": "Adriean Khisbe",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bunyan": "^1.3.4"
+  }
 }
