@@ -15,3 +15,4 @@ log.warn(MESSAGE);
 server.start(function() {
     log.info("Listening on port " + port);
 });
+// TODO : extract server
