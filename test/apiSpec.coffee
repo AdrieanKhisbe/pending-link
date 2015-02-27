@@ -5,13 +5,17 @@ should = require('chai').should()
 # TODO: test util
 
 describe "Api server", ->
+  serv = null
   it 'can be created with a port', ->
     serv = server(12345)
     should.exist serv
-  it 'can be launched'
-  it 'can be shutted diwn'
+  it 'can be launched', ->
+    serv.start()
+  it 'can be shutted down', ->
+    serv.stop()
 
 describe 'GET /hello', ->
+
  it 'respond with json'#, (done) ->
    #request(server)
  #    .get('/api/hello')
