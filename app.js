@@ -1,14 +1,9 @@
 // Pending Link
 
-var log = require('bunyan').createLogger({name: 'pending-link'});
-
-var Hapi = require('hapi');
 var port = ~~process.env.PORT || 12121;
+var server = require('./src/server')(port)
 
-var server = new Hapi.Server();
-server.connection({ port: port });
-
-server.route(require('./src/config/routes'));
+var log = require('bunyan').createLogger({name: 'pending-link'});
 
 var MESSAGE = 'Pending Link in building, come back later !';
 log.warn(MESSAGE);
