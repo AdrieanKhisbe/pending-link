@@ -2,10 +2,11 @@ server = require('../src/server.js')
 request = require('supertest')
 should = require('chai').should()
 
+serv = null
+
 # TODO: test util
 
 describe "Api server", ->
-  serv = null
   it 'can be created with a port', ->
     serv = server(12345)
     should.exist serv
@@ -14,9 +15,13 @@ describe "Api server", ->
   it 'can be shutted down', ->
     serv.stop()
 
-describe 'GET /hello', ->
+describe 'The Api', ->
 
- it 'respond with json'#, (done) ->
+  before = ->
+    serv = server(12345)
+    serv.start()
+
+  it 'respond with json'#, (done) ->
    #request(server)
  #    .get('/api/hello')
        #.set('Accept', 'application/json')
