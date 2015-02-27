@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "mocha --compilers coffee:coffee-script/register test/model/*.coffee"
+    "test": "mocha --compilers coffee:coffee-script/register **/*Spec.coffee"
   },
   "keywords": [
     "link"

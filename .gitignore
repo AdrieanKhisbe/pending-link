@@ -1,3 +1,7 @@
+# coffee spec
+test/**/*Spec.js*
+
+
 # Logs
 logs
 *.log
