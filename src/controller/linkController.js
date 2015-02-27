@@ -3,7 +3,6 @@
  */
 "use strict";
 
-var Hapi = require('hapi');
 var LinkDAO = require('../model/linkDao');
 var Link = require('../model/link');
 

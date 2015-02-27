@@ -1,6 +1,8 @@
 /** The server
  * Created by abecchis on 27/02/15.
  */
+"use strict";
+
 var Hapi = require('hapi');
 
 module.exports = function(port){

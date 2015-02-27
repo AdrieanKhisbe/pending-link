@@ -3,6 +3,9 @@
  *
  * Created by abecchis on 26/02/15.
  */
+
+"use strict";
+
 var LinkController = require('../controller/linkController')
 
 

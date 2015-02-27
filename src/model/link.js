@@ -4,6 +4,8 @@
  * Created by abecchis on 26/02/15.
  */
 
+"use strict";
+
 var Link = function(url){
     this.type = 'link';
     this.url = url;

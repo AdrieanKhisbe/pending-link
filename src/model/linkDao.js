@@ -3,6 +3,8 @@
  */
 // V1 in memory
 
+"use strict";
+
 var allLinks = [];
 
 function save(link){
