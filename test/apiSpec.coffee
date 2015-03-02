@@ -1,10 +1,13 @@
-port = 12345
+port = 12543
 
 server = require('../src/server.js')
 supertest = require('supertest')
 api = supertest("http://0.0.0.0:#{port}");
 should = require('chai').should()
 req = require('./utilTest')(api)
+
+# FIXME TEST NOT WORKING!!!!!!!!
+## TODO: NOW CHECK SERVER PORT
 
 serv = null
 
@@ -13,30 +16,30 @@ describe "Api server", ->
     serv = server(port)
     should.exist serv
   it 'can be launched', ->
-    serv.start()
-    serv.info.started.should.be.above 0
+    serv.start -> console.log "server started"
+    serv.connections[0].info.created.should.be.above 0
+    serv.connections[0].info.started.should.be.above 0
   it 'can be shutted down', ->
-    serv.stop()
+    serv.root.stop()
     serv.info.started.should.equal 0
+    serv.info.created.should.above 0
 
 describe 'The Api', ->
 
   before = ->
     serv = server(port)
-    serv.start()
+    serv.start -> console.log "Server started"
 
   it 'Api server is on', ->
     should.exist serv
-    serv.info.started.above 0
+    serv.info.started.should.be.above 0
 
   describe 'Hello endpoint', ->
     it 'works', (done) ->
       api.get('/api/hellosss')
       # api(serv).get('/api/hello')
       .expect(200)
-      .expect("Hello Links!")
-      # here
-      done()
+      .expect("Hello Links!", done)
 
 
   it 'respond with json'#, (done) ->
