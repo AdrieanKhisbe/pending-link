@@ -27,6 +27,16 @@ module.exports = [
         method: 'POST',
         path: '/api/links',
         handler:LinkController.create
+    },
+    {
+        method: 'PUT',
+        path: '/api/links',
+        handler: LinkController.update
+    },
+    {
+        method: 'DELETE',
+        path: '/api/links',
+        handler: LinkController.remove
     }
 
     ]

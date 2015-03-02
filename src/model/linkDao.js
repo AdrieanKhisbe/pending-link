@@ -13,13 +13,21 @@ function save(link){
     //TODO: loging?? global?
 }
 
-function remove(link){
-    // allLinks.remove(link)
-    //TODO:
+function update(linkId) {
+    if (!linkId) return false
+    // TODO
+}
+
+// see: id or?
+function remove(linkId) {
+    if (linkId < 0 && linkId > allLinks.length - 1) return false
+    allLinks[linkId].archived = true
 }
 
 var all = function(){
-    return [].concat(allLinks);
+    return [].concat(allLinks.filter(function (link) {
+        return !link.archived
+    }));
 }
 
 //TODO: finder

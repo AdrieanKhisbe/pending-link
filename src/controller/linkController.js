@@ -21,6 +21,13 @@ LinkController.prototype = (function(){
             console.log(l);
             LinkDAO.save(l)
             reply().code(200);
+        },
+        update: function (request, reply) {
+
+        },
+        remove: function (request, reply) {
+            var id = request.param.id;
+
         }
     }})();
 
