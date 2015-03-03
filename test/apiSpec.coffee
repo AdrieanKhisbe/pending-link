@@ -15,20 +15,20 @@ describe "Api server", ->
   it 'can be created with a port', ->
     serv = server(port)
     should.exist serv
-  it 'can be launched', ->
-    serv.start -> console.log "server started"
-    serv.connections[0].info.created.should.be.above 0
-    serv.connections[0].info.started.should.be.above 0
-  it 'can be shutted down', ->
-    serv.root.stop()
-    serv.info.started.should.equal 0
-    serv.info.created.should.above 0
+  it 'can be launched',  ->
+    serv.start ->
+      serv.info.created.should.be.above 0
+      serv.info.started.should.be.above 0
+  it 'can be shutted down',->
+    serv.root.stop ->
+      serv.info.started.should.equal 0
+      serv.info.created.should.above 0
 
 describe 'The Api', ->
 
-  before = ->
+  before (done) ->
     serv = server(port)
-    serv.start -> console.log "Server started"
+    serv.start done
 
   it 'Api server is on', ->
     should.exist serv
@@ -36,7 +36,7 @@ describe 'The Api', ->
 
   describe 'Hello endpoint', ->
     it 'works', (done) ->
-      api.get('/api/hellosss')
+      api.get('/api/hello')
       # api(serv).get('/api/hello')
       .expect(200)
       .expect("Hello Links!", done)

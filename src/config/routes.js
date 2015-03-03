@@ -12,7 +12,7 @@ var Joi = require('joi');
 
 module.exports = [
     {
-        method: 'GET', path: '/hello', handler: function (req, res) {
+        method: 'GET', path: '/api/hello', handler: function (req, res) {
         res("Hello Links!")
     }
     },
