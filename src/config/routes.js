@@ -11,32 +11,12 @@ var LinkController = require('../controller/linkController')
 
 module.exports = [
     {
-        method: 'GET',
-        path: '/hello',
-        handler: function(req,res){
-            res("Hello Links!")
-        }
-
-    },
-    {
-        method: 'GET',
-        path: '/api/links',
-        handler:LinkController.get
-    },
-    {
-        method: 'POST',
-        path: '/api/links',
-        handler:LinkController.create
-    },
-    {
-        method: 'PUT',
-        path: '/api/links',
-        handler: LinkController.update
-    },
-    {
-        method: 'DELETE',
-        path: '/api/links',
-        handler: LinkController.remove
+        method: 'GET', path: '/hello', handler: function (req, res) {
+        res("Hello Links!")
     }
-
+    },
+    {method: 'GET', path: '/api/links', handler: LinkController.all},
+    {method: 'POST', path: '/api/links', handler: LinkController.create},
+    {method: 'PUT', path: '/api/links', handler: LinkController.update},
+    {method: 'DELETE', path: '/api/links', handler: LinkController.remove}
     ]

@@ -9,13 +9,22 @@ var allLinks = [];
 
 function save(link){
     //TODO: check link
-    allLinks.push(link);
+    var id = allLinks.length
+    link.id = id;
+    allLinks[id] = link;
     //TODO: loging?? global?
 }
 
+function get(linkId) {
+    return allLinks[linkId]
+}
+
+// TODO: take object?
 function update(linkId) {
     if (!linkId) return false
     // TODO
+
+
 }
 
 // see: id or?
@@ -24,7 +33,7 @@ function remove(linkId) {
     allLinks[linkId].archived = true
 }
 
-var all = function(){
+function all() {
     return [].concat(allLinks.filter(function (link) {
         return !link.archived
     }));
