@@ -11,13 +11,18 @@ LinkController.prototype = (function(){
 
     //TODO: see content type
     return {
-        "get": function (request, reply) {
+        all: function (request, reply) {
             reply(LinkDAO.all());
+        },
+        "get": function (request, reply) {
+            var id = request.params.id;
+
+            reply(LinkDAO.get(id));
         },
         create: function (request, reply) {
             // TODO: stub
             //TODO: validation
-            var link = Link.create(request.payload)
+            var link = Link.create(request.payload.url)
             //TODO Log
             console.log("new link: %j", link);
             var res = LinkDAO.save(link)
@@ -27,9 +32,9 @@ LinkController.prototype = (function(){
             //TODO
         },
         remove: function (request, reply) {
-            if (!request.param.id) return false;
+            if (!request.params.id) return false;
             // LOG
-            var id = request.param.id;
+            var id = request.params.id;
             var res = LinkDAO.remove(id);
             res ? reply().code(200) : reply().code(500);
         }

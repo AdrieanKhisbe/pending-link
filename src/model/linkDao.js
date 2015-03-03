@@ -44,5 +44,7 @@ function all() {
 module.exports = {
     all:all,
     save:save,
+    get: get,
+    update: update,
     remove:remove
 }

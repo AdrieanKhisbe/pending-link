@@ -6,7 +6,8 @@
 
 "use strict";
 
-var LinkController = require('../controller/linkController')
+var LinkController = require('../controller/linkController');
+var Joi = require('joi');
 
 
 module.exports = [
@@ -15,8 +16,18 @@ module.exports = [
         res("Hello Links!")
     }
     },
+
+    // Liens
     {method: 'GET', path: '/api/links', handler: LinkController.all},
-    {method: 'POST', path: '/api/links', handler: LinkController.create},
     {method: 'PUT', path: '/api/links', handler: LinkController.update},
-    {method: 'DELETE', path: '/api/links', handler: LinkController.remove}
-    ]
+    {method: 'DELETE', path: '/api/links', handler: LinkController.remove},
+    {method: 'GET', path: '/api/links/{id}', handler: LinkController.get},
+    {
+        method: 'POST', path: '/api/links',
+        config: {
+            handler: LinkController.create,
+            validate: {payload: {url: Joi.string().required()}}
+        }
+    }
+
+]
