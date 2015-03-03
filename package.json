@@ -13,6 +13,7 @@
   "author": "Adriean Khisbe",
   "license": "ISC",
   "dependencies": {
+    "blipp": "^2.0.0",
     "bunyan": "^1.3.4",
     "coffee-script": "^1.9.1",
     "hapi": "^8.2.0",

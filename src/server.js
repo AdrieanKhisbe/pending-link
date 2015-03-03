@@ -4,6 +4,7 @@
 "use strict";
 
 var Hapi = require('hapi');
+var Blipp = require('blipp');
 
 module.exports = function(port, host){
   // Default value
@@ -17,6 +18,11 @@ module.exports = function(port, host){
     var server = new Hapi.Server(config);
   server.connection({ port: port, host:host });
   server.route(require('./config/routes'));
+
+  // Bliiip plugin (print routes)
+  server.register({ register: Blipp }, function(err) {
+      if(err) console.warn("Error happened loading blipp %j", err)
+  });
 
   return server;
 }
