@@ -27,7 +27,10 @@ LinkController.prototype = (function(){
             console.log("new link: %j", link);
             var res = LinkDAO.save(link)
             //TODO: LOCATION
-            res ? reply().code(200) : reply().code(500);
+            //reply.created("./"+link.id)
+            reply().code(201).header('Location', '/api/links/' //+ link.id
+            );
+
         },
         update: function (request, reply) {
             //TODO
