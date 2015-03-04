@@ -1,9 +1,10 @@
-// Pending Link
+/** Pending Link */
 
-var port = ~~process.env.PORT || 12121;
+var conf = require('./src/config/configuration.js');
+var log = require('./src/config/logger')(conf);
+
+var port = ~~process.env.PORT || conf.get("pl:port") ||  12121;
 var server = require('./src/server')(port)
-
-var log = require('bunyan').createLogger({name: 'pending-link'});
 
 var MESSAGE = 'Pending Link in building, come back later !';
 log.warn(MESSAGE);
