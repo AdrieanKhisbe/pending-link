@@ -5,6 +5,7 @@
 
 var LinkDAO = require('../model/linkDao');
 var Link = require('../model/link');
+var log = require('../config/logger')();
 
 function LinkController(){};
 LinkController.prototype = (function(){
@@ -12,21 +13,19 @@ LinkController.prototype = (function(){
     //TODO: see content type
     return {
         all: function (request, reply) {
-            //TODO :see uf tag param
+            log.debug("get method incoming");
             reply(LinkDAO.all());
         },
         "get": function (request, reply) {
             var id = request.params.id;
-
+            log.debug("access link %d", id);
             reply(LinkDAO.get(id));
         },
         create: function (request, reply) {
-            // TODO: stub
-            var link = Link.create(request.payload.url)
+            var link = Link.create(request.payload.url);
             //TODO: check existing tag
 
-            //TODO Log
-            console.log("new link: %j", link);
+            log.info("new link: %j", link);
             var res = LinkDAO.save(link)
 
             reply().created("/api/links/" + link.id);
@@ -34,14 +33,16 @@ LinkController.prototype = (function(){
         update: function (request, reply) {
             var id = request.params.id;
             if (!id) return false;
+            log.info("update link with %d", id);
+
+
             //TODO
-
-
         },
         remove: function (request, reply) {
             var id = request.params.id;
             if (!id) return false;
-            // TODO LOG
+
+            log.info("remove link with %d", id)
             var res = LinkDAO.remove(id);
             res ? reply().code(200) : reply().code(500);
         }
