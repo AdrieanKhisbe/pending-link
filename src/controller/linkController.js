@@ -12,6 +12,7 @@ LinkController.prototype = (function(){
     //TODO: see content type
     return {
         all: function (request, reply) {
+            //TODO :see uf tag param
             reply(LinkDAO.all());
         },
         "get": function (request, reply) {
@@ -21,8 +22,9 @@ LinkController.prototype = (function(){
         },
         create: function (request, reply) {
             // TODO: stub
-            //TODO: validation
             var link = Link.create(request.payload.url)
+            //TODO: check existing tag
+
             //TODO Log
             console.log("new link: %j", link);
             var res = LinkDAO.save(link)
@@ -30,12 +32,16 @@ LinkController.prototype = (function(){
             reply().created("/api/links/" + link.id);
         },
         update: function (request, reply) {
+            var id = request.params.id;
+            if (!id) return false;
             //TODO
+
+
         },
         remove: function (request, reply) {
-            if (!request.params.id) return false;
-            // LOG
             var id = request.params.id;
+            if (!id) return false;
+            // TODO LOG
             var res = LinkDAO.remove(id);
             res ? reply().code(200) : reply().code(500);
         }

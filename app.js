@@ -7,6 +7,7 @@ var log = require('bunyan').createLogger({name: 'pending-link'});
 
 var MESSAGE = 'Pending Link in building, come back later !';
 log.warn(MESSAGE);
+server.loadGoodies(); // TODO: ask good thing?
 server.start(function() {
     log.info("Listening on port " + port);
 });

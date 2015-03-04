@@ -19,10 +19,12 @@ module.exports = function(port, host){
   server.connection({ port: port, host:host });
   server.route(require('./config/routes'));
 
-  // Bliiip plugin (print routes)
-  server.register({ register: Blipp }, function(err) {
-      if(err) console.warn("Error happened loading blipp %j", err)
-  });
+  server.loadGoodies = function(){
+        // Bliip plugin (print routes)
+        server.register({ register: Blipp }, function(err) {
+            if(err) console.warn("Error happened loading blipp %j", err)
+        });
+    }
 
   return server;
 }

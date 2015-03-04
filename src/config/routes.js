@@ -19,8 +19,8 @@ module.exports = [
 
     // Liens
     {method: 'GET', path: '/api/links', handler: LinkController.all},
-    {method: 'PUT', path: '/api/links', handler: LinkController.update},
-    {method: 'DELETE', path: '/api/links', handler: LinkController.remove},
+    {method: 'PUT', path: '/api/links/{id}', handler: LinkController.update},
+    {method: 'DELETE', path: '/api/links/{id}', handler: LinkController.remove},
     {method: 'GET', path: '/api/links/{id}', handler: LinkController.get},
     {
         method: 'POST', path: '/api/links',

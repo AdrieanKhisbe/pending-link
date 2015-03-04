@@ -6,9 +6,6 @@ api = supertest("http://0.0.0.0:#{port}");
 should = require('chai').should()
 req = require('./utilTest')(api)
 
-# FIXME TEST NOT WORKING!!!!!!!!
-## TODO: NOW CHECK SERVER PORT
-
 serv = null
 
 describe "Api server", ->
@@ -42,9 +39,36 @@ describe 'The Api', ->
       .expect("Hello Links!", done)
 
 
-  it 'respond with json'#, (done) ->
-   #request(server)
- #    .get('/api/hello')
-       #.set('Accept', 'application/json')
-       #.expect('Content-Type', /json/)
-   #  .expect(200, done)
+    it 'respond with text', (done) ->
+      api.get('/api/hello')
+      .expect('Content-Type', /text/)
+      .expect(200, done)
+
+
+  describe "Real link api", ->
+
+    describe "Get endpoint", ->
+
+      it "respond with json", (done)->
+        api.get('/api/hello')
+         .set('Accept', 'application/json')
+         .expect('Content-Type', /json/, done)
+
+        # TODO; arraty
+
+    describe "Post endpoint", ->
+      it "Should be done"
+
+      ## todo: check valid and non valid output
+
+      # todo: check localisation
+
+
+    describe "Get single resource endpoint", ->
+      it "Should be done"
+
+    describe "Put endpoint", ->
+      it "Should be done"
+
+    describe "Delete endpoint", ->
+      it "Should be done"
