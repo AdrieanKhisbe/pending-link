@@ -27,7 +27,7 @@ module.exports = [
                     archive: Joi.bool().required(),
                     comment: Joi.string().required(),
                     tags: Joi.array().items(Joi.string()).required(),
-                    type:Joi.string().regex("link").required()
+                    type:Joi.string().regex(/link/).required()
         }}
 } },
     {method: 'PATCH', path: '/api/links/{id}',
