@@ -38,7 +38,7 @@ module.exports = [
                 archive: Joi.bool().optional(),
                 comment: Joi.string().optional(),
                 tags: Joi.array().items(Joi.string()).optional(),
-                type:Joi.string().regex("link").optional()
+                type:Joi.string().regex(/link/).optional()
             }}
         } },
     {method: 'DELETE', path: '/api/links/{id}', handler: LinkController.remove},
