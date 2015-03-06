@@ -33,7 +33,15 @@ LinkController.prototype = (function(){
         update: function (request, reply) {
             var id = request.params.id;
             if (!id) return false;
-            log.info("update link with %d", id);
+            log.info("update link %d with %j", id, request.payload);
+
+
+            //TODO
+        },
+        partial_update: function (request, reply) {
+            var id = request.params.id;
+            if (!id) return false;
+            log.info("update link %d with %j", id, request.payload);
 
 
             //TODO
