@@ -5,14 +5,13 @@
 
 var express = require('express');
 var server = express();
+var routes = require('./routes')
 
 module.exports = function(port, host){
   // Default value
   if(!host ) host = "0.0.0.0";
 
-  server.get('/', function(req, res){
-	res.send('hello world');
-    });
+    routes.add(server);
 
   server.start = function(){
       server.listen(port);
