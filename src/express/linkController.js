@@ -19,7 +19,7 @@ LinkController.prototype = (function () {
         },
         "get": function (req, res) {
             var id = req.params.id;
-            log.debug("access link %d", id);
+            log.debug("access link %s", id);
             res.json(LinkDAO.get(id));
         },
         create: function (req, res) {
@@ -41,17 +41,33 @@ LinkController.prototype = (function () {
             if (!id) return res.status(400).send();
             log.info("update link %d with %j", id, req.body);
 
-
-            //TODO: check content and update
+            // I know it's burk....
+            if( ! "link" === req.body.type
+                || ! req.body.id || req.body.id !== id
+                || !req.body.comment || ! req.body.tags|| ! req.body.archived
+                || !req.body.url  || !req.body.timestamp ){
+                return res.status(400).send();
+            } else {
+                LinkDAO.update(req.body);
+                return res.status(200).send();
+            }
         },
         partial_update: function (req, res) {
             var id = request.params.id;
             if (!id) return res.status(400).send()
-            log.info("update link %d with %j", id, request.payload);
+            log.info("update link %d with %j", id, req.body);
 
+            if( ! "link" === req.body.type) return res.status(400).send();
+            var link  = LinkDAO.get(id);
+            if(req.body.url) link.url = req.body.url;
+            if(req.body.comment) link.comment = req.body.comment;
+            if(req.body.archived) link.archived = req.body.archived;
+            if(req.body.timestamp) link.timestamp = req.body.timestamp;
+            if(req.body.tags) link.tags = req.body.tags;
 
-            //TODO
-        },
+            LinkDAO.update(req.body);
+            return res.status(200).send();
+            },
         remove: function (req, res) {
             var id = request.params.id;
             if (!id) return res.status(400).send();

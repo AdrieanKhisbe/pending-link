@@ -9,7 +9,7 @@ var allLinks = [];
 
 function save(link){
     //TODO: check link
-    var id = allLinks.length
+    var id = allLinks.length;
     link.id = id;
     allLinks[id] = link;
     //TODO: loging?? global?
@@ -20,17 +20,15 @@ function get(linkId) {
     return allLinks[linkId]
 }
 
-// TODO: take object?
-function update(linkId) {
-    if (!linkId) return false
-    // TODO
-
+function update(link) {
+    if (!link || link.id) return false;
+    allLinks[link.id] = link;
 
 }
 
 // see: id or?
 function remove(linkId) {
-    if (linkId < 0 && linkId > allLinks.length - 1) return false
+    if (linkId < 0 && linkId > allLinks.length - 1) return false;
     allLinks[linkId].archived = true
 }
 
