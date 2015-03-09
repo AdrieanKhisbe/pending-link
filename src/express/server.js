@@ -11,7 +11,7 @@ module.exports = function(port, host){
   // Default value
   if(!host ) host = "0.0.0.0";
 
-    routes.add(server);
+  server.use('/', routes);
 
   server.start = function(){
       server.listen(port);

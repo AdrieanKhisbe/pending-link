@@ -5,25 +5,20 @@
  */
 
 "use strict";
-
+var router = require('express').Router()
 var LinkController = require('./linkController');
 
-function addToServer(app) {
-    app.get('/api/hello', function (req, res) {
+
+    router.get('/api/hello', function (req, res) {
         res.send("Hello Links!")
     });
-    app.get('/api/links', LinkController.all);
-    app.put('/api/links/{id}', LinkController.update);
-    app.patch('/api/links/{id}', LinkController.partial_update);
-    app.delete('/api/links/{id}', LinkController.remove);
+    router.get('/api/links', LinkController.all);
+    router.put('/api/links/{id}', LinkController.update);
+    router.patch('/api/links/{id}', LinkController.partial_update);
+    router.delete('/api/links/{id}', LinkController.remove);
 
-    app.get('/api/links/{id}', LinkController.get);
-    app.post('/api/links', LinkController.create);
+    router.get('/api/links/{id}', LinkController.get);
+    router.post('/api/links', LinkController.create);
 
-}
 
-module.exports = {
-    // §maybe:rename
-    add: addToServer
-
-}
+module.exports = router;
