@@ -13,6 +13,7 @@ function save(link){
     link.id = id;
     allLinks[id] = link;
     //TODO: loging?? global?
+    return link;
 }
 
 function get(linkId) {

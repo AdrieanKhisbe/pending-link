@@ -13,47 +13,52 @@ LinkController.prototype = (function () {
 
     //FIXME: update to express API!!
     return {
-        all: function (request, reply) {
+        all: function (req, res) {
             log.debug("get method incoming");
-            reply(LinkDAO.all());
+            res.json(LinkDAO.all());
         },
-        "get": function (request, reply) {
-            var id = request.params.id;
+        "get": function (req, res) {
+            var id = req.params.id;
             log.debug("access link %d", id);
-            reply(LinkDAO.get(id));
+            res.json(LinkDAO.get(id));
         },
-        create: function (request, reply) {
-            var link = Link.create(request.payload.url);
+        create: function (req, res) {
+            log.debug("Request received %j", req.body);
+            if (!req.body.url) {
+                return res.status(400).send();
+            }
+            var link = Link.create(req.body.url);
             //TODO: check existing tag
 
             log.info("new link: %j", link);
-            var res = LinkDAO.save(link)
+            var l = LinkDAO.save(link);
 
-            reply().created("/api/links/" + link.id);
+            res.setHeader("Location", "/api/links/" + l.id);
+            res.status(201).send();
         },
-        update: function (request, reply) {
+        update: function (req, res) {
+            var id = req.params.id;
+            if (!id) return res.status(400).send();
+            log.info("update link %d with %j", id, req.body);
+
+
+            //TODO: check content and update
+        },
+        partial_update: function (req, res) {
             var id = request.params.id;
-            if (!id) return false;
+            if (!id) return res.status(400).send()
             log.info("update link %d with %j", id, request.payload);
 
 
             //TODO
         },
-        partial_update: function (request, reply) {
+        remove: function (req, res) {
             var id = request.params.id;
-            if (!id) return false;
-            log.info("update link %d with %j", id, request.payload);
-
-
-            //TODO
-        },
-        remove: function (request, reply) {
-            var id = request.params.id;
-            if (!id) return false;
+            if (!id) return res.status(400).send();
 
             log.info("remove link with %d", id)
             var res = LinkDAO.remove(id);
-            res ? reply().code(200) : reply().code(500);
+            res ? res.status(200).send() : res.status(500).send();
         }
     }
 })();
