@@ -23,7 +23,8 @@ module.exports = function(port, host){
   server.loadGoodies = function(){
         // Bliip plugin (print routes)
         server.register({ register: Blipp }, function(err) {
-            if(err) console.warn("Error happened loading blipp %j", err)
+            if(err) console.warn("Error happened loading blipp %j", err);
+	    console.log('Server running at: ' + server.info.uri);
         });
     }
 

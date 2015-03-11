@@ -1,15 +1,23 @@
 Pending Link
 ============
 
-Small server POC for a rest api to store link to be read.
+Small Rest Api server POC for a rest api to store link to be read.
+This was made to compare `express` and `hapi` *node.js* frameworks.
 
 Enable to store link, to which you can attach tag so that you miss any link.
 <!-- Yes I know i pocket like light :p -->
 
-See Raml api specification [here :) ](api-raml.yaml)
+The api is available on [Heroku](https://pending-link.herokuapp.com/)
 
+### Details
 
-You can consult the api on [Heroku](https://pending-link.herokuapp.com/)
+Pending link is a rest api about one specific ressource. Links
+
+Links consist in an `url`, a `comment`, a set of `tags`, a `timestamp`, and a status `archived`, and an `id`. They are available on the server at the endpoint `/api/links` with the standard `POST`/`GET`, and `GET`,`PUT`,`DELETE` on the subresources
+
+Server also have another endpoint `/api/hello` to ping if the server is online
+
+For more details, See Raml api specification [here :) ](api-raml.yaml)
 
 ### Development Notes
 
@@ -25,10 +33,13 @@ Here are the main configurtion points:
 - TOBEDONE
 - ONEDAY
 
-Login is being done using [Bu](https://github.com/trentm/node-bunyan)
+Logging is being done using [Bunyan](https://github.com/trentm/node-bunyan)
+So if you run the process, you better pipe it to *bunyan* program.
 
 ### Client Generation
 
 Raml tool example:
+```sh
 npm install raml-client-generator -g
 raml-to-client api.raml -o api-client -l javascript
+```
