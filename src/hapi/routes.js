@@ -11,6 +11,13 @@ var Joi = require('joi');
 
 
 module.exports = [
+
+    // index and doc
+    {method: 'GET', path: '/', handler: {file: "public/index.html"}},
+    {method: 'GET', path: '/doc', handler: {file: "public/api.html"}},
+
+
+    // Hello endpoint
     {
         method: 'GET', path: '/api/hello', handler: function (req, res) {
         res("Hello Links!")
