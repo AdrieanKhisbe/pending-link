@@ -36,6 +36,12 @@ Here are the main configurtion points:
 Logging is being done using [Bunyan](https://github.com/trentm/node-bunyan)
 So if you run the process, you better pipe it to *bunyan* program.
 
+### Api documentation
+Documentation from raml spec can be generated with `raml2html` available on `npm`,
+regenerate them using `raml2html api-raml.yaml > public/api.html`
+
+Can be invoked with `npm run generate-doc`
+
 ### Client Generation
 
 Raml tool example:

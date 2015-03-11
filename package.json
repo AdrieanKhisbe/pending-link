@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "mocha --compilers coffee:coffee-script/register test/*Spec.coffee test/*/*Spec.coffee"
+    "test": "mocha --compilers coffee:coffee-script/register test/*Spec.coffee test/*/*Spec.coffee",
+    "generate-doc": "raml2html api-raml.yaml > public/api.html"
   },
   "keywords": [
     "link"
@@ -27,6 +28,7 @@
   "devDependencies": {
     "chai": "^2.1.0",
     "mocha": "^2.1.0",
+    "raml2html": "^1.4.0",
     "supertest": "^0.15.0"
   }
 }
