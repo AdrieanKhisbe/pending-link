@@ -5,6 +5,7 @@ var log = require('./src/config/logger')(conf);
 
 var port = ~~process.env.PORT || conf.get("pl:port") ||  12121;
 var server = require('./src/express')(port)
+//var server = require('./src/hapi')(port)
 // §maybe: use nconf for the port
 
 var MESSAGE = 'Pending Link in building, come back later !';

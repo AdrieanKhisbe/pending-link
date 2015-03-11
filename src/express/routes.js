@@ -8,6 +8,9 @@
 var router = require('express').Router()
 var LinkController = require('./linkController');
 
+router.get('/',function (req, res) { res.sendfile("index.html", {root: './public'})});
+router.get('/doc',function (req, res) { res.sendfile("api.html", {root: './public'})});
+
 
 router.get('/api/hello', function (req, res) {
     res.send("Hello Links!")
