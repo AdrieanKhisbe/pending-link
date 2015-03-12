@@ -6,7 +6,8 @@ log = require('../src/config/logger')(conf);
 
 # TODO: schange?
 
-server = require('../src/express') # TODO: make it run both with hapi then express
+hapiServer = require('../src/hapi')
+expressServer = require('../src/express')
 supertest = require('supertest')
 api = supertest("http://0.0.0.0:#{port}");
 should = require('chai').should()
@@ -23,53 +24,57 @@ respond_with_json = (method, url) ->
     .expect('Content-Type', /json/, done)
 
 
-#testing_api
+testing_api = (name, server) ->
 
-describe 'The Api', ->
+  describe "The Api in #{name}", ->
 
-  beforeEach (done) ->
-    serv = server(port)
-    serv.start done
+    beforeEach (done) ->
+      serv = server(port)
+      serv.start done
 
-  afterEach (done) ->
-    serv.stop done
+    afterEach (done) ->
+      serv.stop done
 
-  describe 'Hello endpoint', ->
-    it 'works', (done) ->
-      api.get('/api/hello')
-      # api(serv).get('/api/hello')
-      .expect(200)
-      .expect("Hello Links!", done)
-
-
-    it 'respond with text', (done) ->
-      api.get('/api/hello')
-      .expect('Content-Type', /text/)
-      .expect(200, done)
+    describe 'Hello endpoint', ->
+      it 'works', (done) ->
+        api.get('/api/hello')
+        # api(serv).get('/api/hello')
+        .expect(200)
+        .expect("Hello Links!", done)
 
 
-  describe "Real link api", ->
-
-    describe "Get endpoint", ->
-
-      it "respond with json", respond_with_json('get', '/api/hello')
-
-
-    describe "Post endpoint", ->
-      it "Should be done"
-
-      it "respond with json", respond_with_json('post', '/api/hello')
-
-      ## todo: check valid and non valid output
-
-      # todo: check localisation
+      it 'respond with text', (done) ->
+        api.get('/api/hello')
+        .expect('Content-Type', /text/)
+        .expect(200, done)
 
 
-    describe "Get single resource endpoint", ->
-      it "Should be done"
+    describe "Real link api", ->
 
-    describe "Put endpoint", ->
-      it "Should be done"
+      describe "Get endpoint", ->
 
-    describe "Delete endpoint", ->
-      it "Should be done"
+        it "respond with json", respond_with_json('get', '/api/hello')
+
+
+      describe "Post endpoint", ->
+        it "Should be done"
+
+        it "respond with json", respond_with_json('post', '/api/hello')
+
+        ## todo: check valid and non valid output
+
+        # todo: check localisation
+
+
+      describe "Get single resource endpoint", ->
+        it "Should be done"
+
+      describe "Put endpoint", ->
+        it "Should be done"
+
+      describe "Delete endpoint", ->
+        it "Should be done"
+
+
+testing_api "Express", expressServer
+testing_api "Hapi", hapiServer
