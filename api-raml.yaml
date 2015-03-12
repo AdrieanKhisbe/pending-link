@@ -18,6 +18,7 @@ version: v1
   get:
     # §todo: see optional option
   post:
+
   /{linkId}:
     get:
       responses:
