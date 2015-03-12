@@ -6,7 +6,7 @@
 var bodyParser = require('body-parser');
 var express = require('express');
 var routes = require('./routes');
-
+// TODO: logging
 
 module.exports = function (port, host) {
 
@@ -15,6 +15,7 @@ module.exports = function (port, host) {
   // Default value
   if (!host) host = "0.0.0.0";
 
+  var realServer;
 
   server.use(bodyParser.json());
 
@@ -22,12 +23,17 @@ module.exports = function (port, host) {
 
 
   server.start = function (callback) {
-    return server.listen(port, callback);
-  }
+    realServer = server.listen(port, callback);
+    return realServer;
+  };
 
   server.loadGoodies = function () {
     // No goodies
-  }
+  };
+
+  server.stop = function(callback){
+    realServer.close(callback);
+  };
 
   return server;
 }
