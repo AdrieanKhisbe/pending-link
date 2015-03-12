@@ -17,11 +17,13 @@ serv = null
 
 
 ## utils functions
-respond_with_json = (method, url) ->
+respond_with_json = (method, url, code) ->
   (done) ->
     api[method](url)
     .set('Accept', 'application/json')
-    .expect('Content-Type', /json/, done)
+    .expect(code || 200)
+    .expect('Content-Type', /json/)
+    .end(done)
 
 
 testing_api = (name, server) ->
@@ -60,7 +62,7 @@ testing_api = (name, server) ->
         it "Should be done"
 
         it "respond with json", respond_with_json('post', '/api/links')
-
+           ## FIXME: body
         ## todo: check valid and non valid output
 
         # todo: check localisation

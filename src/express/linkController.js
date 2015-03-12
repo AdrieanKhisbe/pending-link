@@ -34,7 +34,7 @@ LinkController.prototype = (function () {
             var l = LinkDAO.save(link);
 
             res.setHeader("Location", "/api/links/" + l.id);
-            res.status(201).send();
+            res.status(201).json({});
         },
         update: function (req, res) {
             var id = req.params.id;
