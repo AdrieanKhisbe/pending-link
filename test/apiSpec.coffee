@@ -53,13 +53,13 @@ testing_api = (name, server) ->
 
       describe "Get endpoint", ->
 
-        it "respond with json", respond_with_json('get', '/api/hello')
+        it "respond with json", respond_with_json('get', '/api/links')
 
 
       describe "Post endpoint", ->
         it "Should be done"
 
-        it "respond with json", respond_with_json('post', '/api/hello')
+        it "respond with json", respond_with_json('post', '/api/links')
 
         ## todo: check valid and non valid output
 
