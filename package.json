@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "test": "mocha --compilers coffee:coffee-script/register test/*Spec.coffee test/*/*Spec.coffee",
+    "cover-test": "istanbul cover _mocha -- --compilers coffee:coffee-script/register test/*Spec.coffee test/*/*Spec.coffee",
     "generate-doc": "raml2html api-raml.yaml > public/api.html",
     "generate-html": "jade public/index.jade"
   },
