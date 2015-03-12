@@ -21,8 +21,8 @@ module.exports = function(port, host){
   server.use('/', routes);
 
 
-    server.start = function () {
-      server.listen(port);
+    server.start = function (callback) {
+     return server.listen(port, callback);
   }
 
   server.loadGoodies = function(){

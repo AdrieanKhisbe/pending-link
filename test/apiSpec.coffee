@@ -6,13 +6,13 @@ log = require('../src/config/logger')(conf);
 
 # TODO: schange?
 
-server = require('../src/hapi') # TODO: make it run both with hapi then express
+server = require('../src/express') # TODO: make it run both with hapi then express
 supertest = require('supertest')
 api = supertest("http://0.0.0.0:#{port}");
 should = require('chai').should()
 req = require('./utilTest')(api)
 
-serv = null
+serv = null; serv_serv = null
 
 
 ## utils functions
@@ -30,13 +30,16 @@ describe "Api server", ->
     serv = server(port)
     should.exist serv
   it 'can be launched',  ->
-    serv.start ->
+    serv_serv = serv.start ->
       serv.info.created.should.be.above 0
       serv.info.started.should.be.above 0
   it 'can be shutted down',->
-    serv.root.stop ->
+    if serv.root
+    then serv.root.stop ->
       serv.info.started.should.equal 0
       serv.info.created.should.above 0
+    else # it is express
+      serv_serv.close -> true # hack
 
 describe 'The Api', ->
 
@@ -72,7 +75,7 @@ describe 'The Api', ->
     describe "Post endpoint", ->
       it "Should be done"
 
-      it "respond with json", respond_with_json('get', '/api/hello')
+      it "respond with json", respond_with_json('post', '/api/hello')
 
       ## todo: check valid and non valid output
 
