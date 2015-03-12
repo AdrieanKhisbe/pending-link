@@ -1,12 +1,29 @@
 port = 12543
 
-server = require('../src/server.js')
+# >
+conf = require('../src/config/configuration.js');
+log = require('../src/config/logger')(conf);
+
+# TODO: schange?
+
+server = require('../src/hapi') # TODO: make it run both with hapi then express
 supertest = require('supertest')
 api = supertest("http://0.0.0.0:#{port}");
 should = require('chai').should()
 req = require('./utilTest')(api)
 
 serv = null
+
+
+## utils functions
+respond_with_json = (method, url) ->
+  (done) ->
+    api[method](url)
+    .set('Accept', 'application/json')
+    .expect('Content-Type', /json/, done)
+
+
+
 
 describe "Api server", ->
   it 'can be created with a port', ->
@@ -49,15 +66,13 @@ describe 'The Api', ->
 
     describe "Get endpoint", ->
 
-      it "respond with json", (done)->
-        api.get('/api/hello')
-         .set('Accept', 'application/json')
-         .expect('Content-Type', /json/, done)
+      it "respond with json", respond_with_json('get', '/api/hello')
 
-        # TODO; arraty
 
     describe "Post endpoint", ->
       it "Should be done"
+
+      it "respond with json", respond_with_json('get', '/api/hello')
 
       ## todo: check valid and non valid output
 
