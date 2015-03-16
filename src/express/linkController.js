@@ -3,7 +3,7 @@
  */
 "use strict";
 
-var LinkDAO = require('../model/linkDao');
+var LinkDAO = require('../model/linkDao')();
 var Link = require('../model/link');
 var log = require('../config/logger')();
 

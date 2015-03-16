@@ -1,5 +1,5 @@
 Link = require '../../src/model/link.js'
-LinkDao = require '../../src/model/linkDao.js'
+LinkDao = (require '../../src/model/linkDao.js')()
 should = require('chai').should()
 
 describe 'Link Dao', ->
