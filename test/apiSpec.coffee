@@ -89,12 +89,19 @@ testing_api = (name, server) ->
           post_basic_link ->
             respond_with_json 'get', LINK_RES, done
 
-
+        ## TODO check format?
 
       describe "Put endpoint", ->
         it "it respond with json", (done) ->
           post_basic_link ->
             respond_with_json 'put', LINK_RES, done, {body:data.valid_link_update}
+
+        it "update works", (done) ->
+          post_basic_link ->
+            api.put(LINK_RES).send(data.valid_link_update).end ->
+              api.get(LINK_RES).expect(200, done).
+                expect (res) -> res.should.equal data.valid_link_update
+                ## FIX (maybe: equal link?)
 
 
       describe "Patch endpoint", ->
@@ -102,12 +109,23 @@ testing_api = (name, server) ->
           post_basic_link ->
             respond_with_json 'patch', LINK_RES, done, {body:data.valid_link_partial_update}
 
+        it "patch works", (done) ->
+          post_basic_link ->
+            api.patch(LINK_RES).send(data.valid_link_partial_update).end ->
+              api.get(LINK_RES).expect(200, done).
+                expect (res) -> res.tags.shoud.equal data.valid_link_partial_update.tags
 
 
       describe "Delete endpoint", ->
         it "it respond with json", (done) ->
           post_basic_link ->
             respond_with_json 'delete', LINK_RES, done
+
+        it "delete things", (done) ->
+          post_basic_link ->
+            api.del(LINK_RES).end ->
+              api.get(LINK_RES).expect(404,done)
+
 
 
 
