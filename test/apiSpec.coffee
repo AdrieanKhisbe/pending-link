@@ -24,7 +24,7 @@ serv = null
 
 ## utils functions
 respond_with_json = (method, url, code, body) ->
-  (done) ->
+  it "respond with json", (done) ->
     api[method](url)
     .set('Accept', 'application/json')
     .expect(code || 200)
@@ -59,19 +59,19 @@ testing_api = (name, server) ->
     ############################
     describe "Real link api", ->
 
-      describe "Get endpoint", ->
-
-        it "respond with json", respond_with_json('get', LINK_ENDPOINT)
-
 
       describe "Post endpoint", ->
         it "Should be done"
 
-        it "respond with json", respond_with_json('post', LINK_ENDPOINT)
+        respond_with_json('post', LINK_ENDPOINT)
            ## FIXME: body
            ## todo: check valid and non valid output
 
            # todo: check localisation
+
+      describe "Get endpoint", ->
+
+        respond_with_json('get', LINK_ENDPOINT)
 
 
       describe "Get single resource endpoint", ->
