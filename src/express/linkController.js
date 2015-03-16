@@ -53,7 +53,7 @@ LinkController.prototype = (function () {
             }
         },
         partial_update: function (req, res) {
-            var id = request.params.id;
+            var id = req.params.id;
             if (!id) return res.status(400).send()
             log.info("update link %d with %j", id, req.body);
 
@@ -69,12 +69,12 @@ LinkController.prototype = (function () {
             return res.status(200).send();
             },
         remove: function (req, res) {
-            var id = request.params.id;
+            var id = req.params.id;
             if (!id) return res.status(400).send();
 
             log.info("remove link with %d", id)
-            var res = LinkDAO.remove(id);
-            res ? res.status(200).send() : res.status(500).send();
+            var r = LinkDAO.remove(id);
+            r ? res.status(200).send() : res.status(500).send();
         }
     }
 })();

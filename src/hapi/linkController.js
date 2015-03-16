@@ -36,7 +36,7 @@ LinkController.prototype = (function(){
             log.info("update link %d with %j", id, request.payload);
 
 
-            //TODO
+            //FIXME
         },
         partial_update: function (request, reply) {
             var id = request.params.id;
@@ -44,7 +44,7 @@ LinkController.prototype = (function(){
             log.info("update link %d with %j", id, request.payload);
 
 
-            //TODO
+            //FIXME
         },
         remove: function (request, reply) {
             var id = request.params.id;
