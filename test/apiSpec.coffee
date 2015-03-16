@@ -4,7 +4,7 @@ port = 12543
 conf = require('../src/config/configuration.js');
 log = require('../src/config/logger')(conf);
 
-# TODO: schange?
+# TODO: change?
 
 hapiServer = require('../src/hapi')
 expressServer = require('../src/express')
@@ -17,7 +17,7 @@ serv = null
 
 
 ## utils functions
-respond_with_json = (method, url, code) ->
+respond_with_json = (method, url, code, body) ->
   (done) ->
     api[method](url)
     .set('Accept', 'application/json')

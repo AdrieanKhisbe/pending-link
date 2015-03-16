@@ -1,8 +1,12 @@
 #%RAML 0.8
 
+# TODO: see variables, and extractthem
+
 title: Pending Link Api
-baseUri: SOMEAPI/{version}
-version: v1
+baseUri: http://pending-link.herokuapp.com
+#  /{version}
+#version: v1
+
 # traits:
 #  - paged:
 #      queryParameters:
@@ -13,14 +17,19 @@ version: v1
 
 ## Main ressource
 /links:
+  description: Just some links to store and them retrieve
   # resource: link:string, timestamp:timestamp, tag:list<string>, archive:boolean, comment:string
   # is: [ paged, secured ]
   get:
     # §todo: see optional option
+    description: |
+      Retrieve list of existing links
   post:
-
+    description: |
+      Create a new link
   /{linkId}:
     get:
+      description: Retrieve link representation
       responses:
         200:
           body:
@@ -35,27 +44,27 @@ version: v1
               schema: |
                 { "$schema": "http://json-schema.org/schema",
                   "type": "object",
-                  "id": "APILINK",
+                  "id": "<<baseUri>>",
                   "properties": {
                     "link": {
-                      "id": "APILINK/link",
+                      "id": "<<baseUri>>/link",
                       "type": "string" },
                     "archive": {
-                      "id": "APILINK/archive",
+                      "id": "<<baseUri>>/archive",
                       "type": "boolean" },
                     "timestamp": {
-                      "id": "APILINK/timestamp",
+                      "id": "<<baseUri>>/timestamp",
                       "type": "string"},
                     "tags": {
-                      "id": "APILINK/tags",
+                      "id": "<<baseUri>>/tags",
                       "type": "array",
                       "items": [{
-                          "id": "APILINK/tags/0",
+                          "id": "<<baseUri>>/tags/0",
                           "type": "string"},
-                        {"id": "APILINK/tags/1",
+                        {"id": "<<baseUri>>/tags/1",
                           "type": "string"}]},
                     "comment": {
-                      "id": "APILINK/comment",
+                      "id": "<<baseUri>>/comment",
                       "type": "string"}},
                   "required": ["link","timestamp"]
                 }
@@ -63,3 +72,9 @@ version: v1
     delete:
       description: |
         This method will *delete* an **individual link**
+    put:
+      description: |
+        This method will *replace* an **individual link**
+    patch:
+      description: |
+        This method will do a partial *update* on an **individual link**
