@@ -13,7 +13,7 @@ api = supertest("http://0.0.0.0:#{port}");
 should = require('chai').should()
 req = require('./utilTest')(api)
 
-date = require('./data')
+data = require('./data')
 
 # Constant
 HELLO_ENDPOINT = '/api/hello'
@@ -25,11 +25,13 @@ serv = null
 ## utils functions
 respond_with_json = (method, url, code, body) ->
   it "respond with json", (done) ->
-    api[method](url)
-    .set('Accept', 'application/json')
-    .expect(code || 200)
-    .expect('Content-Type', /json/)
-    .end(done)
+    query = api[method](url)
+      .set('Accept', 'application/json')
+      .expect(code || 200)
+      .expect('Content-Type', /json/)
+    if body then query.send body
+
+    query.end(done)
 
 
 testing_api = (name, server) ->
@@ -63,7 +65,7 @@ testing_api = (name, server) ->
       describe "Post endpoint", ->
         it "Should be done"
 
-        respond_with_json('post', LINK_ENDPOINT)
+        respond_with_json('post', LINK_ENDPOINT, 200, data.valid_link_request)
            ## FIXME: body
            ## todo: check valid and non valid output
 
