@@ -13,6 +13,12 @@ api = supertest("http://0.0.0.0:#{port}");
 should = require('chai').should()
 req = require('./utilTest')(api)
 
+date = require('./data')
+
+# Constant
+HELLO_ENDPOINT = '/api/hello'
+LINK_ENDPOINT = '/api/links'
+
 serv = null
 
 
@@ -39,33 +45,33 @@ testing_api = (name, server) ->
 
     describe 'Hello endpoint', ->
       it 'works', (done) ->
-        api.get('/api/hello')
-        # api(serv).get('/api/hello')
+        api.get(HELLO_ENDPOINT)
         .expect(200)
         .expect("Hello Links!", done)
 
 
       it 'respond with text', (done) ->
-        api.get('/api/hello')
+        api.get(HELLO_ENDPOINT)
         .expect('Content-Type', /text/)
         .expect(200, done)
 
 
+    ############################
     describe "Real link api", ->
 
       describe "Get endpoint", ->
 
-        it "respond with json", respond_with_json('get', '/api/links')
+        it "respond with json", respond_with_json('get', LINK_ENDPOINT)
 
 
       describe "Post endpoint", ->
         it "Should be done"
 
-        it "respond with json", respond_with_json('post', '/api/links')
+        it "respond with json", respond_with_json('post', LINK_ENDPOINT)
            ## FIXME: body
-        ## todo: check valid and non valid output
+           ## todo: check valid and non valid output
 
-        # todo: check localisation
+           # todo: check localisation
 
 
       describe "Get single resource endpoint", ->
@@ -78,5 +84,6 @@ testing_api = (name, server) ->
         it "Should be done"
 
 
+# Test Both implementation!
 testing_api "Express", expressServer
 testing_api "Hapi", hapiServer
