@@ -31,7 +31,6 @@ respond_with_json = (method, url, callback, opts) ->
       .expect(code || 200)
       .expect('Content-Type', /json/)
     if body then query.send body
-
     query.end(callback)
 
 post_basic_link = (callback) ->
@@ -99,8 +98,9 @@ testing_api = (name, server) ->
         it "update works", (done) ->
           post_basic_link ->
             api.put(LINK_RES).send(data.valid_link_update).end ->
-              api.get(LINK_RES).expect(200, done).
-                expect (res) -> res.should.equal data.valid_link_update
+              api.get(LINK_RES).expect(200)
+                .expect (res) -> res.body.should.equal data.valid_link_update
+                .end done
                 ## FIX (maybe: equal link?)
 
 
@@ -112,9 +112,9 @@ testing_api = (name, server) ->
         it "patch works", (done) ->
           post_basic_link ->
             api.patch(LINK_RES).send(data.valid_link_partial_update).end ->
-              api.get(LINK_RES).expect(200, done).
-                expect (res) -> res.tags.shoud.equal data.valid_link_partial_update.tags
-
+              api.get(LINK_RES).expect(200)
+                .expect (res) -> res.tags.shoud.equal data.valid_link_partial_update.tags
+                .end done
 
       describe "Delete endpoint", ->
         it "it respond with json", (done) ->
