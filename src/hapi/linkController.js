@@ -5,10 +5,14 @@
 
 var LinkDAO = require('../model/linkDao')();
 var Link = require('../model/link');
-var log = require('../config/logger')();
+var default_option = require('../config/options').default_option;
 
-function LinkController(){};
-LinkController.prototype = (function(){
+
+module.exports = function(options){
+
+  if(options == null) options = default_option;
+
+  var log = options.logger;
 
     //TODO: see content type
     return {
@@ -54,6 +58,4 @@ LinkController.prototype = (function(){
             var res = LinkDAO.remove(id);
             res ? reply().code(200) : reply().code(500);
         }
-    }})();
-
-module.exports = new LinkController();
+    }};

@@ -1,10 +1,5 @@
 port = 12543
 
-# >
-conf = require('../src/config/configuration.js');
-log = require('../src/config/logger')(conf);
-# TODO : change logger
-
 hapiServer = require('../src/hapi')
 expressServer = require('../src/express')
 supertest = require('supertest')

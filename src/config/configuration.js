@@ -1,6 +1,6 @@
 'use strict';
 
-// Configuration
+/** Configuration of the server */
 var conf = require('nconf');
 
 conf.env();

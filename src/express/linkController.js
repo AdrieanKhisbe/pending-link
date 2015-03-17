@@ -5,11 +5,13 @@
 
 var LinkDAO = require('../model/linkDao')();
 var Link = require('../model/link');
-var log = require('../config/logger')();
+var default_option = require('../config/options').default_option;
 
-function LinkController() {
-};
-LinkController.prototype = (function () {
+module.exports = function(options){
+
+  if(options == null) options = default_option;
+
+  var log = options.logger;
 
     //FIXME: update to express API!!
     return {
@@ -77,6 +79,4 @@ LinkController.prototype = (function () {
             r ? res.status(200).send() : res.status(500).send();
         }
     }
-})();
-
-module.exports = new LinkController();
+};

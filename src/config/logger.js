@@ -2,28 +2,31 @@
 
 /** Logger */
 var bunyan = require('bunyan');
+var blackhole = require("stream-blackhole");
 
-var logger;
+module.exports = {
 
-module.exports = function createLogger(conf) {
-    if (logger) {
-	return logger;
-    }
+  empty_logger: bunyan.createLogger({
+    name: "empty",
+    stream: blackhole()
+  }),
+
+  createLogger: function (conf) {
 
     if (!conf) {
-	throw new Error('Invalid configuration during creating logger');
+      throw new Error('Invalid configuration during creating logger');
     }
 
-    logger = bunyan.createLogger({
-	name: conf.get('pl:application_name'),
-	streams: [
+    var logger = bunyan.createLogger({
+      name: conf.get('pl:application_name'),
+      streams: [
         {
-            level: conf.get('log:level'),
-            stream: eval(conf.get('log:stream')),
-            path: conf.get('log:path')
+          level: conf.get('log:level'),
+          stream: eval(conf.get('log:stream')),
+          path: conf.get('log:path')
         }
-    ]
+      ]
     });
-
     return logger;
+  }
 };

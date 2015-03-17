@@ -25,7 +25,8 @@
     "hapi": "^8.2.0",
     "joi": "^6.0.0",
     "level": "^0.18.0",
-    "nconf": "^0.7.1"
+    "nconf": "^0.7.1",
+    "stream-blackhole": "^1.0.3"
   },
   "devDependencies": {
     "chai": "^2.1.0",

@@ -4,10 +4,18 @@
 // V1 in memory
 
 "use strict";
+var default_option = require('../config/options').default_option;
 
 
-module.exports = function() {
+module.exports = function(options) {
+
+  if(options == null) options = default_option;
+
+  var log = options.logger;
+
+
   return {
+
     allLinks: [],
 
     save: function (link) {
