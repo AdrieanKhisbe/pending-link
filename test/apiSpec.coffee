@@ -1,9 +1,12 @@
-port = 12543
+# TEST OF THE LINK API
+
+options = require('../src/config/options').null_option
+port = options.port = 12543
 
 hapiServer = require('../src/hapi')
 expressServer = require('../src/express')
-supertest = require('supertest')
-api = supertest("http://0.0.0.0:#{port}");
+supertest = require('supertest');
+api = supertest("http://0.0.0.0:#{port}")
 should = require('chai').should()
 req = require('./utilTest')(api)
 
@@ -40,7 +43,7 @@ testing_api = (name, server) ->
   describe "The Api in #{name}", ->
 
     beforeEach (done) ->
-      serv = server(port)
+      serv = server(options)
       serv.start done
 
     afterEach (done) ->

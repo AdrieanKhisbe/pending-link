@@ -5,26 +5,31 @@
 
 var Hapi = require('hapi');
 var Blipp = require('blipp');
+var default_option = require('../config/options').default_option;
+var controller = require('./linkController');
 var routes = require('./routes');
 
-module.exports = function (port, host) {
-  // Default value
-  if (!host) host = "0.0.0.0";
+module.exports = function(options){
 
-  //TODO: exteriorise?
-  var config = {
+  if(options == null) options = default_option;
+
+  var log = options.logger;
+
+  var hapi_config = {
     load: {sampleInterval: 5000} // process monitoring
   };
   //TODO: see how config doc
-  var server = new Hapi.Server(config);
-  server.connection({port: port, host: host});
-  server.route(routes);
+  var server = new Hapi.Server(hapi_config);
+  server.connection({port: options.port, host: options.host});
+
+  var linkedRoutes = routes(controller(options));
+  server.route(linkedRoutes);
 
   server.loadGoodies = function () {
     // Bliip plugin (print routes)
     server.register({register: Blipp}, function (err) {
-      if (err) console.warn("Error happened loading blipp %j", err);
-      console.log('Server running at: ' + server.info.uri);
+      if (err) log.error("Error happened loading blipp %j", err);
+      log.info('Server running at: ' + server.info.uri);
     });
   }
 

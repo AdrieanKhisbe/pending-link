@@ -9,11 +9,15 @@ var conf = require('./configuration');
 
 module.exports = {
   null_option: {
-    logger: logger.empty_logger
+    logger: logger.empty_logger,
+    port: 0,
+    host: "0.0.0.0"
   },
 
   default_option:{
-    logger: logger.createLogger(conf)
+    logger: logger.createLogger(conf),
+    port: conf.get("pl:port"),
+    host: conf.get("pl:host") || "0.0.0.0"
   }
 
   // LATER: config ?
