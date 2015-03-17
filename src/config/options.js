@@ -14,13 +14,20 @@ module.exports = {
     host: "0.0.0.0"
   },
 
-  default_option:{
+  default_option: {
     logger: logger.createLogger(conf),
     port: conf.get("pl:port"),
     host: conf.get("pl:host") || "0.0.0.0"
-  }
+  },
 
   // LATER: config ?
+  option_from: function (port, host) {
+    return {
+      logger: logger.createLogger(conf),
+      port: port || conf.get("pl:port"),
+      host: host || conf.get("pl:host")
 
+    };
+  }
 
-}
+};
