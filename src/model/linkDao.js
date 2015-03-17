@@ -6,24 +6,22 @@
 "use strict";
 var default_option = require('../config/options').default_option;
 
+module.exports = function (options) {
 
-module.exports = function(options) {
-
-  if(options == null) options = default_option;
+  if (options == null) options = default_option;
 
   var log = options.logger;
-
 
   return {
 
     allLinks: [],
 
     save: function (link) {
-      //TODO: check link
+      //TODO: check link?
       var id = this.allLinks.length;
       link.id = id;
       this.allLinks[id] = link;
-      //TODO: loging?? global?
+      log.debug("Saved new link %j", link);
       return link;
     },
 
@@ -33,12 +31,14 @@ module.exports = function(options) {
 
     update: function (link) {
       if (!link || link.id) return false;
+      log.debug("update link %d", link.id);
       this.allLinks[link.id] = link;
     },
 
-// see: id or?
+    // see: id or?
     remove: function (linkId) {
       if (linkId < 0 && linkId > this.allLinks.length - 1) return false;
+      log.debug("remove link %d", linkId);
       this.allLinks[linkId].archived = true
     },
 
@@ -48,7 +48,7 @@ module.exports = function(options) {
       }));
     }
 
-//TODO: finder
+    //TODO: finder
 
   }
-}
+};
