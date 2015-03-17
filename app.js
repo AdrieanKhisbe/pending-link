@@ -3,13 +3,27 @@
 var options = require('./src/config/options').option_from(~~process.env.PORT);
 var log = options.logger;
 
-var server = require('./src/express')(options) ;
-//var server = require('./src/hapi')(options)
+var framework, express = './src/express', hapi = './src/hapi';
 
-var MESSAGE = 'Pending Link in building, come back later !';
-log.warn(MESSAGE);
-server.loadGoodies(); // TODO: ask good thing?
+switch(process.argv[2].toLowerCase()){
+  // TODO: maybe replace with config,option
+  case "hapi":
+    framework = hapi;
+    log.info("Launching server with hapi framework");
+    break;
+  case "express":
+    framework = express;
+    log.info("Launching server with express framework");
+    break;
+  default:
+    framework = express;
+    log.info("Launching server with default framework, express");
+}
+
+var server = require(framework)(options) ;
+
+log.info("Starting pending link");
+server.loadGoodies();
 server.start(function() {
     log.info("Listening on port "+ options.port);
 });
-// TODO : extract server
