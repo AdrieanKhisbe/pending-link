@@ -40,7 +40,7 @@ module.exports = function (options) {
     update: function (link, callback) {
       if (!link || link.id) return callback(false);
 
-      link.update({'_id': link.id}, link, {}, function (err, numReplaced) {
+      linkDb.update({'_id': link.id}, link, {}, function (err, numReplaced) {
         if (err == null && numReplaced == 1) {
           log.debug("update link %d", link.id);
           callback(true);

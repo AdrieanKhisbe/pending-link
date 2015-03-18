@@ -34,7 +34,8 @@ respond_with_json = (method, url, callback, opts) ->
 post_basic_link = (callback) ->
   api['post'](LINK_ENDPOINT).set('Accept', 'application/json')
     .send(data.valid_link_request)
-    .end callback
+    .end (err, res) ->
+      callback res.headers.location
   ## maybe retrieve location rather to assume 0
 
 ## all the test
@@ -65,7 +66,6 @@ testing_api = (name, server) ->
     ############################
     describe "Real link api", ->
 
-
       describe "Post endpoint", ->
          it "it respond with json", (done) ->
             respond_with_json 'post', LINK_ENDPOINT, done, {code:201, body:data.valid_link_request}
@@ -77,26 +77,23 @@ testing_api = (name, server) ->
         it "it respond with json", (done) ->
           respond_with_json 'get', LINK_ENDPOINT, done
 
-
-      LINK_RES = LINK_ENDPOINT + "/0"
-
       describe "Get single resource endpoint", ->
 
         it "it respond with json", (done) ->
-          post_basic_link ->
-            respond_with_json 'get', LINK_RES, done
+          post_basic_link (url) ->
+            respond_with_json 'get', url, done
 
         ## TODO check format?
 
       describe "Put endpoint", ->
         it "it respond with json", (done) ->
-          post_basic_link ->
-            respond_with_json 'put', LINK_RES, done, {body:data.valid_link_update}
+          post_basic_link (url) ->
+            respond_with_json 'put', url, done, {body:data.valid_link_update}
 
         it "update works", (done) ->
-          post_basic_link ->
-            api.put(LINK_RES).send(data.valid_link_update).end ->
-              api.get(LINK_RES).expect(200)
+          post_basic_link (url) ->
+            api.put(url).send(data.valid_link_update).end ->
+              api.get(url).expect(200)
                 .expect (res) -> res.body.should.equal data.valid_link_update
                 .end done
                 ## FIX (maybe: equal link?)
@@ -104,25 +101,25 @@ testing_api = (name, server) ->
 
       describe "Patch endpoint", ->
         it "it respond with json", (done) ->
-          post_basic_link ->
-            respond_with_json 'patch', LINK_RES, done, {body:data.valid_link_partial_update}
+          post_basic_link (url) ->
+            respond_with_json 'patch', url, done, {body:data.valid_link_partial_update}
 
         it "patch works", (done) ->
-          post_basic_link ->
-            api.patch(LINK_RES).send(data.valid_link_partial_update).end ->
-              api.get(LINK_RES).expect(200)
-                .expect (res) -> res.tags.shoud.equal data.valid_link_partial_update.tags
+          post_basic_link (url) ->
+            api.patch(url).send(data.valid_link_partial_update).end ->
+              api.get(url).expect(200)
+                .expect (res) -> res.tags.should.equal data.valid_link_partial_update.tags
                 .end done
 
       describe "Delete endpoint", ->
         it "it respond with json", (done) ->
-          post_basic_link ->
-            respond_with_json 'delete', LINK_RES, done
+          post_basic_link (url) ->
+            respond_with_json 'delete', url, done
 
         it "delete things", (done) ->
-          post_basic_link ->
-            api.del(LINK_RES).end ->
-              api.get(LINK_RES).expect(404,done)
+          post_basic_link (url) ->
+            api.del(url).end ->
+              api.get(url).expect(410,done)
 
 
 

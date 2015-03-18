@@ -64,7 +64,7 @@ module.exports = function (options) {
       } else {
         LinkDAO.update(request.payload, function (ok) {
           if (ok) reply.code(200);
-          else reply.code(500);
+          else reply().code(500);
         });
       }
     },
@@ -74,7 +74,7 @@ module.exports = function (options) {
       if (!id) return reply.code(400);
       log.info("update link %d with %j", id, request.payload);
 
-      if (!"link" === request.payload.type) return reply.code(400);
+      if (!"link" === request.payload.type) return reply().code(400);
 
       LinkDAO.get(id, function (link) {
         //TODO: handle doc not here
@@ -86,7 +86,7 @@ module.exports = function (options) {
 
         LinkDAO.update(link, function (ok) {
           if (ok) reply.code(200);
-          else reply.code(500);
+          else reply().code(500);
         });
       });
     },
@@ -97,7 +97,7 @@ module.exports = function (options) {
 
       log.info("remove link with %d", id);
       LinkDAO.remove(id, function (ok) {
-        ok ? reply.code(200) : reply.code(500);
+        ok ? reply().code(200) : reply().code(500);
       });
     }
   }
