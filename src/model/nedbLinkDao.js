@@ -6,7 +6,7 @@
 "use strict";
 var default_option = require('../config/options').default_option;
 var DataStore = require('nedb');
-var linkDb = new DataStore({filename: 'link.nedb'}); //TODO: config?
+var linkDb = new DataStore({filename: 'link.nedb', autoload: true }); //TODO: config?
 
 
 //FIXME : see: should I send a promisE?
@@ -20,11 +20,14 @@ module.exports = function (options) {
 
     save: function (link, callback) {
       linkDb.insert(link, function (err, newDoc) {
-        if (err) log.warn(err);
-        else
+        if (err) {
+          log.warn(err);
+          callback(null);
+        }
+        else {
           log.debug("Saved new link %j", link);
-
-        callback(err, newDoc)
+          callback(newDoc);
+        }
       });
     },
 
