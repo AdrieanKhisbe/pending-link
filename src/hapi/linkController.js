@@ -32,7 +32,13 @@ module.exports = function (options) {
       var id = request.params.id;
       log.debug("access link %s", id);
       LinkDAO.get(id, function (link) {
-        reply(link)
+        if (link == null) {
+          reply().code(404);
+        } else {
+          if (link.archived)
+            reply().code(410);
+          else reply(link)
+        }
       });
     },
 

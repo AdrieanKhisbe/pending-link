@@ -79,6 +79,9 @@ testing_api = (name, server) ->
 
       describe "Get single resource endpoint", ->
 
+        it "it say 404 when try to get bullshit", (done) ->
+          api.get(LINK_ENDPOINT+"/whatevertheweather").expect(404,done)
+
         it "it respond with json", (done) ->
           post_basic_link (url) ->
             respond_with_json 'get', url, done
@@ -92,6 +95,7 @@ testing_api = (name, server) ->
 
         it "update works", (done) ->
           post_basic_link (url) ->
+            # TODO: clone valid update with value url?
             api.put(url).send(data.valid_link_update).end ->
               api.get(url).expect(200)
                 .expect (res) -> res.body.should.equal data.valid_link_update

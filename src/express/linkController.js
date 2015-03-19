@@ -25,7 +25,13 @@ module.exports = function (options) {
       var id = req.params.id;
       log.debug("access link %s", id);
       LinkDAO.get(id, function (link) {
-        res.json(link)
+        if (link == null) {
+          res.status(404).end();
+        } else {
+          if (link.archived)
+            res.status(410).end();
+          else res.json(link)
+        }
       });
     },
 
