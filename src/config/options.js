@@ -19,7 +19,7 @@ module.exports = {
     logger: logger.createLogger(conf),
     port: conf.get("pl:port"),
     host: conf.get("pl:host") || "0.0.0.0",
-    base_uri: conf.get("base_uri")
+    base_uri: conf.get("pl:base_uri")
   },
 
   option_from: function (port, host) {
@@ -27,7 +27,7 @@ module.exports = {
       logger: logger.createLogger(conf),
       port: port || conf.get("pl:port"),
       host: host || conf.get("pl:host"),
-      base_uri: conf.get("base_uri")
+      base_uri: conf.get("pl:base_uri")
     };
   }
 

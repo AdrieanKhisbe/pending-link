@@ -10,9 +10,9 @@ var controller = require('./linkController');
 var routes = require('./routes');
 var staticRoutes = require('./staticRoutes');
 
-module.exports = function(options){
+module.exports = function (options) {
 
-  if(options == null) options = default_option;
+  if (options == null) options = default_option;
 
   var log = options.logger;
 
@@ -24,8 +24,10 @@ module.exports = function(options){
   server.connection({port: options.port, host: options.host});
 
   var linkedRoutes = routes(controller(options));
-  server.route(linkedRoutes);
   server.route(staticRoutes);
+
+  var prefixize = function (r) {  r.path = options.base_uri + r.path;return r; }
+  server.route(linkedRoutes.map(prefixize));
 
   server.loadGoodies = function () {
     // Bliip plugin (print routes)
@@ -33,7 +35,7 @@ module.exports = function(options){
       if (err) log.error("Error happened loading blipp %j", err);
       log.info('Server running at: ' + server.info.uri);
     });
-  }
+  };
 
   return server;
-}
+};

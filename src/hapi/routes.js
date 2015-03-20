@@ -13,15 +13,15 @@ module.exports = function (LinkController) {
 
     // Hello endpoint
     {
-      method: 'GET', path: '/api/hello', handler: function (req, res) {
+      method: 'GET', path: '/hello', handler: function (req, res) {
       res("Hello Links!")
     }
     },
 
     // Liens
-    {method: 'GET', path: '/api/links', handler: LinkController.all},
+    {method: 'GET', path: '/links', handler: LinkController.all},
     {
-      method: 'PUT', path: '/api/links/{id}',
+      method: 'PUT', path: '/links/{id}',
       config: {
         handler: LinkController.update,
         validate: {
@@ -37,7 +37,7 @@ module.exports = function (LinkController) {
       }
     },
     {
-      method: 'PATCH', path: '/api/links/{id}',
+      method: 'PATCH', path: '/links/{id}',
       config: {
         handler: LinkController.partial_update,
         validate: {
@@ -52,10 +52,10 @@ module.exports = function (LinkController) {
         }
       }
     },
-    {method: 'DELETE', path: '/api/links/{id}', handler: LinkController.remove},
-    {method: 'GET', path: '/api/links/{id}', handler: LinkController.get},
+    {method: 'DELETE', path: '/links/{id}', handler: LinkController.remove},
+    {method: 'GET', path: '/links/{id}', handler: LinkController.get},
     {
-      method: 'POST', path: '/api/links',
+      method: 'POST', path: '/links',
       config: {
         handler: LinkController.create,
         validate: {payload: {url: Joi.string().required()}}

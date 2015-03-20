@@ -21,7 +21,7 @@ module.exports = function(options){
   server.use(bodyParser.json());
 
   var linkedRoutes = routes(controller(options));
-  server.use('/api', linkedRoutes);
+  server.use(options.base_uri, linkedRoutes);
   server.use('/', staticRoutes);
 
   // Add this methods to have an uniform api with hapi
