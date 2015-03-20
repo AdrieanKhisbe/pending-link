@@ -8,6 +8,7 @@ var Blipp = require('blipp');
 var default_option = require('../config/options').default_option;
 var controller = require('./linkController');
 var routes = require('./routes');
+var staticRoutes = require('./staticRoutes');
 
 module.exports = function(options){
 
@@ -24,6 +25,7 @@ module.exports = function(options){
 
   var linkedRoutes = routes(controller(options));
   server.route(linkedRoutes);
+  server.route(staticRoutes);
 
   server.loadGoodies = function () {
     // Bliip plugin (print routes)

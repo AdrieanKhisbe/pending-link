@@ -8,6 +8,7 @@ var express = require('express');
 var default_option = require('../config/options').default_option;
 var controller = require('./linkController');
 var routes = require('./routes');
+var staticRoutes = require('./staticRoutes')();
 
 module.exports = function(options){
 
@@ -21,6 +22,7 @@ module.exports = function(options){
 
   var linkedRoutes = routes(controller(options));
   server.use('/', linkedRoutes);
+  server.use('/', staticRoutes);
 
   // Add this methods to have an uniform api with hapi
   server.start = function (callback) {
