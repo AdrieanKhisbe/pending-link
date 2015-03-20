@@ -11,22 +11,23 @@ module.exports = {
   null_option: {
     logger: logger.empty_logger,
     port: 0,
-    host: "0.0.0.0"
+    host: "0.0.0.0",
+    base_uri: "/api"
   },
 
   default_option: {
     logger: logger.createLogger(conf),
     port: conf.get("pl:port"),
-    host: conf.get("pl:host") || "0.0.0.0"
+    host: conf.get("pl:host") || "0.0.0.0",
+    base_uri: conf.get("base_uri")
   },
 
-  // LATER: config ?
   option_from: function (port, host) {
     return {
       logger: logger.createLogger(conf),
       port: port || conf.get("pl:port"),
-      host: host || conf.get("pl:host")
-
+      host: host || conf.get("pl:host"),
+      base_uri: conf.get("base_uri")
     };
   }
 

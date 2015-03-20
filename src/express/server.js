@@ -24,7 +24,7 @@ module.exports = function(options){
 
   // Add this methods to have an uniform api with hapi
   server.start = function (callback) {
-    log.info("Starting Express Server")
+    log.info("Starting Express Server");
     realServer = server.listen(options.port, callback);
     return realServer;
   };

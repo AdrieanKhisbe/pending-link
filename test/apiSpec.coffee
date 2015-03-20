@@ -19,6 +19,9 @@ LINK_ENDPOINT = '/api/links'
 serv = null
 
 
+
+# FIXME: CHECK RETURN CODE!!!!!!!!!!!!! NO CONTENT TYPE
+
 ## utils functions
 respond_with_json = (method, url, callback, opts) ->
     body = opts?.body

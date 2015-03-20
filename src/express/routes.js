@@ -8,7 +8,8 @@
 
 module.exports = function(LinkController) {
 
-  var router = require('express').Router()
+  var router = require('express').Router();
+
 
   router.get('/', function (req, res) {
     res.sendfile("index.html", {root: './public'})
@@ -16,10 +17,11 @@ module.exports = function(LinkController) {
   router.get('/doc', function (req, res) {
     res.sendfile("api.html", {root: './public'})
   });
+  // FIXME: extract from route?
 
 
   router.get('/api/hello', function (req, res) {
-    res.send("Hello Links!")
+    res.send("Hello Links!");
   });
   router.get('/api/links', LinkController.all);
   router.put('/api/links/:id', LinkController.update);
