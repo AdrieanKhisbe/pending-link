@@ -54,11 +54,20 @@ module.exports = function (options) {
 
     // see: id or?
     remove: function (linkId, callback) {
-      linkDb.remove({'_id': linkId}, function (err, numRem) {
-        log.debug("remove link %d", linkId);
-        callback(err == null && numRem == 1);
+      // not real remove?? : / TODO: ask
+      // linkDb.remove({'_id': linkId}, function (err, numRem) {
+      // log.debug("remove link %d", linkId);
+      //  callback(err == null && numRem == 1);
+      //});
+      linkDb.update({'_id': linkId}, {"$set": {"archived": true}}, {}, function (err, numReplaced) {
+        if (err == null && numReplaced == 1) {
+          log.debug("archived link %d", linkId);
+          callback(true);
+        } else {
+          log.debug("archived link %d FAILED", linkId);
+          callback(false);
+        }
       });
-
     },
 
     all: function (callback) {

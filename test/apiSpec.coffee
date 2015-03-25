@@ -108,9 +108,12 @@ testing_api = (name, server) ->
 
         it "patch works", (done) ->
           post_basic_link (url) ->
+            patched_link = extend({}, data.valid_link_request)
+            # mise à jour patched object
+            (patched_link[prop] = data.valid_link_partial_update[prop]) for prop in data.valid_link_partial_update
             api.patch(url).send(data.valid_link_partial_update).end ->
               api.get(url).expect(200)
-                .expect (res) -> res.tags.should.equal data.valid_link_partial_update.tags
+                .expect patched_link
                 .end done
 
       describe "Delete endpoint", ->
