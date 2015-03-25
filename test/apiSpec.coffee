@@ -70,11 +70,12 @@ testing_api = (name, server) ->
     describe "Real link api", ->
 
       describe "Post endpoint", ->
-         it "it respond with json", (done) ->
-            respond_with_json 'post', LINK_ENDPOINT, done, {code:201, body:data.valid_link_request}
+         #it "it respond with json", (done) ->
+          #  respond_with_json 'post', LINK_ENDPOINT, done, {code:201, body:data.valid_link_request}
          # todo: check valid and non valid output
-
+         it "should answer with a location (that I can access)"
            # todo: check location
+
 
       describe "Get endpoint", ->
         it "it respond with json", (done) ->
@@ -89,13 +90,7 @@ testing_api = (name, server) ->
           post_basic_link (url) ->
             respond_with_json 'get', url, done
 
-        ## TODO check format?
-
       describe "Put endpoint", ->
-        it "it respond with json", (done) ->
-          post_basic_link (url) ->
-            respond_with_json 'put', url, done, {body:data.valid_link_update}
-
         it "update works", (done) ->
           post_basic_link (url) ->
             # TODO: clone valid update with value url?
@@ -107,9 +102,6 @@ testing_api = (name, server) ->
 
 
       describe "Patch endpoint", ->
-        it "it respond with json", (done) ->
-          post_basic_link (url) ->
-            respond_with_json 'patch', url, done, {body:data.valid_link_partial_update}
 
         it "patch works", (done) ->
           post_basic_link (url) ->
@@ -119,9 +111,6 @@ testing_api = (name, server) ->
                 .end done
 
       describe "Delete endpoint", ->
-        it "it respond with json", (done) ->
-          post_basic_link (url) ->
-            respond_with_json 'delete', url, done
 
         it "delete things", (done) ->
           post_basic_link (url) ->
