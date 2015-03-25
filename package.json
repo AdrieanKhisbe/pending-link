@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "chai": "^2.1.0",
+    "extends": "0.0.4",
     "jade": "^1.9.2",
     "mocha": "^2.1.0",
     "raml2html": "^1.4.0",

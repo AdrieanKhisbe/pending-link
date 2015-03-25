@@ -9,6 +9,7 @@ supertest = require('supertest');
 api = supertest("http://0.0.0.0:#{port}")
 should = require('chai').should()
 req = require('./utilTest')(api)
+extend = require('extends')
 
 data = require('./data')
 
@@ -93,10 +94,12 @@ testing_api = (name, server) ->
       describe "Put endpoint", ->
         it "update works", (done) ->
           post_basic_link (url) ->
-            # TODO: clone valid update with value url?
-            api.put(url).send(data.valid_link_update).end ->
+            updated_link = extend({},data.valid_link_update)
+            updated_link.id = url.match("/.*/([^/]+)$")[1]
+
+            api.put(url).send().end ->
               api.get(url).expect(200)
-                .expect (res) -> res.body.should.equal data.valid_link_update
+                .expect updated_link
                 .end done
                 ## FIX (maybe: equal link?)
 
