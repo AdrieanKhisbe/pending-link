@@ -13,6 +13,7 @@ module.exports = {
     port: 0,
     host: "0.0.0.0",
     base_uri: "/api",
+    in_memory: true,
     db_path: 'link.nedb'
   },
 
@@ -21,6 +22,7 @@ module.exports = {
     port: conf.get("pl:port"),
     host: conf.get("pl:host") || "0.0.0.0",
     base_uri: conf.get("pl:base_uri"),
+    in_memory: true,
     db_path: 'link.nedb'
   },
 
@@ -30,7 +32,9 @@ module.exports = {
       port: port || conf.get("pl:port"),
       host: host || conf.get("pl:host"),
       base_uri: conf.get("pl:base_uri"),
-      db_path: conf.get("db:path")
+      db_path: conf.get("db:path"),
+      in_memory: true,
+
     };
   }
 
