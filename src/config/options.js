@@ -9,7 +9,17 @@ var conf = require('./configuration');
 var DataStore = require('nedb');
 var mongojs = require('mongojs');
 
-
+function dbFromConf(conf){
+  if (conf.get("db:in_memory")) {
+    return function () {
+      return new DataStore(conf.get("db:path"));
+    }
+  } else {
+    return function () {
+      return mongojs(conf.get("db:path"), ['links'])
+    }
+  }
+}
 
 module.exports = {
   null_option: {
@@ -25,8 +35,7 @@ module.exports = {
     port: conf.get("pl:port"),
     host: conf.get("pl:host") || "0.0.0.0",
     base_uri: conf.get("pl:base_uri"),
-    db: conf.get("db:in_memory")? function(){return new DataStore(conf.get("db:path"));}:
-      function(){return mongojs(conf.get("db:path"), ['links'])}
+    db:dbFromConf(conf)
   },
 
   option_from: function (port, host) {
@@ -35,8 +44,7 @@ module.exports = {
       port: port || conf.get("pl:port"),
       host: host || conf.get("pl:host"),
       base_uri: conf.get("pl:base_uri"),
-      db_path: conf.get("db:path"),
-      in_memory:conf.get("db:in_memory")
+      db:dbFromConf(conf)
 
     };
   }
