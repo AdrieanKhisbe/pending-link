@@ -1,18 +1,18 @@
 /**
+ * Dao fir Links in Nedb
+ *
  * Created by abecchis on 26/02/15.
  */
-// V1 in memory
 
 "use strict";
 var default_option = require('../config/options').default_option;
 var DataStore = require('nedb');
-var linkDb = new DataStore({filename: 'link.nedb', autoload: true }); //TODO: config?
 
-
-//FIXME : see: should I send a promisE?
 module.exports = function (options) {
 
   if (options == null) options = default_option;
+
+  var linkDb = new DataStore({filename: options.db_path, autoload: true });
 
   var log = options.logger;
 
@@ -52,7 +52,6 @@ module.exports = function (options) {
       });
     },
 
-    // see: id or?
     remove: function (linkId, callback) {
       // not real remove?? : / TODO: ask
       // linkDb.remove({'_id': linkId}, function (err, numRem) {

@@ -9,5 +9,8 @@
     "level": "debug",
     "stream": "process.stdout",
     "path": ""
+  },
+  "db":{
+    "path": "link.nedb"
   }
 }
