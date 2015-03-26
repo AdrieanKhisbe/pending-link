@@ -7,6 +7,7 @@ conf.env();
 
 // Loads all values defined in file configuration_default.json
 conf.file({file: 'configuration_default.json'});
+// TODO: webprod flag
 
 // Loads any file defined via environment variable named PL_CONFIG_PATH
 if (conf.get('PL_CONFIG_PATH')) {

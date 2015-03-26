@@ -22,8 +22,8 @@ module.exports = {
     port: conf.get("pl:port"),
     host: conf.get("pl:host") || "0.0.0.0",
     base_uri: conf.get("pl:base_uri"),
-    in_memory: true,
-    db_path: 'link.nedb'
+    in_memory: conf.get("db:in_memory"),
+    db_path: conf.get("db:path")
   },
 
   option_from: function (port, host) {
@@ -33,7 +33,7 @@ module.exports = {
       host: host || conf.get("pl:host"),
       base_uri: conf.get("pl:base_uri"),
       db_path: conf.get("db:path"),
-      in_memory: true,
+      in_memory:conf.get("db:in_memory")
 
     };
   }

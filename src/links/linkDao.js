@@ -6,29 +6,26 @@
 
 "use strict";
 var default_option = require('../config/options').default_option;
-var DataStore = require('nedb');
 
 module.exports = function (options) {
 
   if (options == null) options = default_option;
 
-  var getDb;
+  var db;
   var log = options.logger;
 
   if (options.in_memory) {
-    var linkDb = new DataStore({filename: options.db_path, autoload: true});
-    getDb = function () {
-      return linkDb;
-    }
+    var DataStore = require('nedb');
+    db = new DataStore({filename: options.db_path, autoload: true}); //TODO: inject
   } else {
-    getDb = function () {
-      return linkDb
-    }
+    var mongojs = require('mongojs');
+    db = mongojs(options.db_path, ['links']);
   }
 
   return {
+
     save: function (link, callback) {
-      getDb().insert(link, function (err, newDoc) {
+      db.insert(link, function (err, newDoc) {
         if (err) {
           log.warn(err);
           callback(null);
@@ -40,7 +37,7 @@ module.exports = function (options) {
     },
 
     "get": function (linkId, callback) {
-      getDb().findOne({'_id': linkId}, function (err, value) {
+      db.findOne({'_id': linkId}, function (err, value) {
         if (err) callback(null); else callback(value);
       });
     },
@@ -48,7 +45,7 @@ module.exports = function (options) {
     update: function (link, callback) {
       if (!link || link.id) return callback(false);
 
-      getDb().update({'_id': link.id}, link, {}, function (err, numReplaced) {
+      db.update({'_id': link.id}, link, {}, function (err, numReplaced) {
         if (err == null && numReplaced == 1) {
           log.debug("update link %d", link.id);
           callback(true);
@@ -62,11 +59,11 @@ module.exports = function (options) {
 
     remove: function (linkId, callback) {
       // not real remove?? : / TODO: ask
-      // getDb().remove({'_id': linkId}, function (err, numRem) {
+      // db.remove({'_id': linkId}, function (err, numRem) {
       // log.debug("remove link %d", linkId);
       //  callback(err == null && numRem == 1);
       //});
-      getDb().update({'_id': linkId}, {"$set": {"archived": true}}, {}, function (err, numReplaced) {
+      db.update({'_id': linkId}, {"$set": {"archived": true}}, {}, function (err, numReplaced) {
         if (err == null && numReplaced == 1) {
           log.debug("archived link %d", linkId);
           callback(true);
@@ -78,7 +75,7 @@ module.exports = function (options) {
     },
 
     all: function (callback) {
-      getDb().find({}, function (err, docs) {
+      db.find({}, function (err, docs) {
         if (err) callback(null); else callback(docs);
       });
     }
