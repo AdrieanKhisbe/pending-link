@@ -3,6 +3,8 @@
 /** Configuration of the server */
 var conf = require('nconf');
 
+
+
 conf.env();
 
 // Loads all values defined in file configuration_default.json

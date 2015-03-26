@@ -11,16 +11,10 @@ module.exports = function (options) {
 
   if (options == null) options = default_option;
 
-  var db;
+  var db = options.db();
   var log = options.logger;
 
-  if (options.in_memory) {
-    var DataStore = require('nedb');
-    db = new DataStore({filename: options.db_path, autoload: true}); //TODO: inject
-  } else {
-    var mongojs = require('mongojs');
-    db = mongojs(options.db_path, ['links']);
-  }
+
 
   return {
 

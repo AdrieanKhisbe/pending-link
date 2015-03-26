@@ -6,6 +6,10 @@
 
 var logger = require('./logger');
 var conf = require('./configuration');
+var DataStore = require('nedb');
+var mongojs = require('mongojs');
+
+
 
 module.exports = {
   null_option: {
@@ -13,8 +17,7 @@ module.exports = {
     port: 0,
     host: "0.0.0.0",
     base_uri: "/api",
-    in_memory: true,
-    db_path: 'link.nedb'
+    db: function(){return new DataStore();}
   },
 
   default_option: {
@@ -22,8 +25,8 @@ module.exports = {
     port: conf.get("pl:port"),
     host: conf.get("pl:host") || "0.0.0.0",
     base_uri: conf.get("pl:base_uri"),
-    in_memory: conf.get("db:in_memory"),
-    db_path: conf.get("db:path")
+    db: conf.get("db:in_memory")? function(){return new DataStore(conf.get("db:path"));}:
+      function(){return mongojs(conf.get("db:path"), ['links'])}
   },
 
   option_from: function (port, host) {
