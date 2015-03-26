@@ -1,4 +1,4 @@
-Link = require '../../src/model/link.js'
+Link = require '../../src/links/link'
 should = require('chai').should()
 
 

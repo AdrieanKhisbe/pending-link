@@ -3,11 +3,11 @@
  */
 "use strict";
 
-var Link = require('../model/link');
+var Link = require('../links/link');
 var default_option = require('../config/options').default_option;
 
 module.exports = function (options) {
-  var LinkDAO = require('../model/nedbLinkDao')(options);
+  var LinkDAO = require('../links/linkDao')(options);
 
   if (options == null) options = default_option;
 

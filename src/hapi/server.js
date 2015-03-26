@@ -28,6 +28,7 @@ module.exports = function (options) {
 
   var prefixize = function (r) {  r.path = options.base_uri + r.path;return r; }
   server.route(linkedRoutes.map(prefixize));
+  //TODO: clone.
 
   server.loadGoodies = function () {
     // Bliip plugin (print routes)
