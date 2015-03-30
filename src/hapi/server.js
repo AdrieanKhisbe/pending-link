@@ -5,6 +5,8 @@
 
 var Hapi = require('hapi');
 var Blipp = require('blipp');
+var clone = require('clone');
+
 var default_option = require('../config/options').default_option;
 var controller = require('./linkController');
 var routes = require('./routes');
@@ -19,16 +21,15 @@ module.exports = function (options) {
   var hapi_config = {
     load: {sampleInterval: 5000} // process monitoring
   };
-  //TODO: see how config doc
+  //TODO: see how config doc (module)
   var server = new Hapi.Server(hapi_config);
   server.connection({port: options.port, host: options.host});
 
   var linkedRoutes = routes(controller(options));
   server.route(staticRoutes);
 
-  var prefixize = function (r) {  r.path = options.base_uri + r.path;return r; }
-  server.route(linkedRoutes.map(prefixize));
-  //TODO: clone.
+  var prefixize = function (r) {  r.path = options.base_uri + r.path;return r; };
+  server.route(clone(linkedRoutes).map(prefixize));
 
   server.loadGoodies = function () {
     // Bliip plugin (print routes)

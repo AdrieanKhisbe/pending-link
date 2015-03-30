@@ -15,7 +15,6 @@ module.exports = function (options) {
   var log = options.logger;
 
 
-
   return {
 
     save: function (link, callback) {

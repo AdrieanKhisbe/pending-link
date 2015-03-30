@@ -6,9 +6,11 @@
 
 "use strict";
 
+var express = require('express');
+
 module.exports = function(LinkController) {
 
-  var router = require('express').Router();
+  var router = express.Router();
 
   router.get('/hello', function (req, res) {
     res.send("Hello Links!");
@@ -20,7 +22,6 @@ module.exports = function(LinkController) {
 
   router.get('/links/:id', LinkController.get);
   router.post('/links', LinkController.create);
-
 
   return router;
 }

@@ -1,5 +1,5 @@
 /**
- * Module de réprésentation de liens
+ * Module de représentation de liens
  *
  * Created by abecchis on 26/02/15.
  */

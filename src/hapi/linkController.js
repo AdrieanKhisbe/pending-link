@@ -3,12 +3,6 @@
  */
 "use strict";
 
-
-/** Link Controllers
- * Created by abecchis on 09/03/15.
- */
-"use strict";
-
 var Link = require('../links/link');
 var default_option = require('../config/options').default_option;
 
