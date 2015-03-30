@@ -45,7 +45,7 @@ module.exports = function (options) {
     create: function (request, reply) {
       log.debug("Request received %j", request.payload);
       if (!request.payload.url) {
-        return reply.code(400);
+        return reply().code(400);
       }
       var link = Link.create(request.payload.url);
 
@@ -58,7 +58,7 @@ module.exports = function (options) {
 
     update: function (request, reply) {
       var id = request.params.id;
-      if (!id) return reply.code(400);
+      if (!id) return reply().code(400);
       log.info("update link %d with %j", id, request.payload);
 
       // I know it's burk....
@@ -66,10 +66,10 @@ module.exports = function (options) {
         || !request.payload.id || request.payload.id !== id
         || !request.payload.comment || !request.payload.tags || !request.payload.archived
         || !request.payload.url || !request.payload.timestamp) {
-        return reply.code(400).send();
+        return reply().code(400);
       } else {
         LinkDAO.update(request.payload, function (ok) {
-          if (ok) reply.code(200);
+          if (ok) reply();
           else reply().code(500);
         });
       }
@@ -77,7 +77,7 @@ module.exports = function (options) {
 
     partial_update: function (request, reply) {
       var id = request.params.id;
-      if (!id) return reply.code(400);
+      if (!id) return reply().code(400);
       log.info("update link %d with %j", id, request.payload);
 
       if (!"link" === request.payload.type) return reply().code(400);
@@ -91,7 +91,7 @@ module.exports = function (options) {
         if (request.payload.tags) link.tags = request.payload.tags;
 
         LinkDAO.update(link, function (ok) {
-          if (ok) reply.code(200);
+          if (ok) reply();
           else reply().code(500);
         });
       });
@@ -99,11 +99,11 @@ module.exports = function (options) {
 
     remove: function (request, reply) {
       var id = request.params.id;
-      if (!id) return reply.code(400);
+      if (!id) return reply().code(400);
 
       log.info("remove link with %d", id);
       LinkDAO.remove(id, function (ok) {
-        ok ? reply().code(200) : reply().code(500);
+        ok ? reply() : reply().code(500);
       });
     }
   }
