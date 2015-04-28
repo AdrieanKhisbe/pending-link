@@ -1,28 +1,33 @@
 #%RAML 0.8
 
 title: Pending Link Api
-baseUri: http://pending-link.herokuapp.com
+baseUri: http://pending-link.herokuapp.com #  /{version}
 
 schemas:
  - link: !include link.schema
- - link-update: !include link-update.schema
- - link-create: !include link-create.schema
+ - link-partial: !include link-partial.schema
+ - link-create: !include link-creation.schema
 
-#  /{version}
-#version: v1
+version: v1
 
 /links:
+  displayName: Links Collection
   description: Just some links to store and them retrieve
-  # resource: link:string, timestamp:timestamp, tag:list<string>, archive:boolean, comment:string
+    # resource: link:string, timestamp:timestamp, tag:list<string>, archive:boolean, comment:string
   get:
     # §todo: see optional option
-    description: |
-      Retrieve list of existing links
-      # TODO: list schema
+    description:  Retrieve list of existing links
+    # TODO: list schema
   post:
-    description: |
-      Create a new link
+    description: Create a new link
+    body:
+      application/json:
+        schema: link-create
+        # example: {} # TODO!
+
   /{linkId}:
+    displayName: Link Item
+    description: Specific link
     get:
       description: Retrieve link representation
       responses:
@@ -40,11 +45,14 @@ schemas:
 
             application/xml:
     delete:
-      description: |
-        This method will *delete* an **individual link**
+      description: This method will *delete* an **individual link**
     put:
-      description: |
-        This method will *replace* an **individual link**
+      description: This method will *replace* an **individual link**
+      body:
+        application/json:
+          schema: link
     patch:
-      description: |
-        This method will do a partial *update* on an **individual link**
+      description: This method will do a partial *update* on an **individual link**
+      body:
+        application/json:
+          schema: link-partial

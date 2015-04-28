@@ -22,5 +22,5 @@
     "comment": {
       "id": "<<baseUri>>/comment",
       "type": "string"}},
-  "required": ["link","timestamp"]
+  "required": ["link","timestamp","archive","tags","comment"]
 }
