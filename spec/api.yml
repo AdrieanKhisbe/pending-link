@@ -2,17 +2,23 @@
 
 title: Pending Link Api
 baseUri: http://pending-link.herokuapp.com #  /{version}
+version: v1
+
+protocols: [ HTTP ]
+mediaType: application/json
 
 schemas:
  - link: !include schemas/link.schema
  - link-partial: !include schemas/link-partial.schema
  - link-create: !include schemas/link-creation.schema
 
-version: v1
+documentation:
+    - title: About
+      content: Pending link is a simple Api to store and then retrieve links you care about.
 
 /links:
   displayName: Links Collection
-  description: Just some links to store and them retrieve
+  description: Just some links to store and then retrieve!
     # resource: link:string, timestamp:timestamp, tag:list<string>, archive:boolean, comment:string
   get:
     # §todo: see optional option
@@ -20,7 +26,7 @@ version: v1
     # TODO: list schema
     # example: !include examples/simple-collection.json
   post:
-    description: Create a new link
+    description: Create a new link from an url
     body:
       application/json:
         schema: link-create
@@ -30,7 +36,7 @@ version: v1
     displayName: Link Item
     description: Specific link
     get:
-      description: Retrieve link representation
+      description: "*Retrieve* the **link** representation you were looking for"
       responses:
         200:
           body:
@@ -38,16 +44,16 @@ version: v1
               example: !include examples/simple-link.json
               schema: link
     delete:
-      description: This method will *delete* an **individual link**
+      description: Archive this **individual link**
     put:
-      description: This method will *replace* an **individual link**
+      description: "*Update* an **individual link**"
       body:
         application/json:
           schema: link
           example: !include examples/simple-link.json
 
     patch:
-      description: This method will do a partial *update* on an **individual link**
+      description: Partial *update* on this **individual link**
       body:
         application/json:
           schema: link-partial
