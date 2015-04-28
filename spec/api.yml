@@ -1,7 +1,5 @@
 #%RAML 0.8
 
-# TODO: see variables, and extractthem
-
 title: Pending Link Api
 baseUri: http://pending-link.herokuapp.com
 
@@ -13,23 +11,14 @@ schemas:
 #  /{version}
 #version: v1
 
-# traits:
-#  - paged:
-#      queryParameters:
-#        pages:
-#          description: The number of pages to return
-#          type: number
-#  - secured: !include http://raml-example.com/secured.yml
-
-## Main ressource
 /links:
   description: Just some links to store and them retrieve
   # resource: link:string, timestamp:timestamp, tag:list<string>, archive:boolean, comment:string
-  # is: [ paged, secured ]
   get:
     # §todo: see optional option
     description: |
       Retrieve list of existing links
+      # TODO: list schema
   post:
     description: |
       Create a new link
