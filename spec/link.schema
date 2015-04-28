@@ -1,0 +1,26 @@
+{ "$schema": "http://json-schema.org/schema",
+  "type": "object",
+  "id": "<<baseUri>>",
+  "properties": {
+    "link": {
+      "id": "<<baseUri>>/link",
+      "type": "string" },
+    "archive": {
+      "id": "<<baseUri>>/archive",
+      "type": "boolean" },
+    "timestamp": {
+      "id": "<<baseUri>>/timestamp",
+      "type": "string"},
+    "tags": {
+      "id": "<<baseUri>>/tags",
+      "type": "array",
+      "items": [{
+        "id": "<<baseUri>>/tags/0",
+        "type": "string"},
+        {"id": "<<baseUri>>/tags/1",
+          "type": "string"}]},
+    "comment": {
+      "id": "<<baseUri>>/comment",
+      "type": "string"}},
+  "required": ["link","timestamp"]
+}

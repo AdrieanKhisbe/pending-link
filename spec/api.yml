@@ -4,6 +4,12 @@
 
 title: Pending Link Api
 baseUri: http://pending-link.herokuapp.com
+
+schemas:
+ - link: !include link.schema
+ - link-update: !include link-update.schema
+ - link-create: !include link-create.schema
+
 #  /{version}
 #version: v1
 
@@ -41,33 +47,8 @@ baseUri: http://pending-link.herokuapp.com
                   "tags": ["rest", "api"],
                   "comment": "Api Rocks"
                 }
-              schema: |
-                { "$schema": "http://json-schema.org/schema",
-                  "type": "object",
-                  "id": "<<baseUri>>",
-                  "properties": {
-                    "link": {
-                      "id": "<<baseUri>>/link",
-                      "type": "string" },
-                    "archive": {
-                      "id": "<<baseUri>>/archive",
-                      "type": "boolean" },
-                    "timestamp": {
-                      "id": "<<baseUri>>/timestamp",
-                      "type": "string"},
-                    "tags": {
-                      "id": "<<baseUri>>/tags",
-                      "type": "array",
-                      "items": [{
-                          "id": "<<baseUri>>/tags/0",
-                          "type": "string"},
-                        {"id": "<<baseUri>>/tags/1",
-                          "type": "string"}]},
-                    "comment": {
-                      "id": "<<baseUri>>/comment",
-                      "type": "string"}},
-                  "required": ["link","timestamp"]
-                }
+              schema: link
+
             application/xml:
     delete:
       description: |
