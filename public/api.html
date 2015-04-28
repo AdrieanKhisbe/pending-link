@@ -123,6 +123,8 @@
     }
   },
   "required": ["url"]
+}</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "url": "http://blog.octo.com/node-for-api/"
 }</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel__links__linkId_"><span class="parent">/links</span>/{linkId}</a> <span class="methods"><a href="#" data-toggle="modal" data-target="#_links__linkId__get"><span class="badge badge_get">get</span></a> <a href="#" data-toggle="modal" data-target="#_links__linkId__delete"><span class="badge badge_delete">delete</span></a> <a href="#" data-toggle="modal" data-target="#_links__linkId__put"><span class="badge badge_put">put</span></a> <a href="#" data-toggle="modal" data-target="#_links__linkId__patch"><span class="badge badge_patch">patch</span></a></span></h4></div><div id="panel__links__linkId_" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Specific link</p></div><div class="list-group"><div data-toggle="modal" data-target="#_links__linkId__get" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Retrieve link representation</p></div><div class="clearfix"></div></div><div data-toggle="modal" data-target="#_links__linkId__delete" class="list-group-item"><span class="badge badge_delete">delete</span><div class="method_description"><p>This method will <em>delete</em> an <strong>individual link</strong></p></div><div class="clearfix"></div></div><div data-toggle="modal" data-target="#_links__linkId__put" class="list-group-item"><span class="badge badge_put">put</span><div class="method_description"><p>This method will <em>replace</em> an <strong>individual link</strong></p></div><div class="clearfix"></div></div><div data-toggle="modal" data-target="#_links__linkId__patch" class="list-group-item"><span class="badge badge_patch">patch</span><div class="method_description"><p>This method will do a partial <em>update</em> on an <strong>individual link</strong></p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="_links__linkId__get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/links</span>/{linkId}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Retrieve link representation</p></div><ul class="nav nav-tabs"><li class="active"><a href="#_links__linkId__get_request" data-toggle="tab">Request</a></li><li><a href="#_links__linkId__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="_links__linkId__get_request"><h3>URI Parameters</h3><ul><li><strong>linkId</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="_links__linkId__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{ "$schema": "http://json-schema.org/schema",
   "type": "object",
   "id": "&lt;&lt;baseUri&gt;&gt;",
@@ -148,13 +150,17 @@
       "id": "&lt;&lt;baseUri&gt;&gt;/comment",
       "type": "string"}},
   "required": ["link","timestamp","archive","tags","comment"]
-}</code></pre><p><strong>Example</strong>:</p><pre><code>{ "link": "http://blog.octo.com/designer-une-api-rest/",
+}</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "id": "adKFsdfdsuhnkj",
+  "link": "http://blog.octo.com/designer-une-api-rest/",
   "archive": true,
   "timestamp": "2015-02-16T09:25:43.511Z",
-  "tags": ["rest", "api"],
+  "tags": [
+    "rest",
+    "api"
+  ],
   "comment": "Api Rocks"
-}
-</code></pre><p><strong>Type: application/xml</strong></p></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="_links__linkId__delete"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete</span> <span class="parent">/links</span>/{linkId}</h4></div><div class="modal-body"><div class="alert alert-info"><p>This method will <em>delete</em> an <strong>individual link</strong></p></div><ul class="nav nav-tabs"><li class="active"><a href="#_links__linkId__delete_request" data-toggle="tab">Request</a></li></ul><div class="tab-content"><div class="tab-pane active" id="_links__linkId__delete_request"><h3>URI Parameters</h3><ul><li><strong>linkId</strong>: <em>required (string)</em></li></ul></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="_links__linkId__put"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/links</span>/{linkId}</h4></div><div class="modal-body"><div class="alert alert-info"><p>This method will <em>replace</em> an <strong>individual link</strong></p></div><ul class="nav nav-tabs"><li class="active"><a href="#_links__linkId__put_request" data-toggle="tab">Request</a></li></ul><div class="tab-content"><div class="tab-pane active" id="_links__linkId__put_request"><h3>URI Parameters</h3><ul><li><strong>linkId</strong>: <em>required (string)</em></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{ "$schema": "http://json-schema.org/schema",
+}</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="_links__linkId__delete"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete</span> <span class="parent">/links</span>/{linkId}</h4></div><div class="modal-body"><div class="alert alert-info"><p>This method will <em>delete</em> an <strong>individual link</strong></p></div><ul class="nav nav-tabs"><li class="active"><a href="#_links__linkId__delete_request" data-toggle="tab">Request</a></li></ul><div class="tab-content"><div class="tab-pane active" id="_links__linkId__delete_request"><h3>URI Parameters</h3><ul><li><strong>linkId</strong>: <em>required (string)</em></li></ul></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="_links__linkId__put"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/links</span>/{linkId}</h4></div><div class="modal-body"><div class="alert alert-info"><p>This method will <em>replace</em> an <strong>individual link</strong></p></div><ul class="nav nav-tabs"><li class="active"><a href="#_links__linkId__put_request" data-toggle="tab">Request</a></li></ul><div class="tab-content"><div class="tab-pane active" id="_links__linkId__put_request"><h3>URI Parameters</h3><ul><li><strong>linkId</strong>: <em>required (string)</em></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{ "$schema": "http://json-schema.org/schema",
   "type": "object",
   "id": "&lt;&lt;baseUri&gt;&gt;",
   "properties": {
@@ -179,6 +185,16 @@
       "id": "&lt;&lt;baseUri&gt;&gt;/comment",
       "type": "string"}},
   "required": ["link","timestamp","archive","tags","comment"]
+}</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "id": "adKFsdfdsuhnkj",
+  "link": "http://blog.octo.com/designer-une-api-rest/",
+  "archive": true,
+  "timestamp": "2015-02-16T09:25:43.511Z",
+  "tags": [
+    "rest",
+    "api"
+  ],
+  "comment": "Api Rocks"
 }</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="_links__linkId__patch"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_patch">patch</span> <span class="parent">/links</span>/{linkId}</h4></div><div class="modal-body"><div class="alert alert-info"><p>This method will do a partial <em>update</em> on an <strong>individual link</strong></p></div><ul class="nav nav-tabs"><li class="active"><a href="#_links__linkId__patch_request" data-toggle="tab">Request</a></li></ul><div class="tab-content"><div class="tab-pane active" id="_links__linkId__patch_request"><h3>URI Parameters</h3><ul><li><strong>linkId</strong>: <em>required (string)</em></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{ "$schema": "http://json-schema.org/schema",
   "type": "object",
   "id": "&lt;&lt;baseUri&gt;&gt;",
@@ -204,4 +220,7 @@
       "id": "&lt;&lt;baseUri&gt;&gt;/comment",
       "type": "string"}
   }
+}</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "id": "adKFsdfdsuhnkj",
+  "comment": "Api really Rocks"
 }</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#_links">Links Collection</a></li></ul></div></div></div></div></body></html>

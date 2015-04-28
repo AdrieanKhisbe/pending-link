@@ -4,9 +4,9 @@ title: Pending Link Api
 baseUri: http://pending-link.herokuapp.com #  /{version}
 
 schemas:
- - link: !include link.schema
- - link-partial: !include link-partial.schema
- - link-create: !include link-creation.schema
+ - link: !include schemas/link.schema
+ - link-partial: !include schemas/link-partial.schema
+ - link-create: !include schemas/link-creation.schema
 
 version: v1
 
@@ -18,12 +18,13 @@ version: v1
     # §todo: see optional option
     description:  Retrieve list of existing links
     # TODO: list schema
+    # example: !include examples/simple-collection.json
   post:
     description: Create a new link
     body:
       application/json:
         schema: link-create
-        # example: {} # TODO!
+        example: !include examples/simple-url.json
 
   /{linkId}:
     displayName: Link Item
@@ -34,16 +35,8 @@ version: v1
         200:
           body:
             application/json:
-              example: |
-                { "link": "http://blog.octo.com/designer-une-api-rest/",
-                  "archive": true,
-                  "timestamp": "2015-02-16T09:25:43.511Z",
-                  "tags": ["rest", "api"],
-                  "comment": "Api Rocks"
-                }
+              example: !include examples/simple-link.json
               schema: link
-
-            application/xml:
     delete:
       description: This method will *delete* an **individual link**
     put:
@@ -51,8 +44,11 @@ version: v1
       body:
         application/json:
           schema: link
+          example: !include examples/simple-link.json
+
     patch:
       description: This method will do a partial *update* on an **individual link**
       body:
         application/json:
           schema: link-partial
+          example: !include examples/partial-link.json
