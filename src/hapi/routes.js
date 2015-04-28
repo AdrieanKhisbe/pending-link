@@ -13,8 +13,8 @@ module.exports = function (LinkController) {
 
     // Hello endpoint
     {
-      method: 'GET', path: '/hello', handler: function (req, res) {
-      res("Hello Links!")
+      method: 'GET', path: '/hello', handler: function (request, reply) {
+      reply("Hello Links!")
     }
     },
 
@@ -26,6 +26,7 @@ module.exports = function (LinkController) {
         handler: LinkController.update,
         validate: {
           payload: {
+            // TODO: extract in validation file
             url: Joi.string().required(),
             timestamp: Joi.date().required(),
             archive: Joi.bool().required(),

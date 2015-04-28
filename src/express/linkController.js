@@ -26,10 +26,10 @@ module.exports = function (options) {
       log.debug("access link %s", id);
       LinkDAO.get(id, function (link) {
         if (link == null) {
-          res.status(404).end();
+          res.sendStatus(404);
         } else {
           if (link.archived)
-            res.status(410).end();
+            res.sendStatus(410);
           else res.json(link)
         }
       });
@@ -38,7 +38,7 @@ module.exports = function (options) {
     create: function (req, res) {
       log.debug("Request received %j", req.body);
       if (!req.body.url) {
-        return res.status(400).send();
+        return res.sendStatus(400);
       }
       var link = Link.create(req.body.url);
 
@@ -53,7 +53,7 @@ module.exports = function (options) {
 
     update: function (req, res) {
       var id = req.params.id;
-      if (!id) return res.status(400).send();
+      if (!id) return res.sendStatus(400);
       log.info("update link %d with %j", id, req.body);
 
       // I know it's burk....
@@ -61,21 +61,21 @@ module.exports = function (options) {
         || !req.body.id || req.body.id !== id
         || !req.body.comment || !req.body.tags || !req.body.archived
         || !req.body.url || !req.body.timestamp) {
-        return res.status(400).send();
+        return res.sendStatus(400);
       } else {
         LinkDAO.update(req.body, function (ok) {
-          if (ok) res.status(200).end();
-          else res.status(500).end();
+          if (ok) res.sendStatus(200);
+          else res.sendStatus(500);
         });
       }
     },
 
     partial_update: function (req, res) {
       var id = req.params.id;
-      if (!id) return res.status(400).send()
+      if (!id) return res.sendStatus(400);
       log.info("update link %d with %j", id, req.body);
 
-      if (!"link" === req.body.type) return res.status(400).send();
+      if (!"link" === req.body.type) return res.sendStatus(400);
 
       LinkDAO.get(id, function (link) {
         //TODO: handle doc not here
@@ -86,19 +86,19 @@ module.exports = function (options) {
         if (req.body.tags) link.tags = req.body.tags;
 
         LinkDAO.update(link, function (ok) {
-          if (ok) res.status(200).end();
-          else res.status(500).end();
+          if (ok) res.sendStatus(200);
+          else res.sendStatus(500);
         });
       });
     },
 
     remove: function (req, res) {
       var id = req.params.id;
-      if (!id) return res.status(400).send();
+      if (!id) return res.sendStatus(400);
 
       log.info("remove link with %d", id);
       LinkDAO.remove(id, function (ok) {
-        ok ? res.status(200).send() : res.status(500).send();
+        ok ? res.sendStatus(200) : res.sendStatus(500);
       });
     }
   }

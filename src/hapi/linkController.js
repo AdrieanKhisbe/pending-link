@@ -31,7 +31,7 @@ module.exports = function (options) {
         } else {
           if (link.archived)
             reply().code(410);
-          else reply(link)
+          else reply(link);
         }
       });
     },
