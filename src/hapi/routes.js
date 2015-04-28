@@ -6,7 +6,7 @@
 
 "use strict";
 
-var Joi = require('joi');
+var schemas = require('./schemas');
 
 module.exports = function (LinkController) {
   return [
@@ -24,33 +24,14 @@ module.exports = function (LinkController) {
       method: 'PUT', path: '/links/{id}',
       config: {
         handler: LinkController.update,
-        validate: {
-          payload: {
-            // TODO: extract in validation file
-            url: Joi.string().required(),
-            timestamp: Joi.date().required(),
-            archive: Joi.bool().required(),
-            comment: Joi.string().required(),
-            tags: Joi.array().items(Joi.string()).required(),
-            type: Joi.string().regex(/link/).required()
-          }
-        }
+        validate: { payload: schemas.linkUpdate }
       }
     },
     {
       method: 'PATCH', path: '/links/{id}',
       config: {
         handler: LinkController.partial_update,
-        validate: {
-          payload: {
-            url: Joi.string().optional(),
-            timestamp: Joi.date().optional(),
-            archive: Joi.bool().optional(),
-            comment: Joi.string().optional(),
-            tags: Joi.array().items(Joi.string()).optional(),
-            type: Joi.string().regex(/link/).optional()
-          }
-        }
+        validate: { payload: schemas.linkPatch }
       }
     },
     {method: 'DELETE', path: '/links/{id}', handler: LinkController.remove},
@@ -59,7 +40,7 @@ module.exports = function (LinkController) {
       method: 'POST', path: '/links',
       config: {
         handler: LinkController.create,
-        validate: {payload: {url: Joi.string().required()}}
+        validate: {payload: schemas.linkCreate}
       }
     }
 
