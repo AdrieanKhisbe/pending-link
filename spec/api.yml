@@ -1,7 +1,7 @@
 #%RAML 0.8
 
 title: Pending Link Api
-baseUri: http://pending-link.herokuapp.com #  /{version}
+baseUri: http://pending-link.herokuapp.com/api/{version}
 version: v1
 
 protocols: [ HTTP ]
@@ -21,10 +21,15 @@ documentation:
   description: Just some links to store and then retrieve!
     # resource: link:string, timestamp:timestamp, tag:list<string>, archive:boolean, comment:string
   get:
-    # §todo: see optional option
+    # §todo: see optional options, filters!
     description:  Retrieve list of existing links
-    # TODO: list schema
-    # example: !include examples/simple-collection.json
+    responses:
+      200:
+        body:
+          application/json:
+             # TODO: list schema
+          example: !include examples/simple-collection.json
+
   post:
     description: Create a new link from an url
     body:
@@ -32,21 +37,37 @@ documentation:
         schema: link-create
         example: !include examples/simple-url.json
 
+  # §INPROGRESS
+  /search:
+    description: Search some link on the server
+      # TODO param
+
+  /tags:
+    /{tagName}:
+      description: Filter links by a specific *tagname*
+      get:
+      # HERE
+
   /{linkId}:
     displayName: Link Item
     description: Specific link
+
     get:
-      description: "*Retrieve* the **link** representation you were looking for"
+      description:
+        | *Retrieve* the **link** representation you were looking for
       responses:
         200:
           body:
             application/json:
               example: !include examples/simple-link.json
               schema: link
+
     delete:
       description: Archive this **individual link**
+
     put:
-      description: "*Update* an **individual link**"
+      description:
+        | *Update* an **individual link**
       body:
         application/json:
           schema: link
