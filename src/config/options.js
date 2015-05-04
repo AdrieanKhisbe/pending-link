@@ -3,6 +3,7 @@
  *
  * Created by abecchis on 17/03/15.
  */
+'use strict';
 
 var logger = require('./logger');
 var conf = require('./configuration');

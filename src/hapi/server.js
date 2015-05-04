@@ -1,7 +1,7 @@
 /** The server
  * Created by abecchis on 27/02/15.
  */
-"use strict";
+'use strict';
 
 var Hapi = require('hapi');
 var Blipp = require('blipp');

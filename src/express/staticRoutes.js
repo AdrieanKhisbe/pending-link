@@ -3,7 +3,6 @@
  *
  * Created by abecchis on 09/03/15.
  */
-
 "use strict";
 
 module.exports = function() {
@@ -16,5 +15,6 @@ module.exports = function() {
   router.get('/doc', function (req, res) {
     res.sendfile("api.html", {root: './public'})
   });
+
   return router;
 };

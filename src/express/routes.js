@@ -3,7 +3,6 @@
  *
  * Created by abecchis on 09/03/15.
  */
-
 "use strict";
 
 var express = require('express');
@@ -24,4 +23,4 @@ module.exports = function(LinkController) {
   router.post('/links', LinkController.create);
 
   return router;
-}
+};

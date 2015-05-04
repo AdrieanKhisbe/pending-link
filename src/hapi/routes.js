@@ -3,8 +3,7 @@
  *
  * Created by abecchis on 26/02/15.
  */
-
-"use strict";
+'use strict';
 
 var schemas = require('./schemas');
 

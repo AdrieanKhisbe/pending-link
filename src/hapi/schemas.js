@@ -2,6 +2,7 @@
  * Links Schemas
  * Created by abecchis on 28/04/15.
  */
+'use strict';
 
 var Joi = require('joi');
 

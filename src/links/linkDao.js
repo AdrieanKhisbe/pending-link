@@ -3,8 +3,8 @@
  *
  * Created by abecchis on 26/02/15.
  */
+'use strict';
 
-"use strict";
 var default_option = require('../config/options').default_option;
 
 module.exports = function (options) {
@@ -13,7 +13,6 @@ module.exports = function (options) {
 
   var db = options.db();
   var log = options.logger;
-
 
   return {
 
