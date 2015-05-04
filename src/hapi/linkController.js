@@ -99,6 +99,18 @@ module.exports = function (options) {
       LinkDAO.remove(id, function (ok) {
         ok ? reply() : reply().code(500);
       });
+    },
+
+    findByTags: function (request, reply) {
+      var tag = request.params.tagName;
+      if (!tag) return reply().code(400);
+
+      log.info("fetching link with tag %s", tag);
+
+      LinkDAO.findByTags(tag, function (taggedLink) {
+        log.debug('find by tag just grabbed result');
+        reply(taggedLink);
+      });
     }
   }
 };

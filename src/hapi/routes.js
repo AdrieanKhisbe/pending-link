@@ -41,7 +41,12 @@ module.exports = function (LinkController) {
         handler: LinkController.create,
         validate: {payload: schemas.linkCreate}
       }
-    }
+    },
+
+    // Tags
+    {method: 'GET', path: '/tags/{tagName}', handler: LinkController.findByTags},
+   // {method: 'GET', path: '/tags', handler: LinkController.listTags},
+
 
   ];
 };
