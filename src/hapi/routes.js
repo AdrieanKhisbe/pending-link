@@ -29,7 +29,7 @@ module.exports = function (LinkController) {
     {
       method: 'PATCH', path: '/links/{id}',
       config: {
-        handler: LinkController.partial_update,
+        handler: LinkController.partialUpdate,
         validate: { payload: schemas.linkPatch }
       }
     },

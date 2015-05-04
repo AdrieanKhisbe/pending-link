@@ -23,7 +23,7 @@ function dbFromConf(conf){
 }
 
 module.exports = {
-  null_option: {
+  nullOption: {
     logger: logger.empty_logger,
     port: 0,
     host: "0.0.0.0",
@@ -31,7 +31,7 @@ module.exports = {
     db: function(){return new DataStore();}
   },
 
-  default_option: {
+  defaultOption: {
     logger: logger.createLogger(conf),
     port: conf.get("pl:port"),
     host: conf.get("pl:host") || "0.0.0.0",
@@ -39,7 +39,7 @@ module.exports = {
     db:dbFromConf(conf)
   },
 
-  option_from: function (port, host) {
+  optionFrom: function (port, host) {
     return {
       logger: logger.createLogger(conf),
       port: port || conf.get("pl:port"),

@@ -5,7 +5,7 @@
  */
 'use strict';
 
-var default_option = require('../config/options').default_option;
+var default_option = require('../config/options').defaultOption;
 
 module.exports = function (options) {
 

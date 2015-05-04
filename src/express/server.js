@@ -5,14 +5,14 @@
 
 var bodyParser = require('body-parser');
 var express = require('express');
-var default_option = require('../config/options').default_option;
+var defaultOption = require('../config/options').defaultOption;
 var controller = require('./linkController');
 var routes = require('./routes');
 var staticRoutes = require('./staticRoutes')();
 
 module.exports = function(options){
 
-  if(options == null) options = default_option;
+  if(options == null) options = defaultOption;
 
   var log = options.logger;
   var server = express();

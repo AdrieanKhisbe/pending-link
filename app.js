@@ -1,6 +1,6 @@
 /** Pending Link */
 
-var options = require('./src/config/options').option_from(~~process.env.PORT);
+var options = require('./src/config/options').optionFrom(~~process.env.PORT);
 var log = options.logger;
 
 var framework, express = './src/express', hapi = './src/hapi';

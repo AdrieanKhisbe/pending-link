@@ -4,13 +4,13 @@
 'use strict';
 
 var Link = require('../links/link');
-var default_option = require('../config/options').default_option;
+var defaultOption = require('../config/options').defaultOption;
 
 module.exports = function (options) {
   var LinkDAO = require('../links/linkDao')(options);
 
 
-  if (options == null) options = default_option;
+  if (options == null) options = defaultOption;
 
   var log = options.logger;
 
@@ -69,7 +69,7 @@ module.exports = function (options) {
       }
     },
 
-    partial_update: function (request, reply) {
+    partialUpdate: function (request, reply) {
       var id = request.params.id;
       if (!id) return reply().code(400);
       log.info("update link %d with %j", id, request.payload);

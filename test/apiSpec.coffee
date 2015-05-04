@@ -1,6 +1,6 @@
 # TEST OF THE LINK API
 
-options = require('../src/config/options').null_option
+options = require('../src/config/options').nullOption
 port = options.port = 12543
 
 hapiServer = require('../src/hapi')

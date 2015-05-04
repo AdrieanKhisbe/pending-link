@@ -16,7 +16,7 @@ module.exports = function(LinkController) {
   });
   router.get('/links', LinkController.all);
   router.put('/links/:id', LinkController.update);
-  router.patch('/links/:id', LinkController.partial_update);
+  router.patch('/links/:id', LinkController.partialUpdate);
   router.delete('/links/:id', LinkController.remove);
 
   router.get('/links/:id', LinkController.get);
