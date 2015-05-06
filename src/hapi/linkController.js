@@ -115,6 +115,11 @@ module.exports = function (options) {
         log.debug('find by tag just grabbed result');
         reply(taggedLinks);
       });
+    },
+    allTags: function(request, reply){
+      LinkDAO.allTags(function(tags){
+        reply(tags);
+      });
     }
   }
 };

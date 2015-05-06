@@ -45,8 +45,7 @@ module.exports = function (LinkController) {
 
     // Tags
     {method: 'GET', path: '/tags/{tagName}', handler: LinkController.findByTags},
-   // {method: 'GET', path: '/tags', handler: LinkController.listTags},
-
+    {method: 'GET', path: '/tags', handler: LinkController.allTags}
 
   ];
 };

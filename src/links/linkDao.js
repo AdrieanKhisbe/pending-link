@@ -82,7 +82,17 @@ module.exports = function (options) {
           callback(docs);
         }
       });
+    },
+    allTags: function (callback) {
+      callback(['a','b','c']);
+      /*
+      db.find({}, function (err, docs) {
+        // might need to do a special DOC.
+
+        if (err) callback(null); else callback(docs);
+      });*/
     }
+
 
     // TODO: search : in url + comment
 
