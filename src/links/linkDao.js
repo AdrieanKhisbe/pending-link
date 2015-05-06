@@ -71,7 +71,7 @@ module.exports = function (options) {
       });
     },
 
-    findByTags: function(tags, callback){
+    findByTags: function (tags, callback) {
       // TODO: add suport for list of more?  $in
       db.find({tags: tags}, function (err, docs) {
         if (err) {
@@ -84,13 +84,24 @@ module.exports = function (options) {
       });
     },
     allTags: function (callback) {
-      callback(['a','b','c']);
-      /*
-      db.find({}, function (err, docs) {
-        // might need to do a special DOC.
+      db.find({$not: {tags: {$size: 0}}}, {tags: 1, _id: 0}, function (err, docs) {
+        // might need to do a special DOC. (not performant at all!!!
 
-        if (err) callback(null); else callback(docs);
-      });*/
+        if (err) {
+          callback(null);
+        } else {
+          console.log("DOCS %j",docs);
+          // maybe: underscore refactor this
+          var tags = {};
+          docs.forEach(function(tag){
+            console.log("TAG %j",tag);
+            tag.tags.forEach(function(tagName){
+              tags[tagName] = true;
+            });
+          });
+          callback(Object.getOwnPropertyNames(tags));
+        }
+      });
     }
 
 
