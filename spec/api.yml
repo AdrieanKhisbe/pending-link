@@ -11,6 +11,7 @@ schemas:
  - link: !include schemas/link.schema
  - link-partial: !include schemas/link-partial.schema
  - link-create: !include schemas/link-creation.schema
+ # TODO: list schema
 
 documentation:
     - title: About
@@ -21,7 +22,7 @@ documentation:
   description: Just some links to store and then retrieve!
     # resource: link:string, timestamp:timestamp, tag:list<string>, archive:boolean, comment:string
   get:
-    # §todo: see optional options, filters!
+    # §TODO: see optional options, filters!
     description:  Retrieve list of existing links
     responses:
       200:
@@ -37,16 +38,29 @@ documentation:
         schema: link-create
         example: !include examples/simple-url.json
 
-  # §INPROGRESS
   /search:
     description: Search some link on the server
-      # TODO param
+      # TODO param q + implem
 
   /tags:
+    get:
+      description: Get the list of all existing tags
+      responses:
+        200:
+         body:
+           application/json:
+             example: !include examples/tag-list.json
+        # TODO: schema of list
+
     /{tagName}:
       description: Filter links by a specific *tagname*
       get:
-      # HERE
+        responses:
+          200:
+           body:
+             application/json:
+               example: !include examples/tag-link-list.json
+             # TODO list body schema
 
   /{linkId}:
     displayName: Link Item
