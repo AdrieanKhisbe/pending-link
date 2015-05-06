@@ -28,6 +28,7 @@
     "hapi": "^8.2.0",
     "joi": "^6.0.0",
     "mongojs": "^0.18.2",
+    "morgan": "^1.5.2",
     "nconf": "^0.7.1",
     "nedb": "^1.1.1",
     "stream-blackhole": "^1.0.3"

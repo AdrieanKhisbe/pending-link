@@ -10,10 +10,10 @@ module.exports = function() {
   var router = require('express').Router();
 
   router.get('/', function (req, res) {
-    res.sendfile("index.html", {root: './public'})
+    res.sendFile("index.html", {root: './public'})
   });
   router.get('/doc', function (req, res) {
-    res.sendfile("api.html", {root: './public'})
+    res.sendFile("api.html", {root: './public'})
   });
 
   return router;

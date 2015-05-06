@@ -5,6 +5,8 @@
 
 var bodyParser = require('body-parser');
 var express = require('express');
+var morgan = require('morgan');
+
 var defaultOption = require('../config/options').defaultOption;
 var controller = require('./linkController');
 var routes = require('./routes');
@@ -19,6 +21,7 @@ module.exports = function(options){
   var realServer;
 
   server.use(bodyParser.json());
+  server.use(morgan('combined'));
 
   var linkedRoutes = routes(controller(options));
   server.use(options.base_uri, linkedRoutes);
