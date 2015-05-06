@@ -5,6 +5,17 @@
     "url": {
       "id": "<<baseUri>>/url",
       "type": "string"
+    },
+    "comment": {
+      "id": "<<baseUri>>/comment",
+      "type": "string"
+    },
+    "tags": {
+      "id": "<<baseUri>>/tags",
+      "type": "array",
+      "items":[{
+        "id": "<<baseUri>>/tags/0",
+        "type": "string"}]
     }
   },
   "required": ["url"]
