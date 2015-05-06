@@ -22,5 +22,8 @@ module.exports = function(LinkController) {
   router.get('/links/:id', LinkController.get);
   router.post('/links', LinkController.create);
 
+  router.get('/tags/:tagName', LinkController.findByTags);
+  router.get('/tags', LinkController.allTags);
+
   return router;
 };

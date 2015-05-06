@@ -99,6 +99,23 @@ module.exports = function (options) {
       LinkDAO.remove(id, function (ok) {
         ok ? res.sendStatus(200) : res.sendStatus(500);
       });
+    },
+
+    findByTags: function (req, res) {
+      var tag = req.params.tagName;
+      if (!tag) return res.sendStatus(400);
+
+      log.info("fetching link with tag %s", tag);
+
+      LinkDAO.findByTags(tag, function (taggedLinks) {
+        log.debug('find by tag just grabbed result');
+        res.json(taggedLinks);
+      });
+    },
+    allTags: function(req, res){
+      LinkDAO.allTags(function(tags){
+        res.json(tags);
+      });
     }
   }
 };

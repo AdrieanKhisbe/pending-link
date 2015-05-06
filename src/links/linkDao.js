@@ -90,11 +90,9 @@ module.exports = function (options) {
         if (err) {
           callback(null);
         } else {
-          console.log("DOCS %j",docs);
           // maybe: underscore refactor this
           var tags = {};
           docs.forEach(function(tag){
-            console.log("TAG %j",tag);
             tag.tags.forEach(function(tagName){
               tags[tagName] = true;
             });
