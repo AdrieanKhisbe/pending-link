@@ -5,7 +5,8 @@ var log = options.logger;
 
 var framework, express = './src/express', hapi = './src/hapi';
 
-switch(process.argv[2].toLowerCase()){
+var serverName = process.argv[2] ? process.argv[2].toLowerCase() :"";
+switch(serverName){
   // TODO: maybe replace with config,option
   case "hapi":
     framework = hapi;
