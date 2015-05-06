@@ -14,10 +14,14 @@ TODO:
 - schema: made it available from server.
 - check json schema for array of string
 - see how to add multiple examples
-
+e
 - api: add the search, filter. implement them
 
 - setup plato and run it.
+
+- put passport in place
+
+- link utils function: compare
 
 MAYBES:
 - adding code doc?

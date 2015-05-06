@@ -10,6 +10,7 @@ module.exports = {
   ],
 
   valid_link_request: {url:"http://tototo"  },
+  valid_link_request_with_comment_and_tag: {url:"http://titi", comment: "lol", tags:["hehe", "haha"]  },
   empty_link_request: "",
   invalid_link_request: {junk:"big junk"  },
 
@@ -24,4 +25,4 @@ module.exports = {
 
   valid_link_partial_update: {tags:["abc"]}
 
-}
+};

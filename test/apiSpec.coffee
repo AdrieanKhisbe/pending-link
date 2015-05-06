@@ -75,12 +75,19 @@ testing_api = (name, server) ->
         describe "Post endpoint", ->
           # it "it respond with json", (done) ->
           # respond_with_json 'post', LINK_ENDPOINT, done, {code:201, body:data.valid_link_request}
-          # todo: check valid and non valid output
+          # TODO: check valid and non valid output
+          # TODO: check ressource created
           it "should answer with a location (that I can access)", (done) ->
              api.post(LINK_ENDPOINT).set('Accept', 'application/json')
                .send(data.valid_link_request)
-               .expect('Location', RegExp("#{LINK_ENDPOINT}/\\w+"))
-               .expect(201, done)
+               .expect(201)
+               .expect('Location', RegExp("#{LINK_ENDPOINT}/\\w+"), done)
+          it "should be working with a comment and some tags", (done) ->
+            api.post(LINK_ENDPOINT).set('Accept', 'application/json')
+              .send(data.valid_link_request_with_comment_and_tag)
+              .expect(201)
+              .expect('Location', RegExp("#{LINK_ENDPOINT}/\\w+"), done)
+
 
         describe "Get endpoint", ->
             it "it respond with json", (done) ->
