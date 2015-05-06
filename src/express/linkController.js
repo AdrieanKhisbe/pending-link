@@ -44,8 +44,7 @@ module.exports = function (options) {
 
       LinkDAO.save(link, function (newLink) {
         log.info("new link: %j", newLink);
-
-        res.header("Location", "/api/links/" + newLink._id);
+        res.location("/api/links/" + newLink._id);
         res.status(201).json({});
       });
 

@@ -21,21 +21,23 @@ module.exports = function(options){
   var realServer;
 
   server.use(bodyParser.json());
-  server.use(morgan('combined'));
 
   var linkedRoutes = routes(controller(options));
-  server.use(options.base_uri, linkedRoutes);
-  server.use('/', staticRoutes);
 
   // Add this methods to have an uniform api with hapi
   server.start = function (callback) {
+
+    // note: load routes in start so that they are loaded after the eventual goodies
+    server.use(options.base_uri, linkedRoutes);
+    server.use('/', staticRoutes);
+
     log.info("Starting Express Server");
     realServer = server.listen(options.port, callback);
     return realServer;
   };
 
   server.loadGoodies = function () {
-    // No goodies
+    server.use(morgan('combined'));
   };
 
   server.stop = function(callback){
