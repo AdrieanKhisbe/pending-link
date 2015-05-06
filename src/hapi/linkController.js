@@ -41,6 +41,8 @@ module.exports = function (options) {
         return reply().code(400);
       }
       var link = Link.create(request.payload.url);
+      if(request.payload.tags) link.tags = request.payload.tags;
+      if(request.payload.comment) link.comment = request.payload.comment;
 
       LinkDAO.save(link, function (newLink) {
         log.info("new link: %j", newLink);

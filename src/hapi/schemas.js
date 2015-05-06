@@ -9,8 +9,11 @@ var Joi = require('joi');
 var schemas = {
 
   linkCreate: {
-    url: Joi.string().required()
+    url: Joi.string().required(),
+    comment: Joi.string().optional(),
+    tags: Joi.array().items(Joi.string()).optional()
   },
+
   linkUpdate: {
     url: Joi.string().required(),
     timestamp: Joi.date().required(),
@@ -19,6 +22,7 @@ var schemas = {
     tags: Joi.array().items(Joi.string()).required(),
     type: Joi.string().regex(/link/).required()
   },
+
   linkPatch: {
     url: Joi.string().optional(),
     timestamp: Joi.date().optional(),
