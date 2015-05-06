@@ -71,14 +71,18 @@ testing_api = (name, server) ->
     describe "Real link api", ->
 
       describe "Post endpoint", ->
-         #it "it respond with json", (done) ->
-          #  respond_with_json 'post', LINK_ENDPOINT, done, {code:201, body:data.valid_link_request}
-         # todo: check valid and non valid output
-         it "should answer with a location (that I can access)"
-           # todo: check location
+        # it "it respond with json", (done) ->
+        # respond_with_json 'post', LINK_ENDPOINT, done, {code:201, body:data.valid_link_request}
+        # todo: check valid and non valid output
+        it "should answer with a location (that I can access)", (done) ->
+           api.post(LINK_ENDPOINT).set('Accept', 'application/json')
+             .send(data.valid_link_request)
+             .expect('Location', RegExp("#{LINK_ENDPOINT}/\\w+"))
+             .expect(201, done)
 
 
-      describe "Get endpoint", ->
+
+    describe "Get endpoint", ->
         it "it respond with json", (done) ->
           respond_with_json 'get', LINK_ENDPOINT, done
 
