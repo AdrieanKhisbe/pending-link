@@ -11,7 +11,7 @@
     "path": ""
   },
   "db":{
-    "path": "link.nedb",
+    "path": "./link.nedb",
     "in_memory": true
   }
 }

@@ -79,7 +79,7 @@ module.exports = function (options) {
           log.warn(err);
           callback(null);
         } else {
-          log.debug('callbacking the tag research')
+          log.debug('callbacking the tag research');
           callback(docs);
         }
       });
@@ -87,5 +87,5 @@ module.exports = function (options) {
 
     // TODO: search : in url + comment
 
-  }
+  };
 };
