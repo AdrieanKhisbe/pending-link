@@ -29,7 +29,7 @@ documentation:
         body:
           application/json:
              # TODO: list schema
-          example: !include examples/simple-collection.json
+            example: !include examples/simple-collection.json
 
   post:
     description: Create a new link from an url
@@ -42,33 +42,12 @@ documentation:
     description: Search some link on the server
       # TODO param q + implem
 
-  /tags:
-    get:
-      description: Get the list of all existing tags
-      responses:
-        200:
-         body:
-           application/json:
-             example: !include examples/tag-list.json
-        # TODO: schema of list
-
-    /{tagName}:
-      description: Filter links by a specific *tagname*
-      get:
-        responses:
-          200:
-           body:
-             application/json:
-               example: !include examples/tag-link-list.json
-             # TODO list body schema
-
   /{linkId}:
     displayName: Link Item
     description: Specific link
 
     get:
-      description:
-        | *Retrieve* the **link** representation you were looking for
+      description: "*Retrieve* the **link** representation you were looking for"
       responses:
         200:
           body:
@@ -77,11 +56,10 @@ documentation:
               schema: link
 
     delete:
-      description: Archive this **individual link**
+      description: "*Archive* this **individual link**"
 
     put:
-      description:
-        | *Update* an **individual link**
+      description: "*Update* an **individual link**"
       body:
         application/json:
           schema: link
@@ -93,3 +71,24 @@ documentation:
         application/json:
           schema: link-partial
           example: !include examples/partial-link.json
+/tags:
+  displayName: Tags
+  description: Tags attached to the differents *pending-link*
+  get:
+    description: Get the list of all existing tags
+    responses:
+      200:
+       body:
+         application/json:
+           example: !include examples/tag-list.json
+        # TODO: schema of list
+
+  /{tagName}:
+    description: Filter links by a specific *tagname*
+    get:
+      responses:
+        200:
+         body:
+           application/json:
+             example: !include examples/tag-link-list.json
+           # TODO list body schema
