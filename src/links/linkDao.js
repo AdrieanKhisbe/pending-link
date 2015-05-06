@@ -35,14 +35,13 @@ module.exports = function (options) {
     },
 
     update: function (link, callback) {
-      if (!link || link.id) return callback(false);
-
-      db.update({'_id': link.id}, link, {}, function (err, numReplaced) {
+      if (!link || !link._id) return callback(false);
+      db.update({'_id': link._id}, link, {}, function (err, numReplaced) {
         if (err == null && numReplaced == 1) {
-          log.debug("update link %d", link.id);
+          log.debug("update link %d", link._id);
           callback(true);
         } else {
-          log.debug("update link %d FAILED", link.id);
+          log.debug("update link %d FAILED", link._id);
           callback(false);
 
         }

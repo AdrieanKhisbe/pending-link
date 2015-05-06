@@ -52,16 +52,18 @@ module.exports = function (options) {
     update: function (request, reply) {
       var id = request.params.id;
       if (!id) return reply().code(400);
-      log.info("update link %d with %j", id, request.payload);
+      var link = request.payload;
+      log.info("update link %d with %j", id, link);
 
       // I know it's burk....
-      if (!"link" === request.payload.type
-        || !request.payload.id || request.payload.id !== id
-        || !request.payload.comment || !request.payload.tags || !request.payload.archived
-        || !request.payload.url || !request.payload.timestamp) {
+      if (!"link" === link.type
+        || !link.id || link.id !== id
+        || !link.comment || !link.tags || !link.archived
+        || !link.url || !link.timestamp) {
         return reply().code(400);
       } else {
-        LinkDAO.update(request.payload, function (ok) {
+        link._id = 'id';
+        LinkDAO.update(link, function (ok) {
           if (ok) reply();
           else reply().code(500);
         });
@@ -71,19 +73,22 @@ module.exports = function (options) {
     partialUpdate: function (request, reply) {
       var id = request.params.id;
       if (!id) return reply().code(400);
-      log.info("update link %d with %j", id, request.payload);
+      var link = request.payload;
 
-      if (!"link" === request.payload.type) return reply().code(400);
+      log.info("update link %d with %j", id, link);
 
-      LinkDAO.get(id, function (link) {
+      if (!"link" === link.type) return reply().code(400);
+
+      LinkDAO.get(id, function (dbLink) {
         //TODO: handle doc not here
-        if (request.payload.url) link.url = request.payload.url;
-        if (request.payload.comment) link.comment = request.payload.comment;
-        if (request.payload.archived) link.archived = request.payload.archived;
-        if (request.payload.timestamp) link.timestamp = request.payload.timestamp;
-        if (request.payload.tags) link.tags = request.payload.tags;
+        if (link.url) dbLink.url = link.url;
+        if (link.comment) dbLink.comment = link.comment;
+        if (link.archived) dbLink.archived = link.archived;
+        if (link.timestamp) dbLink.timestamp = link.timestamp;
+        if (link.tags)    dbLink.tags = link.tags;
+        dbLink._id = id;
 
-        LinkDAO.update(link, function (ok) {
+        LinkDAO.update(dbLink, function (ok) {
           if (ok) reply();
           else reply().code(500);
         });
@@ -106,9 +111,9 @@ module.exports = function (options) {
 
       log.info("fetching link with tag %s", tag);
 
-      LinkDAO.findByTags(tag, function (taggedLink) {
+      LinkDAO.findByTags(tag, function (taggedLinks) {
         log.debug('find by tag just grabbed result');
-        reply(taggedLink);
+        reply(taggedLinks);
       });
     }
   }
