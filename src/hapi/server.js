@@ -4,7 +4,6 @@
 'use strict';
 
 var Hapi = require('hapi');
-var Blipp = require('blipp');
 var clone = require('clone');
 
 var defaultOption = require('../config/options').defaultOption;
@@ -33,10 +32,23 @@ module.exports = function (options) {
 
   server.loadGoodies = function () {
     // Bliip plugin (print routes)
-    server.register({register: Blipp}, function (err) {
+    server.register({register: require('blipp')}, function (err) {
       if (err) log.error("Error happened loading blipp %j", err);
-      log.info('Server running at: ' + server.info.uri);
+      });
+
+
+    // logging of request with good
+    server.register({register: require('good'),
+      options : {
+        reporters: [{
+          reporter: require('good-console'),
+          events: { request: '*', response: '*' }}]
+        }}, function (err) {
+      if (err) log.error("Error happened loading good %j", err);
     });
+
+    log.info('Server running at: ' + server.info.uri);
+
   };
 
   return server;
