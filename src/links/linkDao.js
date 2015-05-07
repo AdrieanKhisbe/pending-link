@@ -90,7 +90,7 @@ module.exports = function (options) {
         if (err) {
           callback(null);
         } else {
-          // maybe: underscore refactor this
+          // TODO refactor this
           var tags = {};
           docs.forEach(function(tag){
             tag.tags.forEach(function(tagName){
@@ -100,10 +100,9 @@ module.exports = function (options) {
           callback(Object.getOwnPropertyNames(tags));
         }
       });
+    },
+    search: function(pattern, callback) {
+      // TODO: search : in url + comment
     }
-
-
-    // TODO: search : in url + comment
-
   };
 };

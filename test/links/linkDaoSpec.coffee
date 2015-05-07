@@ -1,10 +1,8 @@
-BASE_SRC = '../../src'
+options = (require '../../src/config/options').nullOption
 
-options = require("#{BASE_SRC}/config/options").nullOption
-
-Link = require "#{BASE_SRC}/links/link"
-LinkDaoFactory = require "#{BASE_SRC}/links/linkDao"
-LinkFactory = require "#{BASE_SRC}/links/linkFactory"
+Link = require '../../src/links/link'
+LinkDaoFactory = require '../../src/links/linkDao'
+LinkFactory = require '../../src/links/linkFactory'
 LinkDao = null
 
 should = require('chai').should()
@@ -36,3 +34,27 @@ describe 'Link Dao', ->
             # note: strange, not working without serialisation
             # TODO :make a comparae link function
             done()
+
+    it 'enable link to be modified'
+
+
+    it 'enable to "delete"(archive) existing ling'
+
+    # Todo: maybe: test for when things go wrong.
+
+
+
+  describe 'Improved Queries', ->
+    beforeEach (done) ->
+      LinkDao = LinkDaoFactory(options)
+      # TODO: specific population!! -> Dao set test?
+      done()
+
+
+    it 'return the list of all existing tags'
+
+
+    it 'return the list of link with specific tags'
+
+
+    it 'enable us to look for specific content'
