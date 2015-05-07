@@ -23,6 +23,8 @@
     "coffee-script": "^1.9.1",
     "express": "^4.12.2",
     "express-validator": "^2.8.0",
+    "factory-girl": "^1.4.1",
+    "faker": "^2.1.2",
     "good": "^6.1.2",
     "good-console": "^5.0.0",
     "hapi": "^8.2.0",

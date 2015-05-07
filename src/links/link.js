@@ -24,6 +24,8 @@ Link.prototype.removeTag = function(tag) {
        this.tags = tags.slice(0,i) + tags.slice(i+1,tags.length);
 };
 
-module.exports.create = function(url){
+Link.create = function(url){
     return new Link(url);
 };
+
+module.exports = Link;
