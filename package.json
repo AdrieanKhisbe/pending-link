@@ -41,6 +41,6 @@
     "jade": "^1.9.2",
     "mocha": "^2.1.0",
     "raml2html": "^1.4.0",
-    "supertest": "^0.15.0"
+    "supertest": "^1.0.1"
   }
 }
