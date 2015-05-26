@@ -5,9 +5,11 @@
  */
 "use strict";
 
+var express = require('express');
+
 module.exports = function() {
 
-  var router = require('express').Router();
+  var router = express.Router();
 
   router.get('/', function (req, res) {
     res.sendFile("index.html", {root: './public'})
@@ -15,6 +17,8 @@ module.exports = function() {
   router.get('/doc', function (req, res) {
     res.sendFile("api.html", {root: './public'})
   });
+
+  router.use('/doc', express.static('spec'));
 
   return router;
 };
