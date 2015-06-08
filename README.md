@@ -1,7 +1,10 @@
 Pending Link
 ============
 
-[![Dependency Status](https://david-dm.org/AdrieanKhisbe/pending-link.svg)](https://david-dm.org/AdrieanKhisbe/pending-link) [![devDependency Status](https://david-dm.org/AdrieanKhisbe/pending-link/dev-status.svg)](https://david-dm.org/AdrieanKhisbe/pending-link#info=devDependencies)
+[![Build Status](https://travis-ci.org/AdrieanKhisbe/pending-link.svg?branch=master)](https://travis-ci.org/AdrieanKhisbe/pending-link)
+[![Heroku](https://img.shields.io/badge/heroku-online-6567a5.svg)](http://pending-link.herokuapp.com/)
+[![Dependency Status](https://david-dm.org/AdrieanKhisbe/pending-link.svg)](https://david-dm.org/AdrieanKhisbe/pending-link)
+[![devDependency Status](https://david-dm.org/AdrieanKhisbe/pending-link/dev-status.svg)](https://david-dm.org/AdrieanKhisbe/pending-link#info=devDependencies)
 
 Small Rest Api server POC for a rest api to store link to be read.
 This was made to compare `express` and `hapi` *node.js* frameworks.
