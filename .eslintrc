@@ -1,15 +1,15 @@
 rules:
   indent:
+    - 1
     - 2
-    - 4
   quotes:
-    - 2
+    - 1
     - single
   linebreak-style:
     - 2
     - unix
   semi:
-    - 2
-    - never
+    - 1
+    - always
 env:
   browser: true
