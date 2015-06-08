@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
+    "lint": "eslint src",
     "test": "mocha --compilers coffee:coffee-script/register test/*Spec.coffee test/*/*Spec.coffee",
     "cover-test": "istanbul cover _mocha -- --compilers coffee:coffee-script/register test/*Spec.coffee test/*/*Spec.coffee",
     "generate-doc": "raml2html spec/api.yml > public/api.html",
@@ -37,6 +38,7 @@
   },
   "devDependencies": {
     "chai": "^2.1.0",
+    "eslint": "^0.22.1",
     "extends": "0.0.4",
     "jade": "^1.9.2",
     "mocha": "^2.1.0",
