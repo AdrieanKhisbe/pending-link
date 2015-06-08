@@ -1,6 +1,10 @@
+*.nedb
+
 # coffee spec
 test/**/*Spec.js*
 
+# Intellij
+/.idea
 
 # Logs
 logs
