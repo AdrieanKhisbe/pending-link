@@ -7,9 +7,11 @@
     "start": "node app.js",
     "lint": "eslint src",
     "test": "mocha --compilers coffee:coffee-script/register test/*Spec.coffee test/*/*Spec.coffee",
-    "cover-test": "istanbul cover _mocha -- --compilers coffee:coffee-script/register test/*Spec.coffee test/*/*Spec.coffee",
     "generate-doc": "raml2html spec/api.yml > public/api.html",
-    "generate-html": "jade public/index.jade"
+    "generate-html": "jade public/index.jade",
+    "istanbul": "istanbul cover --print detail ./node_modules/mocha/bin/_mocha --dir qualimetry/cover -- -R spec --compilers coffee:coffee-script/register test/*Spec.coffee test/*/*Spec.coffee",
+    "plato": "plato -r -d qualimetry/platoReport src/**/*.js",
+    "qualimetry": "npm run plato && npm run istanbul"
   },
   "keywords": [
     "link"
@@ -42,6 +44,7 @@
     "extends": "0.0.4",
     "jade": "^1.9.2",
     "mocha": "^2.1.0",
+    "plato": "^1.5.0",
     "raml2html": "^1.4.0",
     "supertest": "^1.0.1"
   }

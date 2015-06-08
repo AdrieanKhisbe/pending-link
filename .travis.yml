@@ -5,8 +5,7 @@ node_js:
   - "iojs"
 
 script:
-  if $LINT ; then npm run lint ; else npm test; fi
-
+  - if $LINT ; then npm run lint ; else npm test; npm run qualimetry; fi
 env:
   matrix:
     - LINT=true
