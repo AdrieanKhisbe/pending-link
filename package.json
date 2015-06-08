@@ -7,6 +7,8 @@
     "start": "node app.js",
     "lint": "eslint src",
     "test": "mocha --compilers coffee:coffee-script/register test/*Spec.coffee test/*/*Spec.coffee",
+    "test:watch": "npm run test -- -w",
+    "build": "npm run generate-doc && npm run generate-html",
     "generate-doc": "raml2html spec/api.yml > public/api.html",
     "generate-html": "jade public/index.jade",
     "istanbul": "istanbul cover --print detail ./node_modules/mocha/bin/_mocha --dir qualimetry/cover -- -R spec --compilers coffee:coffee-script/register test/*Spec.coffee test/*/*Spec.coffee",
