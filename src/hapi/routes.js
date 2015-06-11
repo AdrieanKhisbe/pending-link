@@ -13,7 +13,7 @@ module.exports = function (LinkController) {
     // Hello endpoint
     {
       method: 'GET', path: '/hello', handler: function (request, reply) {
-      reply("Hello Links!")
+      reply("Hello Links!");
     }
     },
 

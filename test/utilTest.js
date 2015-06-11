@@ -5,4 +5,4 @@ module.exports = function (api) {
 
     // Utils go there
     return {}
-}
+};

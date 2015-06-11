@@ -13,14 +13,14 @@ describe 'Link Object', ->
 
   it 'can contains added tag', ->
     link = Link.create 'dce'
-    link.addTag "toto"
-    link.tags.should.contains "toto"
+    link.addTag 'toto'
+    link.tags.should.contains 'toto'
 
   it 'can be deleted tag', ->
     link = Link.create 'fgh'
-    link.addTag "toto"
-    link.addTag "titi"
+    link.addTag 'toto'
+    link.addTag 'titi'
 
-    link.removeTag "toto"
-    link.tags.should.contains "titi"
-    link.tags.should.not.contains "toto"
+    link.removeTag 'toto'
+    link.tags.should.contains 'titi'
+    link.tags.should.not.contains 'toto'

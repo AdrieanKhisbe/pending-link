@@ -31,7 +31,7 @@ module.exports = function(options){
     server.use(options.baseUri, linkedRoutes);
     server.use('/', staticRoutes);
 
-    log.info("Starting Express Server");
+    log.info('Starting Express Server');
     realServer = server.listen(options.port, callback);
     return realServer;
   };
@@ -45,4 +45,4 @@ module.exports = function(options){
   };
 
   return server;
-}
+};

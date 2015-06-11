@@ -16,7 +16,7 @@ module.exports = function (options) {
 
   return {
     all: function (req, res) {
-      log.debug("get method incoming");
+      log.debug('get method incoming');
       LinkDAO.all(function (all) {
         res.json(all);
       });
@@ -24,7 +24,7 @@ module.exports = function (options) {
 
     "get": function (req, res) {
       var id = req.params.id;
-      log.debug("access link %s", id);
+      log.debug('access link %s', id);
       LinkDAO.get(id, function (link) {
         if (link == null) {
           res.sendStatus(404);
@@ -37,7 +37,7 @@ module.exports = function (options) {
     },
 
     create: function (req, res) {
-      log.debug("Request received %j", req.body);
+      log.debug('Request received %j', req.body);
       if (!req.body.url) {
         return res.sendStatus(400);
       }
@@ -47,7 +47,7 @@ module.exports = function (options) {
 
 
       LinkDAO.save(link, function (newLink) {
-        log.info("new link: %j", newLink);
+        log.info('new link: %j', newLink);
         res.location(linksEndpoint + '/' + newLink._id);
         res.status(201).json({});
       });
@@ -57,10 +57,10 @@ module.exports = function (options) {
     update: function (req, res) {
       var id = req.params.id;
       if (!id) return res.sendStatus(400);
-      log.info("update link %d with %j", id, req.body);
+      log.info('update link %d with %j', id, req.body);
 
       // I know it's burk....
-      if (!"link" === req.body.type
+      if (!'link' === req.body.type
         || !req.body.id || req.body.id !== id
         || !req.body.comment || !req.body.tags || !req.body.archived
         || !req.body.url || !req.body.timestamp) {
@@ -75,9 +75,9 @@ module.exports = function (options) {
     partialUpdate: function (req, res) {
       var id = req.params.id;
       if (!id) return res.sendStatus(400);
-      log.info("update link %d with %j", id, req.body);
+      log.info('update link %d with %j', id, req.body);
 
-      if (!"link" === req.body.type) return res.sendStatus(400);
+      if (!'link' === req.body.type) return res.sendStatus(400);
 
       LinkDAO.get(id, function (link) {
         //TODO: handle doc not here
@@ -97,7 +97,7 @@ module.exports = function (options) {
       var id = req.params.id;
       if (!id) return res.sendStatus(400);
 
-      log.info("remove link with %d", id);
+      log.info('remove link with %d', id);
       LinkDAO.remove(id, function (ok) {
         res.sendStatus(ok ? 200 : 500);
       });
@@ -107,7 +107,7 @@ module.exports = function (options) {
       var tag = req.params.tagName;
       if (!tag) return res.sendStatus(400);
 
-      log.info("fetching link with tag %s", tag);
+      log.info('fetching link with tag %s', tag);
 
       LinkDAO.findByTags(tag, function (taggedLinks) {
         log.debug('find by tag just grabbed result');
@@ -119,5 +119,5 @@ module.exports = function (options) {
         res.json(tags);
       });
     }
-  }
+  };
 };

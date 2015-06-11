@@ -17,7 +17,7 @@ module.exports = function (options) {
 
   return {
     all: function (request, reply) {
-      log.debug("get method incoming");
+      log.debug('get method incoming');
       LinkDAO.all(function (all) {
         reply(all);
       });
@@ -25,7 +25,7 @@ module.exports = function (options) {
 
     'get': function (request, reply) {
       var id = request.params.id;
-      log.debug("access link %s", id);
+      log.debug('access link %s', id);
       LinkDAO.get(id, function (link) {
         if (link == null) {
           reply().code(404);
@@ -38,7 +38,7 @@ module.exports = function (options) {
     },
 
     create: function (request, reply) {
-      log.debug("Request received %j", request.payload);
+      log.debug('Request received %j', request.payload);
       if (!request.payload.url) {
         return reply().code(400);
       }
@@ -47,7 +47,7 @@ module.exports = function (options) {
       if(request.payload.comment) link.comment = request.payload.comment;
 
       LinkDAO.save(link, function (newLink) {
-        log.info("new link: %j", newLink);
+        log.info('new link: %j', newLink);
         reply().created(linksEndpoint + '/' + newLink._id);
       });
 
@@ -57,7 +57,7 @@ module.exports = function (options) {
       var id = request.params.id;
       if (!id) return reply().code(400);
       var link = request.payload;
-      log.info("update link %d with %j", id, link);
+      log.info('update link %d with %j', id, link);
 
       // I know it's burk....
       if (!"link" === link.type
@@ -65,13 +65,12 @@ module.exports = function (options) {
         || !link.comment || !link.tags || !link.archived
         || !link.url || !link.timestamp) {
         return reply().code(400);
-      } else {
-        link._id = 'id';
-        LinkDAO.update(link, function (ok) {
-          if (ok) reply();
-          else reply().code(500);
-        });
       }
+      link._id = 'id';
+      LinkDAO.update(link, function (ok) {
+        if (ok) reply();
+        else reply().code(500);
+      });
     },
 
     partialUpdate: function (request, reply) {
@@ -79,9 +78,9 @@ module.exports = function (options) {
       if (!id) return reply().code(400);
       var link = request.payload;
 
-      log.info("update link %d with %j", id, link);
+      log.info('update link %d with %j', id, link);
 
-      if (!"link" === link.type) return reply().code(400);
+      if (!'link' === link.type) return reply().code(400);
 
       LinkDAO.get(id, function (dbLink) {
         //TODO: handle doc not here
@@ -103,7 +102,7 @@ module.exports = function (options) {
       var id = request.params.id;
       if (!id) return reply().code(400);
 
-      log.info("remove link with %d", id);
+      log.info('remove link with %d', id);
       LinkDAO.remove(id, function (ok) {
         ok ? reply() : reply().code(500);
       });
@@ -113,7 +112,7 @@ module.exports = function (options) {
       var tag = request.params.tagName;
       if (!tag) return reply().code(400);
 
-      log.info("fetching link with tag %s", tag);
+      log.info('fetching link with tag %s', tag);
 
       LinkDAO.findByTags(tag, function (taggedLinks) {
         log.debug('find by tag just grabbed result');
@@ -125,5 +124,5 @@ module.exports = function (options) {
         reply(tags);
       });
     }
-  }
+  };
 };

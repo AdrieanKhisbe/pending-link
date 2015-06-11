@@ -2,7 +2,7 @@
 
 /** Logger */
 var bunyan = require('bunyan');
-var blackhole = require("stream-blackhole");
+var blackhole = require('stream-blackhole');
 
 module.exports = {
 

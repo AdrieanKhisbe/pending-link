@@ -11,10 +11,10 @@ var factory = require('factory-girl');
 
 factory.define('link', Link, {
   type: 'link',
-  url: function(){ return faker.internet.domainName()},
-  comment: function(){ return faker.hacker.phrase()},
+  url: function(){ return faker.internet.domainName(); },
+  comment: function(){ return faker.hacker.phrase(); },
   tags: [], //TODO: pick from tag list
-  timestamp: function(){ return Date.now()},
+  timestamp: function(){ return Date.now(); },
   archived: false
 });
 

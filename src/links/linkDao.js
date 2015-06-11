@@ -22,7 +22,7 @@ module.exports = function (options) {
           log.warn(err);
           callback(null);
         } else {
-          log.debug("Saved new link %j", link);
+          log.debug('Saved new link %j', link);
           callback(newDoc);
         }
       });
@@ -38,10 +38,10 @@ module.exports = function (options) {
       if (!link || !link._id) return callback(false);
       db.update({'_id': link._id}, link, {}, function (err, numReplaced) {
         if (!err && numReplaced === 1) {
-          log.debug("update link %d", link._id);
+          log.debug('update link %d', link._id);
           callback(true);
         } else {
-          log.debug("update link %d FAILED", link._id);
+          log.debug('update link %d FAILED', link._id);
           callback(false);
 
         }
@@ -57,10 +57,10 @@ module.exports = function (options) {
       db.update({'_id': linkId}, {$set: {archived: true}}, {},
         function (err, numReplaced) {
           if (!err && numReplaced === 1) {
-            log.debug("archived link %d", linkId);
+            log.debug('archived link %d', linkId);
             callback(true);
           } else {
-            log.debug("archived link %d FAILED", linkId);
+            log.debug('archived link %d FAILED', linkId);
             callback(false);
           }
       });

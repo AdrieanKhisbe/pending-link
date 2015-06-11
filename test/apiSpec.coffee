@@ -59,7 +59,7 @@ testing_api = (name, server) ->
       it 'works', (done) ->
         api.get(HELLO_ENDPOINT)
         .expect(200)
-        .expect("Hello Links!", done)
+        .expect('Hello Links!', done)
 
 
       it 'respond with text', (done) ->
@@ -69,31 +69,31 @@ testing_api = (name, server) ->
 
 
     ############################
-    describe "Real link api", ->
-      describe "/links", ->
+    describe 'Real link api', ->
+      describe '/links', ->
 
-        describe "Post endpoint", ->
+        describe 'Post endpoint', ->
           # it "it respond with json", (done) ->
           # respond_with_json 'post', LINK_ENDPOINT, done, {code:201, body:data.valid_link_request}
           # TODO: check valid and non valid output
           # TODO: check ressource created
-          it "should answer with a location (that I can access)", (done) ->
+          it 'should answer with a location (that I can access)', (done) ->
              api.post(LINK_ENDPOINT).set('Accept', 'application/json')
                .send(data.valid_link_request)
                .expect(201)
                .expect('Location', RegExp("#{LINK_ENDPOINT}/\\w+"), done)
-          it "should be working with a comment and some tags", (done) ->
+          it 'should be working with a comment and some tags', (done) ->
             api.post(LINK_ENDPOINT).set('Accept', 'application/json')
               .send(data.valid_link_request_with_comment_and_tag)
               .expect(201)
               .expect('Location', RegExp("#{LINK_ENDPOINT}/\\w+"), done)
 
 
-        describe "Get endpoint", ->
-            it "it respond with json", (done) ->
+        describe 'Get endpoint', ->
+            it 'it respond with json', (done) ->
               respond_with_json 'get', LINK_ENDPOINT, done
 
-        describe "Get single resource endpoint", ->
+        describe 'Get single resource endpoint', ->
 
           it "it say 404 when try to get bullshit", (done) ->
             api.get(LINK_ENDPOINT+"/whatevertheweather").expect(404,done)
@@ -102,8 +102,8 @@ testing_api = (name, server) ->
             post_basic_link (url) ->
               respond_with_json 'get', url, done
 
-        describe "Put endpoint", ->
-          it "update works", (done) ->
+        describe 'Put endpoint', ->
+          it 'update works', (done) ->
             post_basic_link (url) ->
               updated_link = extend({},data.valid_link_update)
               updated_link.id = url.match("/.*/([^/]+)$")[1]
@@ -115,9 +115,9 @@ testing_api = (name, server) ->
                   ## FIX (maybe: equal link?)
 
 
-        describe "Patch endpoint", ->
+        describe 'Patch endpoint', ->
 
-          it "patch works", (done) ->
+          it 'patch works', (done) ->
             post_basic_link (url) ->
               expected_patched_link = extend({}, data.valid_link_request)
               # mise à jour patched object
@@ -127,18 +127,18 @@ testing_api = (name, server) ->
                   .expect expected_patched_link
                   .end done
 
-        describe "Delete endpoint", ->
+        describe 'Delete endpoint', ->
 
-          it "delete things", (done) ->
+          it 'delete things', (done) ->
             post_basic_link (url) ->
               api.del(url).end ->
                 api.get(url).expect(410,done)
-      describe "/tags", ->
-        it "should give back a list of tags", (done) ->
+      describe '/tags', ->
+        it 'should give back a list of tags', (done) ->
           respond_with_json 'get', TAG_ENDPOINT, done
           # note: check juste pour l'instant renvoi json valide, teste pas le contenu
 
-        it "should send a list a tags when quering specific tag", (done)->
+        it 'should send a list a tags when quering specific tag', (done)->
           post_basic_link (url) ->
             api.patch(url).send({tags:["yo"]}).end ->
               api.get "#{TAG_ENDPOINT}/yo"
@@ -152,5 +152,5 @@ testing_api = (name, server) ->
 
 
 # Test Both implementation!
-testing_api "Express", expressServer
-testing_api "Hapi", hapiServer
+testing_api 'Express', expressServer
+testing_api 'Hapi', hapiServer
