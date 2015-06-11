@@ -11,7 +11,9 @@ module.exports = function (options) {
 
   if (options == null) options = defaultOption;
 
+
   var log = options.logger;
+  var linksEndpoint = options.base_uri + '/links';
 
   return {
     all: function (request, reply) {
@@ -46,7 +48,7 @@ module.exports = function (options) {
 
       LinkDAO.save(link, function (newLink) {
         log.info("new link: %j", newLink);
-        reply().created("/api/links/" + newLink._id);
+        reply().created(linksEndpoint + "/" + newLink._id);
       });
 
     },
