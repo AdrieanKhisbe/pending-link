@@ -1,7 +1,7 @@
 /** The Express server
  * Created by abecchis on 09/03/15.
  */
-"use strict";
+'use strict';
 
 var bodyParser = require('body-parser');
 var express = require('express');
@@ -28,7 +28,7 @@ module.exports = function(options){
   server.start = function (callback) {
 
     // note: load routes in start so that they are loaded after the eventual goodies
-    server.use(options.base_uri, linkedRoutes);
+    server.use(options.baseUri, linkedRoutes);
     server.use('/', staticRoutes);
 
     log.info("Starting Express Server");

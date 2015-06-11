@@ -13,21 +13,21 @@ var staticRoutes = require('./staticRoutes');
 
 module.exports = function (options) {
 
-  if (options == null) options = defaultOption;
+  if(options == null) options = defaultOption;
 
   var log = options.logger;
 
-  var hapi_config = {
+  var hapiConfig = {
     load: {sampleInterval: 5000} // process monitoring
   };
-  //TODO: see how config doc (module)
-  var server = new Hapi.Server(hapi_config);
+
+  var server = new Hapi.Server(hapiConfig);
   server.connection({port: options.port, host: options.host});
 
   var linkedRoutes = routes(controller(options));
   server.route(staticRoutes);
 
-  var prefixize = function (r) {  r.path = options.base_uri + r.path;return r; };
+  var prefixize = function (r) { r.path = options.baseUri + r.path; return r; };
   server.route(clone(linkedRoutes).map(prefixize));
 
   server.loadGoodies = function () {
@@ -38,8 +38,9 @@ module.exports = function (options) {
 
 
     // logging of request with good
-    server.register({register: require('good'),
-      options : {
+    server.register({
+      register: require('good'),
+      options: {
         reporters: [{
           reporter: require('good-console'),
           events: { request: '*', response: '*' }}]

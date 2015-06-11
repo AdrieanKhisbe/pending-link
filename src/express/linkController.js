@@ -10,7 +10,7 @@ module.exports = function (options) {
   var LinkDAO = require('../links/linkDao')(options);
 
   if (options == null) options = defaultOption;
-  var linksEndpoint = options.base_uri + '/links';
+  var linksEndpoint = options.baseUri + '/links';
 
   var log = options.logger;
 
@@ -31,7 +31,7 @@ module.exports = function (options) {
         } else {
           if (link.archived)
             res.sendStatus(410);
-          else res.json(link)
+          else res.json(link);
         }
       });
     },
@@ -67,8 +67,7 @@ module.exports = function (options) {
         return res.sendStatus(400);
       } else {
         LinkDAO.update(req.body, function (ok) {
-          if (ok) res.sendStatus(200);
-          else res.sendStatus(500);
+          res.sendStatus(ok ? 200 : 500);
         });
       }
     },
@@ -89,8 +88,7 @@ module.exports = function (options) {
         if (req.body.tags) link.tags = req.body.tags;
 
         LinkDAO.update(link, function (ok) {
-          if (ok) res.sendStatus(200);
-          else res.sendStatus(500);
+          res.sendStatus(ok ? 200 : 500);
         });
       });
     },
@@ -101,7 +99,7 @@ module.exports = function (options) {
 
       log.info("remove link with %d", id);
       LinkDAO.remove(id, function (ok) {
-        ok ? res.sendStatus(200) : res.sendStatus(500);
+        res.sendStatus(ok ? 200 : 500);
       });
     },
 

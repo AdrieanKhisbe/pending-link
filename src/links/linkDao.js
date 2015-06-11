@@ -5,11 +5,11 @@
  */
 'use strict';
 
-var default_option = require('../config/options').defaultOption;
+var defaultOption = require('../config/options').defaultOption;
 
 module.exports = function (options) {
 
-  if (options == null) options = default_option;
+  if(options == null) options = defaultOption;
 
   var db = options.db();
   var log = options.logger;
@@ -37,7 +37,7 @@ module.exports = function (options) {
     update: function (link, callback) {
       if (!link || !link._id) return callback(false);
       db.update({'_id': link._id}, link, {}, function (err, numReplaced) {
-        if (err == null && numReplaced == 1) {
+        if (!err && numReplaced === 1) {
           log.debug("update link %d", link._id);
           callback(true);
         } else {
@@ -54,14 +54,15 @@ module.exports = function (options) {
       // log.debug("remove link %d", linkId);
       //  callback(err == null && numRem == 1);
       //});
-      db.update({'_id': linkId}, {"$set": {"archived": true}}, {}, function (err, numReplaced) {
-        if (err == null && numReplaced == 1) {
-          log.debug("archived link %d", linkId);
-          callback(true);
-        } else {
-          log.debug("archived link %d FAILED", linkId);
-          callback(false);
-        }
+      db.update({'_id': linkId}, {$set: {archived: true}}, {},
+        function (err, numReplaced) {
+          if (!err && numReplaced === 1) {
+            log.debug("archived link %d", linkId);
+            callback(true);
+          } else {
+            log.debug("archived link %d FAILED", linkId);
+            callback(false);
+          }
       });
     },
 
@@ -102,7 +103,9 @@ module.exports = function (options) {
       });
     },
     search: function(pattern, callback) {
-      // TODO: search : in url + comment
+      // FIXME: search : in url + comment to implement
+      log.warn('Try to access to unimplemented search function');
+      callback(null);
     }
   };
 };

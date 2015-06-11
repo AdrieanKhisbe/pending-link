@@ -6,8 +6,8 @@ var blackhole = require("stream-blackhole");
 
 module.exports = {
 
-  empty_logger: bunyan.createLogger({
-    name: "empty",
+  emptyLogger: bunyan.createLogger({
+    name: 'empty',
     stream: blackhole()
   }),
 
@@ -17,7 +17,7 @@ module.exports = {
       throw new Error('Invalid configuration during creating logger');
     }
 
-    var logger = bunyan.createLogger({
+    return bunyan.createLogger({
       name: conf.get('pl:application_name'),
       streams: [
         {
@@ -27,6 +27,5 @@ module.exports = {
         }
       ]
     });
-    return logger;
   }
 };

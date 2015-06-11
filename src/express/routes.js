@@ -3,7 +3,7 @@
  *
  * Created by abecchis on 09/03/15.
  */
-"use strict";
+'use strict';
 
 var express = require('express');
 
@@ -12,7 +12,7 @@ module.exports = function(LinkController) {
   var router = express.Router();
 
   router.get('/hello', function (req, res) {
-    res.send("Hello Links!");
+    res.send('Hello Links!');
   });
   router.get('/links', LinkController.all);
   router.put('/links/:id', LinkController.update);

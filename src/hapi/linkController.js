@@ -13,7 +13,7 @@ module.exports = function (options) {
 
 
   var log = options.logger;
-  var linksEndpoint = options.base_uri + '/links';
+  var linksEndpoint = options.baseUri + '/links';
 
   return {
     all: function (request, reply) {
@@ -23,7 +23,7 @@ module.exports = function (options) {
       });
     },
 
-    "get": function (request, reply) {
+    'get': function (request, reply) {
       var id = request.params.id;
       log.debug("access link %s", id);
       LinkDAO.get(id, function (link) {
@@ -48,7 +48,7 @@ module.exports = function (options) {
 
       LinkDAO.save(link, function (newLink) {
         log.info("new link: %j", newLink);
-        reply().created(linksEndpoint + "/" + newLink._id);
+        reply().created(linksEndpoint + '/' + newLink._id);
       });
 
     },
@@ -127,4 +127,3 @@ module.exports = function (options) {
     }
   }
 };
-    

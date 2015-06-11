@@ -5,7 +5,7 @@
  */
 'use strict';
 
-module.exports =  [
+module.exports = [
     // index and doc
     {method: 'GET', path: '/', handler: {file: "public/index.html"}},
     {method: 'GET', path: '/doc', handler: {file: "public/api.html"}},

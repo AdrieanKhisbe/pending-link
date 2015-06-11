@@ -15,14 +15,14 @@ factory.define('link', Link, {
   comment: function(){ return faker.hacker.phrase()},
   tags: [], //TODO: pick from tag list
   timestamp: function(){ return Date.now()},
-  archived:false
+  archived: false
 });
 
 module.exports = {
   create: function(callback){
     // TODO: make it unsync
-    factory.build('link', function(err, link) { callback(link);})
+    factory.build('link', function(err, link) {
+      callback(link);
+    });
   }
 };
-
-
