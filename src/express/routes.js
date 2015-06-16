@@ -14,13 +14,16 @@ module.exports = function(LinkController) {
   router.get('/hello', function (req, res) {
     res.send('Hello Links!');
   });
-  router.get('/links', LinkController.all);
-  router.put('/links/:id', LinkController.update);
-  router.patch('/links/:id', LinkController.partialUpdate);
-  router.delete('/links/:id', LinkController.remove);
 
-  router.get('/links/:id', LinkController.get);
-  router.post('/links', LinkController.create);
+  router.route('/links')
+    .get(LinkController.all)
+    .post(LinkController.create);
+
+  router.route('/links/:id')
+    .get(LinkController.get)
+    .put(LinkController.update)
+    .patch(LinkController.partialUpdate)
+    .delete(LinkController.remove);
 
   router.get('/tags/:tagName', LinkController.findByTags);
   router.get('/tags', LinkController.allTags);
