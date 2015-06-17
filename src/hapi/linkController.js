@@ -57,13 +57,6 @@ module.exports = function (options) {
       var link = request.payload;
       log.info('update link %d with %j', id, link);
 
-      // I know it's burk....
-      if (!"link" === link.type
-        || !link.id || link.id !== id
-        || !link.comment || !link.tags || !link.archived
-        || !link.url || !link.timestamp) {
-        return reply().code(400);
-      }
       link._id = 'id';
       LinkDAO.update(link, function (ok) {
         if (ok) reply();
