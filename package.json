@@ -38,6 +38,7 @@
     "morgan": "^1.5.3",
     "nconf": "^0.7.1",
     "nedb": "^1.1.2",
+    "paperwork": "^2.0.2",
     "stream-blackhole": "^1.0.3"
   },
   "devDependencies": {
