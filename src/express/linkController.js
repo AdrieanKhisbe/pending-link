@@ -41,10 +41,7 @@ module.exports = function (options) {
       if (!req.body.url) {
         return res.sendStatus(400);
       }
-      var link = Link.create(req.body.url);
-      if(req.body.tags) link.tags = req.body.tags;
-      if(req.body.comment) link.comment = req.body.comment;
-
+      var link = Link.create(req.body.url, req.body.tags, req.body.comment);
 
       LinkDAO.save(link, function (newLink) {
         log.info('new link: %j', newLink);

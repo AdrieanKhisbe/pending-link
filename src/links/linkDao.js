@@ -67,13 +67,14 @@ module.exports = function (options) {
     },
 
     all: function (callback) {
+      // FIXME: check no archived!!
       db.find({}, function (err, docs) {
         if (err) callback(null); else callback(docs);
       });
     },
 
     findByTags: function (tags, callback) {
-      // TODO: add suport for list of more?  $in
+      // LATER: add suport for list of more?  $in
       db.find({tags: tags}, function (err, docs) {
         if (err) {
           log.warn(err);
