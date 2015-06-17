@@ -9,7 +9,7 @@ var defaultOption = require('../config/options').defaultOption;
 module.exports = function (options) {
   var LinkDAO = require('../links/linkDao')(options);
 
-  if (options == null) options = defaultOption;
+  if (!options) options = defaultOption;
   var linksEndpoint = options.baseUri + '/links';
 
   var log = options.logger;

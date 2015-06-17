@@ -9,7 +9,7 @@ var defaultOption = require('../config/options').defaultOption;
 module.exports = function (options) {
   var LinkDAO = require('../links/linkDao')(options);
 
-  if (options == null) options = defaultOption;
+  if (!options) options = defaultOption;
 
 
   var log = options.logger;
@@ -27,7 +27,7 @@ module.exports = function (options) {
       var id = request.params.id;
       log.debug('access link %s', id);
       LinkDAO.get(id, function (link) {
-        if (link == null) {
+        if (!link) {
           reply().code(404);
         } else {
           if (link.archived)

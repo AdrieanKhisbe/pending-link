@@ -9,7 +9,7 @@ var defaultOption = require('../config/options').defaultOption;
 
 module.exports = function (options) {
 
-  if(options == null) options = defaultOption;
+  if(!options) options = defaultOption;
 
   var db = options.db();
   var log = options.logger;

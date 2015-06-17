@@ -13,7 +13,7 @@ var staticRoutes = require('./staticRoutes');
 
 module.exports = function (options) {
 
-  if(options == null) options = defaultOption;
+  if(!options) options = defaultOption;
 
   var log = options.logger;
 
