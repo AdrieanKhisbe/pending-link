@@ -6,6 +6,8 @@
 'use strict';
 
 var express = require('express');
+var paperwork = require('paperwork');
+var schemas = require('./schemas');
 
 module.exports = function(LinkController) {
 
@@ -17,12 +19,12 @@ module.exports = function(LinkController) {
 
   router.route('/links')
     .get(LinkController.all)
-    .post(LinkController.create);
+    .post(paperwork.accept(schemas.linkCreate), LinkController.create);
 
   router.route('/links/:id')
     .get(LinkController.get)
-    .put(LinkController.update)
-    .patch(LinkController.partialUpdate)
+    .put(paperwork.accept(schemas.linkUpdate), LinkController.update)
+    .patch(paperwork.accept(schemas.linkPatch), LinkController.partialUpdate)
     .delete(LinkController.remove);
 
   router.get('/tags/:tagName', LinkController.findByTags);

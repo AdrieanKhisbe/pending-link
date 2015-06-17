@@ -56,17 +56,9 @@ module.exports = function (options) {
       if (!id) return res.sendStatus(400);
       log.info('update link %d with %j', id, req.body);
 
-      // I know it's burk....
-      if (!'link' === req.body.type
-        || !req.body.id || req.body.id !== id
-        || !req.body.comment || !req.body.tags || !req.body.archived
-        || !req.body.url || !req.body.timestamp) {
-        return res.sendStatus(400);
-      } else {
-        LinkDAO.update(req.body, function (ok) {
-          res.sendStatus(ok ? 200 : 500);
-        });
-      }
+      LinkDAO.update(req.body, function (ok) {
+        res.sendStatus(ok ? 200 : 500);
+      });
     },
 
     partialUpdate: function (req, res) {
@@ -74,10 +66,8 @@ module.exports = function (options) {
       if (!id) return res.sendStatus(400);
       log.info('update link %d with %j', id, req.body);
 
-      if (!'link' === req.body.type) return res.sendStatus(400);
-
       LinkDAO.get(id, function (link) {
-        //TODO: handle doc not here
+        //TODO: use kind of merge instead
         if (req.body.url) link.url = req.body.url;
         if (req.body.comment) link.comment = req.body.comment;
         if (req.body.archived) link.archived = req.body.archived;
