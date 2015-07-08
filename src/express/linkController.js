@@ -67,7 +67,8 @@ module.exports = function (options) {
       log.info('update link %d with %j', id, req.body);
 
       LinkDAO.get(id, function (link) {
-        //TODO: use kind of merge instead
+        //FIXME: use kind of merge instead
+        // Replace with a standard Dao
         if (req.body.url) link.url = req.body.url;
         if (req.body.comment) link.comment = req.body.comment;
         if (req.body.archived) link.archived = req.body.archived;

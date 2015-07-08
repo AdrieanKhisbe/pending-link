@@ -70,9 +70,6 @@ module.exports = function (options) {
       var link = request.payload;
 
       log.info('update link %d with %j', id, link);
-
-      if (!'link' === link.type) return reply().code(400);
-
       LinkDAO.get(id, function (dbLink) {
         //TODO: handle doc not here
         if (link.url) dbLink.url = link.url;

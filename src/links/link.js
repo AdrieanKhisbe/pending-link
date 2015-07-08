@@ -6,7 +6,6 @@
 'use strict';
 
 var Link = function (url, tags, comment) {
-  this.type = 'link';
   this.url = url;
   this.timestamp = Date.now();
   this.archived = false;

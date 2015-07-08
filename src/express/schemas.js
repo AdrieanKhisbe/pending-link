@@ -18,8 +18,7 @@ var schemas = {
     timestamp: Date,
     archive: Boolean,
     comment: String,
-    tags: [String],
-    type: /link/
+    tags: [String]
   },
 
   linkPatch: {
@@ -27,8 +26,7 @@ var schemas = {
     timestamp: paperwork.optional(Date),
     archive: paperwork.optional(Boolean),
     comment: paperwork.optional(String),
-    tags: paperwork.optional([String]),
-    type: paperwork.optional(/type/)
+    tags: paperwork.optional([String])
   }
 };
 

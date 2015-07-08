@@ -19,8 +19,7 @@ var schemas = {
     timestamp: Joi.date().required(),
     archive: Joi.bool().required(),
     comment: Joi.string().required(),
-    tags: Joi.array().items(Joi.string()).required(),
-    type: Joi.string().regex(/link/).required()
+    tags: Joi.array().items(Joi.string()).required()
   },
 
   linkPatch: {
@@ -28,8 +27,7 @@ var schemas = {
     timestamp: Joi.date().optional(),
     archive: Joi.bool().optional(),
     comment: Joi.string().optional(),
-    tags: Joi.array().items(Joi.string()).optional(),
-    type: Joi.string().regex(/link/).optional()
+    tags: Joi.array().items(Joi.string()).optional()
   }
 };
 

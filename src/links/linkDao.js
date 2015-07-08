@@ -43,7 +43,6 @@ module.exports = function (options) {
         } else {
           log.debug('update link %d FAILED', link._id);
           callback(false);
-
         }
       });
     },
