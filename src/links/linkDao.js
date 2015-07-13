@@ -7,6 +7,7 @@
 
 var defaultOption = require('../config/options').defaultOption;
 
+// TODO: maybe kill the loging!
 module.exports = function (options) {
 
   if(!options) options = defaultOption;
@@ -20,29 +21,29 @@ module.exports = function (options) {
       db.insert(link, function (err, newDoc) {
         if (err) {
           log.warn(err);
-          callback(null);
         } else {
           log.debug('Saved new link %j', link);
-          callback(newDoc);
         }
+        callback(err, newDoc);
       });
     },
 
-    "get": function (linkId, callback) {
-      db.findOne({'_id': linkId}, function (err, value) {
-        if (err) callback(null); else callback(value);
-      });
+    'get': function (linkId, callback) {
+      db.findOne({'_id': linkId}, callback);
     },
 
     update: function (link, callback) {
-      if (!link || !link._id) return callback(false);
+      if (!link || !link._id) {
+        return callback(new Error('no id provided'));
+      }
+      // TODO: ensure key field not changed
       db.update({'_id': link._id}, link, {}, function (err, numReplaced) {
         if (!err && numReplaced === 1) {
           log.debug('update link %d', link._id);
-          callback(true);
+          callback(null);
         } else {
           log.debug('update link %d FAILED', link._id);
-          callback(false);
+          callback(new Error('update failed!?'));
         }
       });
     },
@@ -55,21 +56,21 @@ module.exports = function (options) {
       //});
       db.update({'_id': linkId}, {$set: {archived: true}}, {},
         function (err, numReplaced) {
-          if (!err && numReplaced === 1) {
+          if(err) return callback(err);
+
+          if(numReplaced === 1) {
             log.debug('archived link %d', linkId);
-            callback(true);
+            callback(null);
           } else {
             log.debug('archived link %d FAILED', linkId);
-            callback(false);
+            callback(new Error('archive failed!?'));
           }
       });
     },
 
     all: function (callback) {
       // FIXME: check no archived!!
-      db.find({}, function (err, docs) {
-        if (err) callback(null); else callback(docs);
-      });
+      db.find({}, callback);
     },
 
     findByTags: function (tags, callback) {
@@ -77,11 +78,10 @@ module.exports = function (options) {
       db.find({tags: tags}, function (err, docs) {
         if (err) {
           log.warn(err);
-          callback(null);
         } else {
           log.debug('callbacking the tag research');
-          callback(docs);
         }
+        callback(err, docs);
       });
     },
     allTags: function (callback) {
@@ -89,23 +89,23 @@ module.exports = function (options) {
         // might need to do a special DOC. (not performant at all!!!
 
         if (err) {
-          callback(null);
+          callback(err, null);
         } else {
-          // TODO refactor this
+          // TODO refactor this!
           var tags = {};
           docs.forEach(function(tag){
             tag.tags.forEach(function(tagName){
               tags[tagName] = true;
             });
           });
-          callback(Object.getOwnPropertyNames(tags));
+          callback(null, Object.getOwnPropertyNames(tags));
         }
       });
     },
     search: function(pattern, callback) {
       // FIXME: search : in url + comment to implement
       log.warn('Try to access to unimplemented search function');
-      callback(null);
+      callback(new Error('not implemented'), null);
     }
   };
 };
