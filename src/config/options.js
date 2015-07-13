@@ -11,16 +11,21 @@ var DataStore = require('nedb');
 var mongojs = require('mongojs');
 
 function dbFromConf(config) {
-  if (config.get('db:in_memory')) {
+
+  var inMemory = config.get('db:in_memory');
+  if(inMemory === "false") inMemory = false;
+  //WTFFFFFF!!!!!! (for commandline/env overloading)
+
+  if (inMemory) {
     return function () {
       return new DataStore({ filename: config.get('db:config:path'), autoload: true });
     };
   } else {
+
     return function () {
       // db mongo: collection name
       var dbName = config.get('db:config:name') || 'links';
       var dbcollection = config.get('db:config:collection') || 'links';
-
       var db = mongojs(dbName, [dbcollection]);
       return db[dbcollection];
     };

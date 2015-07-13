@@ -11,7 +11,7 @@
     "path": ""
   },
   "db":{
-    "config": { "path": "./link.nedb" },
-    "in_memory": true
+    "in_memory": true,
+    "config": { "path": "./link.nedb" }
   }
 }
