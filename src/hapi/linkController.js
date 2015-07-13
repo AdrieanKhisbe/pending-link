@@ -61,8 +61,7 @@ module.exports = function (options) {
       var link = request.payload;
       log.info('update link %d with %j', id, link);
 
-      link._id = 'id';
-      LinkDAO.update(link, function (err) {
+      LinkDAO.update(id, link, function (err) {
         if (!err) reply();
         else reply().code(500);
       });
@@ -77,9 +76,8 @@ module.exports = function (options) {
         if (err || !link) return reply().code(404);
 
         var updatedLink = Link.merge(link, request.payload);
-        updatedLink._id = id;
 
-        LinkDAO.update(updatedLink, function (err) {
+        LinkDAO.update(id, updatedLink, function (err) {
           if (err) reply().code(500);
           else reply();
         });

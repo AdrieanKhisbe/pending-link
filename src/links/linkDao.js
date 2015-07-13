@@ -29,20 +29,20 @@ module.exports = function (options) {
     },
 
     'get': function (linkId, callback) {
-      db.findOne({'_id': linkId}, callback);
+      db.findOne({'_id': linkId}, {_id: 0}, callback);
     },
 
-    update: function (link, callback) {
-      if (!link || !link._id) {
-        return callback(new Error('no id provided'));
-      }
+    update: function (linkId, link, callback) {
+      if (!linkId) return callback(new Error('no id provided'));
+      if (!link) return callback(new Error('no id provided'));
+
       // TODO: ensure key field not changed
-      db.update({'_id': link._id}, link, {}, function (err, numReplaced) {
+      db.update({'_id': linkId}, link, {}, function (err, numReplaced) {
         if (!err && numReplaced === 1) {
-          log.debug('update link %d', link._id);
+          log.debug('update link %d', linkId);
           callback(null);
         } else {
-          log.debug('update link %d FAILED', link._id);
+          log.debug('update link %d FAILED', linkId);
           callback(new Error('update failed!?'));
         }
       });

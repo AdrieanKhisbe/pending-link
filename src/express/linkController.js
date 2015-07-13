@@ -59,7 +59,7 @@ module.exports = function (options) {
       if (!id) return res.sendStatus(400);
       log.info('update link %d with %j', id, req.body);
 
-      LinkDAO.update(req.body, function (err) {
+      LinkDAO.update(id, req.body, function (err) {
         res.sendStatus(err ? 500 : 200);
       });
     },
@@ -74,9 +74,8 @@ module.exports = function (options) {
         if(err) return res.sendStatus(404);
 
         var updatedLink = Link.merge(link, req.body);
-        updatedLink._id = id;
 
-        LinkDAO.update(updatedLink, function (updateErr) {
+        LinkDAO.update(id, updatedLink, function (updateErr) {
           res.sendStatus(updateErr ? 500 : 200);
         });
       });

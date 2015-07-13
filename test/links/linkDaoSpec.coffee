@@ -34,6 +34,8 @@ describe 'Link Dao', ->
           should.not.exist err
           LinkDao.get savedLink._id, (nerr, retrievedLink) ->
             should.not.exist nerr
+            should.not.exist retrievedLink._id # representation don't hold the id.
+            retrievedLink._id = savedLink._id  # hack so the equal works
             JSON.stringify(savedLink).should.be.eql JSON.stringify(retrievedLink)
             # note: strange, not working without serialisation
             # TODO :make a compare link function
