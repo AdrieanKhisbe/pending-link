@@ -14,6 +14,7 @@ module.exports = function (options) {
 
   var db = options.db();
   var log = options.logger;
+  var toId = db.convertToId;
 
   return {
 
@@ -29,7 +30,7 @@ module.exports = function (options) {
     },
 
     'get': function (linkId, callback) {
-      db.findOne({'_id': linkId}, {_id: 0}, callback);
+      db.findOne({'_id': toId(linkId)}, {_id: 0}, callback);
     },
 
     update: function (linkId, link, callback) {
@@ -37,7 +38,7 @@ module.exports = function (options) {
       if (!link) return callback(new Error('no id provided'));
 
       // TODO: ensure key field not changed
-      db.update({'_id': linkId}, link, {}, function (err, numReplaced) {
+      db.update({'_id': toId(linkId)}, link, {}, function (err, numReplaced) {
         if (!err && numReplaced === 1) {
           log.debug('update link %d', linkId);
           callback(null);
@@ -54,7 +55,7 @@ module.exports = function (options) {
       // log.debug("remove link %d", linkId);
       //  callback(err == null && numRem == 1);
       //});
-      db.update({'_id': linkId}, {$set: {archived: true}}, {},
+      db.update({'_id': toId(linkId)}, {$set: {archived: true}}, {},
         function (err, numReplaced) {
           if(err) return callback(err);
 

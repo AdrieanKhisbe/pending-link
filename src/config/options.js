@@ -19,7 +19,9 @@ function dbFromConf(config) {
 
   if (inMemory) {
     return function inMemoryFactory() {
-      return new DataStore({ filename: config.get('db:config:path'), autoload: true });
+      var ds = new DataStore({ filename: config.get('db:config:path'), autoload: true });
+      ds.convertToId = function(id){return id; }; // this is so that mongo/nedb exxchange is transparent!
+      return ds;
     };
   } else {
 
@@ -28,6 +30,7 @@ function dbFromConf(config) {
       var dbName = config.get('db:config:name') || 'links';
       var dbcollection = config.get('db:config:collection') || 'links';
       var db = mongojs(dbName, [dbcollection]);
+      db.convertToId = function(id){mongojs.ObjectId(id); };
       return db[dbcollection];
     };
   }
@@ -40,7 +43,9 @@ module.exports = {
     host: '0.0.0.0',
     baseUri: '/api',
     db: function inMemoryFactory() {
-      return new DataStore();
+      var ds = new DataStore();
+      ds.convertToId = function(id){return id; };
+      return ds;
     }
   },
 
