@@ -18,16 +18,18 @@ module.exports = function (options) {
   return {
     all: function (request, reply) {
       log.debug('get method incoming');
-      LinkDAO.all(function (all) {
-        reply(all);
+      LinkDAO.all(function (err, all) {
+        // TODO: use boom.
+        if(err) reply().code(500);
+        else reply(all);
       });
     },
 
     'get': function (request, reply) {
       var id = request.params.id;
       log.debug('access link %s', id);
-      LinkDAO.get(id, function (link) {
-        if (!link) {
+      LinkDAO.get(id, function (err, link) {
+        if (err || !link){
           reply().code(404);
         } else {
           if (link.archived)
@@ -44,7 +46,9 @@ module.exports = function (options) {
       }
       var link = Link.create(request.payload.url, request.payload.tags, request.payload.comment);
 
-      LinkDAO.save(link, function (newLink) {
+      LinkDAO.save(link, function (err, newLink) {
+        // TODO: use Boom
+        if(err) return reply().code(500);
         log.info('new link: %j', newLink);
         reply().created(linksEndpoint + '/' + newLink._id);
       });
@@ -58,8 +62,8 @@ module.exports = function (options) {
       log.info('update link %d with %j', id, link);
 
       link._id = 'id';
-      LinkDAO.update(link, function (ok) {
-        if (ok) reply();
+      LinkDAO.update(link, function (err) {
+        if (!err) reply();
         else reply().code(500);
       });
     },
@@ -70,8 +74,10 @@ module.exports = function (options) {
       var link = request.payload;
 
       log.info('update link %d with %j', id, link);
-      LinkDAO.get(id, function (dbLink) {
-        //TODO: handle doc not here
+      LinkDAO.get(id, function (err, dbLink) {
+        //FIXME: handle doc not here
+        // or error
+
         if (link.url) dbLink.url = link.url;
         if (link.comment) dbLink.comment = link.comment;
         if (link.archived) dbLink.archived = link.archived;
@@ -79,9 +85,9 @@ module.exports = function (options) {
         if (link.tags)    dbLink.tags = link.tags;
         dbLink._id = id;
 
-        LinkDAO.update(dbLink, function (ok) {
-          if (ok) reply();
-          else reply().code(500);
+        LinkDAO.update(dbLink, function (err) {
+          if (err) reply().code(500);
+          else reply();
         });
       });
     },
@@ -91,8 +97,8 @@ module.exports = function (options) {
       if (!id) return reply().code(400);
 
       log.info('remove link with %d', id);
-      LinkDAO.remove(id, function (ok) {
-        ok ? reply() : reply().code(500);
+      LinkDAO.remove(id, function (err) {
+        if(err) reply().code(500); else reply();
       });
     },
 
@@ -102,13 +108,15 @@ module.exports = function (options) {
 
       log.info('fetching link with tag %s', tag);
 
-      LinkDAO.findByTags(tag, function (taggedLinks) {
+      LinkDAO.findByTags(tag, function (err, taggedLinks) {
+        if (err) reply().code(500);
         log.debug('find by tag just grabbed result');
         reply(taggedLinks);
       });
     },
     allTags: function(request, reply){
-      LinkDAO.allTags(function(tags){
+      LinkDAO.allTags(function(err, tags){
+        if (err) reply().code(500);
         reply(tags);
       });
     }

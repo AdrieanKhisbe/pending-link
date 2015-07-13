@@ -14,25 +14,29 @@ describe 'Link Dao', ->
     done()
 
   it 'has initially no link', (done) ->
-    LinkDao.all (links) ->
+    LinkDao.all (err, links) ->
+      should.not.exist err
       links.length.should.equal 0
       done()
 
   describe 'Basic storage', ->
     it 'can store links', (done) ->
       LinkFactory.create (link) ->
-        LinkDao.save link, (savedLink) ->
+        LinkDao.save link, (err, savedLink) ->
+          should.not.exist err
           savedLink.should.not.be.null
           savedLink.url.should.equal link.url
           done()
 
     it 'that can be retrieved' , (done) ->
       LinkFactory.create (link) ->
-        LinkDao.save link, (savedLink) ->
-          LinkDao.get savedLink._id, (retrievedLink) ->
+        LinkDao.save link, (err, savedLink) ->
+          should.not.exist err
+          LinkDao.get savedLink._id, (nerr, retrievedLink) ->
+            should.not.exist nerr
             JSON.stringify(savedLink).should.be.eql JSON.stringify(retrievedLink)
             # note: strange, not working without serialisation
-            # TODO :make a comparae link function
+            # TODO :make a compare link function
             done()
 
     it 'enable link to be modified'
