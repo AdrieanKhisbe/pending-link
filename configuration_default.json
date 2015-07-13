@@ -3,7 +3,7 @@
     "application_name": "pending-link",
     "listening_address": "0.0.0.0",
     "port": 12121,
-    "baseUri": "/api/v1"
+    "base_uri": "/api/v1"
   },
   "log": {
     "level": "debug",
@@ -11,7 +11,7 @@
     "path": ""
   },
   "db":{
-    "path": "./link.nedb",
+    "config": { "path": "./link.nedb" },
     "in_memory": true
   }
 }

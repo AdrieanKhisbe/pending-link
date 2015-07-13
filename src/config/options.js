@@ -13,12 +13,16 @@ var mongojs = require('mongojs');
 function dbFromConf(config) {
   if (config.get('db:in_memory')) {
     return function () {
-      return new DataStore({ filename: config.get('db:path'), autoload: true });
+      return new DataStore({ filename: config.get('db:config:path'), autoload: true });
     };
   } else {
     return function () {
-      // FIXME: draft in building
-      return mongojs(config.get('db:path'), ['links']);
+      // db mongo: collection name
+      var dbName = config.get('db:config:name') || 'links';
+      var dbcollection = config.get('db:config:collection') || 'links';
+
+      var db = mongojs(dbName, [dbcollection]);
+      return db[dbcollection];
     };
   }
 }
@@ -47,7 +51,7 @@ module.exports = {
       logger: logger.createLogger(conf),
       port: port || conf.get('pl:port'),
       host: host || conf.get('pl:host'),
-      baseUri: conf.get('pl:baseUri'),
+      baseUri: conf.get('pl:base_uri'),
       db: dbFromConf(conf)
     };
   }
