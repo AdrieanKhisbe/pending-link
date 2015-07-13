@@ -69,20 +69,15 @@ module.exports = function (options) {
       if (!id) return res.sendStatus(400);
       log.info('update link %d with %j', id, req.body);
 
+      // TODO: port this in the DAO itself!
       LinkDAO.get(id, function (err, link) {
         if(err) return res.sendStatus(404);
 
-        // FIXME: check if link exist + MOVE in MODEL!
-        //FIXME: use kind of merge instead
-        // Replace with a standard Dao
-        if (req.body.url) link.url = req.body.url;
-        if (req.body.comment) link.comment = req.body.comment;
-        if (req.body.archived) link.archived = req.body.archived;
-        if (req.body.timestamp) link.timestamp = req.body.timestamp;
-        if (req.body.tags) link.tags = req.body.tags;
+        var updatedLink = Link.merge(link, req.body);
+        updatedLink._id = id;
 
-        LinkDAO.update(link, function (err) {
-          res.sendStatus(err ? 500 : 200);
+        LinkDAO.update(updatedLink, function (updateErr) {
+          res.sendStatus(updateErr ? 500 : 200);
         });
       });
     },

@@ -1,4 +1,4 @@
-/** The server
+/** The Hapi server
  * Created by abecchis on 27/02/15.
  */
 'use strict';
@@ -11,7 +11,7 @@ var controller = require('./linkController');
 var routes = require('./routes');
 var staticRoutes = require('./staticRoutes');
 
-module.exports = function (options) {
+module.exports = function makeHapiServer(options) {
 
   if(!options) options = defaultOption;
 
@@ -28,14 +28,14 @@ module.exports = function (options) {
   server.route(staticRoutes);
 
   var prefixize = function (r) { r.path = options.baseUri + r.path; return r; };
+  // TODO: byebye: use a prefix
   server.route(clone(linkedRoutes).map(prefixize));
 
   server.loadGoodies = function () {
     // Bliip plugin (print routes)
     server.register({register: require('blipp')}, function (err) {
-      if (err) log.error("Error happened loading blipp %j", err);
-      });
-
+      if (err) log.error('Error happened loading blipp %j', err);
+    });
 
     // logging of request with good
     server.register({
@@ -45,11 +45,10 @@ module.exports = function (options) {
           reporter: require('good-console'),
           events: { request: '*', response: '*' }}]
         }}, function (err) {
-      if (err) log.error("Error happened loading good %j", err);
+      if (err) log.error('Error happened loading good %j', err);
     });
 
     log.info('Server running at: ' + server.info.uri);
-
   };
 
   return server;

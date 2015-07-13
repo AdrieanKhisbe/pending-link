@@ -71,21 +71,15 @@ module.exports = function (options) {
     partialUpdate: function (request, reply) {
       var id = request.params.id;
       if (!id) return reply().code(400);
-      var link = request.payload;
 
-      log.info('update link %d with %j', id, link);
-      LinkDAO.get(id, function (err, dbLink) {
-        //FIXME: handle doc not here
-        // or error
+      log.info('update link %d with %j', id, request.payload);
+      LinkDAO.get(id, function (err, link) {
+        if (err || !link) return reply().code(404);
 
-        if (link.url) dbLink.url = link.url;
-        if (link.comment) dbLink.comment = link.comment;
-        if (link.archived) dbLink.archived = link.archived;
-        if (link.timestamp) dbLink.timestamp = link.timestamp;
-        if (link.tags)    dbLink.tags = link.tags;
-        dbLink._id = id;
+        var updatedLink = Link.merge(link, request.payload);
+        updatedLink._id = id;
 
-        LinkDAO.update(dbLink, function (err) {
+        LinkDAO.update(updatedLink, function (err) {
           if (err) reply().code(500);
           else reply();
         });

@@ -12,7 +12,7 @@ var controller = require('./linkController');
 var routes = require('./routes');
 var staticRoutes = require('./staticRoutes')();
 
-module.exports = function(options){
+module.exports = function makeExpressServer(options){
 
   if(!options) options = defaultOption;
 
