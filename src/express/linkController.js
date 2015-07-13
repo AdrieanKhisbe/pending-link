@@ -17,7 +17,8 @@ module.exports = function (options) {
   return {
     all: function (req, res) {
       log.debug('get method incoming');
-      LinkDAO.all(function (all) {
+      LinkDAO.all(function (err, all) {
+        if(err) return res.sendStatus(500);
         res.json(all);
       });
     },
@@ -25,8 +26,8 @@ module.exports = function (options) {
     "get": function (req, res) {
       var id = req.params.id;
       log.debug('access link %s', id);
-      LinkDAO.get(id, function (link) {
-        if (link == null) {
+      LinkDAO.get(id, function (err, link) {
+        if (err || !link) {
           res.sendStatus(404);
         } else {
           if (link.archived)
@@ -43,7 +44,9 @@ module.exports = function (options) {
       }
       var link = Link.create(req.body.url, req.body.tags, req.body.comment);
 
-      LinkDAO.save(link, function (newLink) {
+      LinkDAO.save(link, function (err, newLink) {
+        if(err) return res.sendStatus(500);
+
         log.info('new link: %j', newLink);
         res.location(linksEndpoint + '/' + newLink._id);
         res.status(201).json({});
@@ -56,8 +59,8 @@ module.exports = function (options) {
       if (!id) return res.sendStatus(400);
       log.info('update link %d with %j', id, req.body);
 
-      LinkDAO.update(req.body, function (ok) {
-        res.sendStatus(ok ? 200 : 500);
+      LinkDAO.update(req.body, function (err) {
+        res.sendStatus(err ? 500 : 200);
       });
     },
 
@@ -66,7 +69,10 @@ module.exports = function (options) {
       if (!id) return res.sendStatus(400);
       log.info('update link %d with %j', id, req.body);
 
-      LinkDAO.get(id, function (link) {
+      LinkDAO.get(id, function (err, link) {
+        if(err) return res.sendStatus(404);
+
+        // FIXME: check if link exist + MOVE in MODEL!
         //FIXME: use kind of merge instead
         // Replace with a standard Dao
         if (req.body.url) link.url = req.body.url;
@@ -75,8 +81,8 @@ module.exports = function (options) {
         if (req.body.timestamp) link.timestamp = req.body.timestamp;
         if (req.body.tags) link.tags = req.body.tags;
 
-        LinkDAO.update(link, function (ok) {
-          res.sendStatus(ok ? 200 : 500);
+        LinkDAO.update(link, function (err) {
+          res.sendStatus(err ? 500 : 200);
         });
       });
     },
@@ -86,8 +92,8 @@ module.exports = function (options) {
       if (!id) return res.sendStatus(400);
 
       log.info('remove link with %d', id);
-      LinkDAO.remove(id, function (ok) {
-        res.sendStatus(ok ? 200 : 500);
+      LinkDAO.remove(id, function (err) {
+        res.sendStatus(err ? 500 : 200);
       });
     },
 
@@ -97,13 +103,17 @@ module.exports = function (options) {
 
       log.info('fetching link with tag %s', tag);
 
-      LinkDAO.findByTags(tag, function (taggedLinks) {
+      LinkDAO.findByTags(tag, function (err, taggedLinks) {
+        if(err) return res.sendStatus(500);
+
         log.debug('find by tag just grabbed result');
         res.json(taggedLinks);
       });
     },
     allTags: function(req, res){
-      LinkDAO.allTags(function(tags){
+      LinkDAO.allTags(function(err, tags){
+        if(err) return res.sendStatus(500);
+
         res.json(tags);
       });
     }
