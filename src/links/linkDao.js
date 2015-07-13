@@ -13,6 +13,7 @@ module.exports = function (options) {
   if(!options) options = defaultOption;
 
   var db = options.db();
+
   var log = options.logger;
   var toId = db.convertToId;
 

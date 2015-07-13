@@ -28,10 +28,12 @@ function dbFromConf(config) {
     return function mongoFactory() {
       // db mongo: collection name
       var dbName = config.get('db:config:name') || 'links';
-      var dbcollection = config.get('db:config:collection') || 'links';
-      var db = mongojs(dbName, [dbcollection]);
-      db.convertToId = function(id){mongojs.ObjectId(id); };
-      return db[dbcollection];
+      var dbCollection = config.get('db:config:collection') || 'links';
+      var db = mongojs(dbName, [dbCollection]);
+      var dbCollectionHandler = db[dbCollection];
+      dbCollectionHandler.convertToId = function(id){ return mongojs.ObjectId(id); };
+      dbCollectionHandler.db = db;
+      return dbCollectionHandler;
     };
   }
 }
