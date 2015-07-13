@@ -15,14 +15,15 @@ function dbFromConf(config) {
   var inMemory = config.get('db:in_memory');
   if(inMemory === "false") inMemory = false;
   //WTFFFFFF!!!!!! (for commandline/env overloading)
+  // du coup part défault, sera vrai. in memory
 
   if (inMemory) {
-    return function () {
+    return function inMemoryFactory() {
       return new DataStore({ filename: config.get('db:config:path'), autoload: true });
     };
   } else {
 
-    return function () {
+    return function mongoFactory() {
       // db mongo: collection name
       var dbName = config.get('db:config:name') || 'links';
       var dbcollection = config.get('db:config:collection') || 'links';
@@ -38,7 +39,7 @@ module.exports = {
     port: 0,
     host: '0.0.0.0',
     baseUri: '/api',
-    db: function () {
+    db: function inMemoryFactory() {
       return new DataStore();
     }
   },
