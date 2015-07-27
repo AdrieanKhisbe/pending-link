@@ -1,0 +1,3 @@
+db__config__collection=links
+db__in_memory=false
+db__config__name=localhost:27017

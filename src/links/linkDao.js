@@ -31,7 +31,7 @@ module.exports = function (options) {
     },
 
     'get': function (linkId, callback) {
-      db.findOne({'_id': toId(linkId)}, {_id: 0}, callback);
+      db.findOne({'_id': toId(linkId)}, callback);
     },
 
     update: function (linkId, link, callback) {
