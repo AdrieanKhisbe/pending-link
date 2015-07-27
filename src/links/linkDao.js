@@ -71,8 +71,7 @@ module.exports = function (options) {
     },
 
     all: function (callback) {
-      // FIXME: check no archived!!
-      db.find({}, callback);
+      db.find({archived: false}, callback);
     },
 
     findByTags: function (tags, callback) {

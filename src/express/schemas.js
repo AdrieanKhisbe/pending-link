@@ -16,7 +16,7 @@ var schemas = {
   linkUpdate: {
     url: String,
     timestamp: Date,
-    archive: Boolean,
+    archived: Boolean,
     comment: String,
     tags: [String]
   },
@@ -24,7 +24,7 @@ var schemas = {
   linkPatch: {
     url: paperwork.optional(String),
     timestamp: paperwork.optional(Date),
-    archive: paperwork.optional(Boolean),
+    archived: paperwork.optional(Boolean),
     comment: paperwork.optional(String),
     tags: paperwork.optional([String])
   }

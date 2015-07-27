@@ -17,7 +17,7 @@ var schemas = {
   linkUpdate: {
     url: Joi.string().required(),
     timestamp: Joi.date().required(),
-    archive: Joi.bool().required(),
+    archived: Joi.bool().required(),
     comment: Joi.string().required(),
     tags: Joi.array().items(Joi.string()).required()
   },
@@ -25,7 +25,7 @@ var schemas = {
   linkPatch: {
     url: Joi.string().optional(),
     timestamp: Joi.date().optional(),
-    archive: Joi.bool().optional(),
+    archived: Joi.bool().optional(),
     comment: Joi.string().optional(),
     tags: Joi.array().items(Joi.string()).optional()
   }
