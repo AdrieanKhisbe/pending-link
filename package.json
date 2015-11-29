@@ -3,12 +3,12 @@
   "version": "0.1.1",
   "description": "Small server to store and quickly share links",
   "main": "./app.js",
-  "scripts": {
+    "scripts": {
     "start": "node app.js",
     "lint": "eslint src",
     "test": "mocha",
     "test:watch": "npm run test -- -w",
-    "ci:test": "mocha && istanbul report text-summary lcov",
+    "ci:test": "istanbul cover --print detail _mocha -- -R spec test",
     "ci:cov": "cat coverage/lcov.info | coveralls",
     "build": "npm run generate-doc && npm run generate-html",
     "generate-doc": "raml2html spec/api.yml > public/api.html",
