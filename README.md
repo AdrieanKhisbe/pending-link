@@ -22,7 +22,7 @@ Links consist in an `url`, a `comment`, a set of `tags`, a `timestamp`, and a st
 
 Server also have another endpoint `/api/hello` to ping if the server is online
 
-For more details, See Raml api specification [here :) ](api-raml.yaml)
+For more details, See Raml api specification [here :) ](spec/api.yaml)
 
 
 #### Configuration
@@ -36,12 +36,15 @@ The main configuration points are the listening port `pl:port`, the base uri `pl
 
 ##### Application
 *To be specified in details*
+
 ##### Data Store
+
 With pending link, you can either use *nedb* as in memory database, or a dedicated collection on a mongo database.
 The switch is done with the `db:in_memory` option.
 
-<!-- TODO: prefix, all options, equiv in memoyr -->
+The /heroku/ application available is running along with a /MongoLab/ cloud instance.
 
+<!-- TODO: prefix, all options, equiv in memoyr -->
 
 ##### Logging
 

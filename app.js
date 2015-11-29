@@ -5,7 +5,7 @@ var log = options.logger;
 
 var framework, express = './src/express', hapi = './src/hapi';
 
-var serverName = process.argv[2] ? process.argv[2].toLowerCase() :"";
+var serverName = process.argv[2] ? process.argv[2].toLowerCase() : "";
 switch(serverName){
   // TODO: maybe replace with config,option
   case "hapi":
@@ -26,5 +26,5 @@ var server = require(framework)(options) ;
 log.info("Starting pending link");
 server.loadGoodies();
 server.start(function() {
-    log.info("Listening on port "+ options.port);
+    log.info("Listening on port " + options.port);
 });
