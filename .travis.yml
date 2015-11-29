@@ -1,8 +1,9 @@
 language: node_js
 node_js:
-  - "0.12"
-  - "0.10"
-  - "iojs"
+  - 4.0
+  - 4.1
+  - 4.2
+  - 5
 
 script:
   - if $LINT ; then npm run lint ; else npm test; npm run qualimetry; fi
@@ -10,6 +11,10 @@ env:
   matrix:
     - LINT=true
     - LINT=false
+cache:
+  directories:
+    - node_modules
+
 matrix:
   fast_finish: true
   allow_failures:
