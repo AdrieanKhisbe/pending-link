@@ -6,7 +6,7 @@ node_js:
   - 5
 
 script:
-  - if $LINT ; then npm run lint ; else npm run ci:test; npm run ci:cov; fi
+  - if $LINT ; then npm run lint ; else npm run ci:test && npm run ci:cov; fi
 env:
   matrix:
     - LINT=true

@@ -2,7 +2,7 @@
   "name": "pending-link",
   "version": "0.1.1",
   "description": "Small server to store and quickly share links",
-  "main": "app.js",
+  "main": "./app.js",
   "scripts": {
     "start": "node app.js",
     "lint": "eslint src",
@@ -20,10 +20,9 @@
   "keywords": [
     "link"
   ],
-   "engines": {
-	"node": ">=0.4.0"
-   },
-  "main": "./app.js",
+  "engines": {
+    "node": ">=0.4.0"
+  },
   "author": "Adriean Khisbe",
   "license": "ISC",
   "repository": {
@@ -54,6 +53,7 @@
   "devDependencies": {
     "chai": "^3.0.0",
     "coffee-coverage": "^0.7.0",
+    "coffee-script": "^1.10.0",
     "coveralls": "^2.11.4",
     "eslint": "^1.10.2",
     "extends": "0.0.4",
