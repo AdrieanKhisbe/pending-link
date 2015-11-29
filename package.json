@@ -6,9 +6,9 @@
   "scripts": {
     "start": "node app.js",
     "lint": "eslint src",
-    "test": "mocha --compilers coffee:coffee-script/register test/*Spec.coffee test/*/*Spec.coffee",
+    "test": "mocha",
     "test:watch": "npm run test -- -w",
-    "ci:test": "istanbul cover --print detail _mocha --compilers coffee:coffee-script/register test/*Spec.coffee test/*/*Spec.coffee",
+    "ci:test": "mocha && istanbul report text-summary lcov",
     "ci:cov": "cat coverage/lcov.info | coveralls",
     "build": "npm run generate-doc && npm run generate-html",
     "generate-doc": "raml2html spec/api.yml > public/api.html",
