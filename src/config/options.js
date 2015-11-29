@@ -24,7 +24,6 @@ function dbFromConf(config) {
       return ds;
     };
   } else {
-
     return function mongoFactory() {
       // db mongo: collection name
       var dbName = config.get('db:config:name') || 'links';
