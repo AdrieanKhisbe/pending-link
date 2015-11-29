@@ -2,6 +2,7 @@ Pending Link
 ============
 
 [![Build Status](https://travis-ci.org/AdrieanKhisbe/pending-link.svg?branch=master)](https://travis-ci.org/AdrieanKhisbe/pending-link)
+[![Coverage Status](https://coveralls.io/repos/AdrieanKhisbe/pending-link/badge.svg?branch=master&service=github)](https://coveralls.io/github/AdrieanKhisbe/pending-link?branch=master)
 [![Heroku](https://img.shields.io/badge/heroku-online-6567a5.svg)](http://pending-link.herokuapp.com/)
 [![Dependency Status](https://david-dm.org/AdrieanKhisbe/pending-link.svg)](https://david-dm.org/AdrieanKhisbe/pending-link)
 [![devDependency Status](https://david-dm.org/AdrieanKhisbe/pending-link/dev-status.svg)](https://david-dm.org/AdrieanKhisbe/pending-link#info=devDependencies)

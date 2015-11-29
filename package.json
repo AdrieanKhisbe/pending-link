@@ -8,6 +8,8 @@
     "lint": "eslint src",
     "test": "mocha --compilers coffee:coffee-script/register test/*Spec.coffee test/*/*Spec.coffee",
     "test:watch": "npm run test -- -w",
+    "ci:test": "istanbul cover --print detail _mocha --compilers coffee:coffee-script/register test/*Spec.coffee test/*/*Spec.coffee",
+    "ci:cov": "cat coverage/lcov.info | coveralls",
     "build": "npm run generate-doc && npm run generate-html",
     "generate-doc": "raml2html spec/api.yml > public/api.html",
     "generate-html": "jade public/index.jade",
@@ -51,6 +53,8 @@
   },
   "devDependencies": {
     "chai": "^3.0.0",
+    "coffee-coverage": "^0.7.0",
+    "coveralls": "^2.11.4",
     "eslint": "^1.10.2",
     "extends": "0.0.4",
     "istanbul": "^0.4.1",
